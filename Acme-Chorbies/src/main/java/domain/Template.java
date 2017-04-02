@@ -84,7 +84,6 @@ public class Template extends DomainEntity {
 	private Chorbi chorbi;
 
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy="template")
 	public Coordinate getCoordinate() {
 		return coordinate;
@@ -96,7 +95,7 @@ public class Template extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany()
+	@OneToMany
 	public Chorbi getChorbi() {
 		return chorbi;
 	}

@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -97,10 +98,13 @@ public class Chorbi extends Actor {
 	//Relationships
 		private Chirp chirpReceives;
 		private Chirp chirpWrites;
-
+		private CreditCard creditCard;
+		private Taste taste;
+		private Coordinate coordinate;
+		private Template template;
+		
 		@Valid
-		@NotNull
-		@ManyToOne(optional=false)
+		@OneToMany(mappedBy="recipient")
 		public Chirp getChirpReceives() {
 			return chirpReceives;
 		}
@@ -109,8 +113,7 @@ public class Chorbi extends Actor {
 			this.chirpReceives = chirpReceives;
 		}
 		@Valid
-		@NotNull
-		@ManyToOne(optional=false)
+		@OneToMany(mappedBy="sender")
 		public Chirp getChirpWrites() {
 			return chirpWrites;
 		}
@@ -119,7 +122,53 @@ public class Chorbi extends Actor {
 			this.chirpWrites = chirpWrites;
 		}
 
+		@Valid
+		@OneToOne(optional=true)
+		public CreditCard getCreditCard() {
+			return creditCard;
+		}
+
+		public void setCreditCard(CreditCard creditCard) {
+			this.creditCard = creditCard;
+		}
+
+		@Valid
+		@OneToMany
+		public Taste getTaste() {
+			return taste;
+		}
+
+		public void setTaste(Taste taste) {
+			this.taste = taste;
+		}
+
+		@Valid
+		@NotNull
+		@OneToOne(optional=false)
+		public Coordinate getCoordinate() {
+			return coordinate;
+		}
+
+		public void setCoordinate(Coordinate coordinate) {
+			this.coordinate = coordinate;
+		}
+
+
+		@Valid
+		@NotNull
+		@OneToOne(optional=false)
+		public Template getTemplate() {
+			return template;
+		}
+
+		public void setTemplate(Template template) {
+			this.template = template;
+		}
+
 		
+	
+
+
 		
 	
 }
