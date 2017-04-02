@@ -22,12 +22,12 @@ public class CreditCard extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private String	holderName;
-	private String	brandName;
-	private String	number;
-	private Integer	expirationMonth;
-	private Integer	expirationYear;
-	private Integer	cvvCode;
+	private String		holderName;
+	private BrandName	brandName;
+	private String		number;
+	private int			expirationMonth;
+	private int			expirationYear;
+	private int			cvvCode;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
@@ -41,12 +41,11 @@ public class CreditCard extends DomainEntity {
 		this.holderName = holderName;
 	}
 
-	@NotBlank
-	public String getBrandName() {
+	public BrandName getBrandName() {
 		return this.brandName;
 	}
 
-	public void setBrandName(final String brandName) {
+	public void setBrandName(final BrandName brandName) {
 		this.brandName = brandName;
 	}
 
@@ -61,31 +60,28 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@Range(min = 1, max = 12)
-	@NotBlank
-	public Integer getExpirationMonth() {
+	public int getExpirationMonth() {
 		return this.expirationMonth;
 	}
 
-	public void setExpirationMonth(final Integer expirationMonth) {
+	public void setExpirationMonth(final int expirationMonth) {
 		this.expirationMonth = expirationMonth;
 	}
 
-	@NotBlank
-	public Integer getExpirationYear() {
+	public int getExpirationYear() {
 		return this.expirationYear;
 	}
 
-	public void setExpirationYear(final Integer expirationYear) {
+	public void setExpirationYear(final int expirationYear) {
 		this.expirationYear = expirationYear;
 	}
 
-	@NotBlank
 	@Range(min = 100, max = 999)
-	public Integer getCvvCode() {
+	public int getCvvCode() {
 		return this.cvvCode;
 	}
 
-	public void setCvvCode(final Integer cvvCode) {
+	public void setCvvCode(final int cvvCode) {
 		this.cvvCode = cvvCode;
 	}
 

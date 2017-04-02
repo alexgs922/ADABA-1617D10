@@ -1,12 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -37,6 +37,7 @@ public class Chorbi extends Actor {
 	private Date			birthDate;
 	private Genre			genre;
 	private boolean			ban;
+	private Coordinate		coordinate;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
@@ -94,81 +95,73 @@ public class Chorbi extends Actor {
 		this.ban = ban;
 	}
 
-	
+	@Valid
+	@NotNull
+	public Coordinate getCoordinate() {
+		return this.coordinate;
+	}
+
+	public void setCoordinate(final Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
+
+
 	//Relationships
-		private Chirp chirpReceives;
-		private Chirp chirpWrites;
-		private CreditCard creditCard;
-		private Taste taste;
-		private Coordinate coordinate;
-		private Template template;
-		
-		@Valid
-		@OneToMany(mappedBy="recipient")
-		public Chirp getChirpReceives() {
-			return chirpReceives;
-		}
-
-		public void setChirpReceives(Chirp chirpReceives) {
-			this.chirpReceives = chirpReceives;
-		}
-		@Valid
-		@OneToMany(mappedBy="sender")
-		public Chirp getChirpWrites() {
-			return chirpWrites;
-		}
-
-		public void setChirpWrites(Chirp chirpWrites) {
-			this.chirpWrites = chirpWrites;
-		}
-
-		@Valid
-		@OneToOne(optional=true)
-		public CreditCard getCreditCard() {
-			return creditCard;
-		}
-
-		public void setCreditCard(CreditCard creditCard) {
-			this.creditCard = creditCard;
-		}
-
-		@Valid
-		@OneToMany
-		public Taste getTaste() {
-			return taste;
-		}
-
-		public void setTaste(Taste taste) {
-			this.taste = taste;
-		}
-
-		@Valid
-		@NotNull
-		@OneToOne(optional=false)
-		public Coordinate getCoordinate() {
-			return coordinate;
-		}
-
-		public void setCoordinate(Coordinate coordinate) {
-			this.coordinate = coordinate;
-		}
+	private Collection<Chirp>	chirpReceives;
+	private Collection<Chirp>	chirpWrites;
+	private CreditCard			creditCard;
+	private Collection<Taste>	givenTastes;
+	private Template			template;
 
 
-		@Valid
-		@NotNull
-		@OneToOne(optional=false)
-		public Template getTemplate() {
-			return template;
-		}
+	@Valid
+	@OneToMany(mappedBy = "recipient")
+	public Collection<Chirp> getChirpReceives() {
+		return this.chirpReceives;
+	}
 
-		public void setTemplate(Template template) {
-			this.template = template;
-		}
+	public void setChirpReceives(final Collection<Chirp> chirpReceives) {
+		this.chirpReceives = chirpReceives;
+	}
+	@Valid
+	@OneToMany(mappedBy = "sender")
+	public Collection<Chirp> getChirpWrites() {
+		return this.chirpWrites;
+	}
 
-		
-	
+	public void setChirpWrites(final Collection<Chirp> chirpWrites) {
+		this.chirpWrites = chirpWrites;
+	}
 
+	@Valid
+	@OneToOne(optional = true)
+	public CreditCard getCreditCard() {
+		return this.creditCard;
+	}
 
-		
-	
+	public void setCreditCard(final CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
+
+	@Valid
+	@OneToMany
+	public Collection<Taste> getGivenTastes() {
+		return this.givenTastes;
+	}
+
+	public void setGivenTastes(final Collection<Taste> givenTastes) {
+		this.givenTastes = givenTastes;
+	}
+
+	@Valid
+	@NotNull
+	@OneToOne(optional = false)
+	public Template getTemplate() {
+		return this.template;
+	}
+
+	public void setTemplate(final Template template) {
+		this.template = template;
+	}
+
 }
