@@ -7,8 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -20,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Chirp {
+public class Chirp extends DomainEntity {
 
 	//Constructors ---------------------------------------------------------------------------
 
@@ -84,33 +82,33 @@ public class Chirp {
 	public void setCopy(final boolean copy) {
 		this.copy = copy;
 	}
-	
+
+
 	//Relationships
-		private Chorbi recipient;
-		private Chorbi sender;
-		
-		
-		@Valid
-		@NotNull
-		@ManyToOne(optional=false)
-		public Chorbi getRecipient() {
-			return recipient;
-		}
-
-		public void setRecipient(Chorbi recipient) {
-			this.recipient = recipient;
-		}
+	private Chorbi	recipient;
+	private Chorbi	sender;
 
 
-		@Valid
-		@NotNull
-		@ManyToOne(optional=false)
-		public Chorbi getSender() {
-			return sender;
-		}
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Chorbi getRecipient() {
+		return this.recipient;
+	}
 
-		public void setSender(Chorbi sender) {
-			this.sender = sender;
-		}
-		
+	public void setRecipient(final Chorbi recipient) {
+		this.recipient = recipient;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Chorbi getSender() {
+		return this.sender;
+	}
+
+	public void setSender(final Chorbi sender) {
+		this.sender = sender;
+	}
+
 }
