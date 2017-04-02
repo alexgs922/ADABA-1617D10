@@ -6,8 +6,11 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -75,4 +78,33 @@ public class Template extends DomainEntity {
 		this.moment = moment;
 	}
 
+	//Relationships
+	
+	private Coordinate coordinate;
+	private Chorbi chorbi;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="template")
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}
+
+	public void setCoordinate(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany()
+	public Chorbi getChorbi() {
+		return chorbi;
+	}
+
+	public void setChorbi(Chorbi chorbi) {
+		this.chorbi = chorbi;
+	}
+	
+	
+	
 }

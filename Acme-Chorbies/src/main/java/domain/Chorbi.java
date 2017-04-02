@@ -6,8 +6,12 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -89,4 +93,33 @@ public class Chorbi extends Actor {
 		this.ban = ban;
 	}
 
+	
+	//Relationships
+		private Chirp chirpReceives;
+		private Chirp chirpWrites;
+
+		@Valid
+		@NotNull
+		@ManyToOne(optional=false)
+		public Chirp getChirpReceives() {
+			return chirpReceives;
+		}
+
+		public void setChirpReceives(Chirp chirpReceives) {
+			this.chirpReceives = chirpReceives;
+		}
+		@Valid
+		@NotNull
+		@ManyToOne(optional=false)
+		public Chirp getChirpWrites() {
+			return chirpWrites;
+		}
+
+		public void setChirpWrites(Chirp chirpWrites) {
+			this.chirpWrites = chirpWrites;
+		}
+
+		
+		
+	
 }

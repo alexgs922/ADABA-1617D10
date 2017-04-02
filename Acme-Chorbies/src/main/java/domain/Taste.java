@@ -6,8 +6,11 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,5 +50,23 @@ public class Taste extends DomainEntity {
 	public void setComment(final String comment) {
 		this.comment = comment;
 	}
+	
+	//Relationship
+	
+	private Chorbi chorbi;
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional=false)
+	public Chorbi getChorbi() {
+		return chorbi;
+	}
+
+	public void setChorbi(Chorbi chorbi) {
+		this.chorbi = chorbi;
+	}
+	
+	
+		
 
 }

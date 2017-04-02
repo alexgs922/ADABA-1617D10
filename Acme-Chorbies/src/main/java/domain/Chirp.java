@@ -6,8 +6,12 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -79,5 +83,85 @@ public class Chirp {
 	public void setCopy(final boolean copy) {
 		this.copy = copy;
 	}
+	
+	//Relationships
+		private Chorbi recipient;
+		private Chorbi sender;
+		private CreditCard creditCard;
+		private Taste taste;
+		private Coordinate coordinate;
+		private Template template;
+		
+		
+		@Valid
+		@NotNull
+		@OneToMany(mappedBy="chirpReceives")
+		public Chorbi getRecipient() {
+			return recipient;
+		}
+
+		public void setRecipient(Chorbi recipient) {
+			this.recipient = recipient;
+		}
+
+
+		@Valid
+		@NotNull
+		@OneToMany(mappedBy="chirpWrites")
+		public Chorbi getSender() {
+			return sender;
+		}
+
+		public void setSender(Chorbi sender) {
+			this.sender = sender;
+		}
+		
+		@Valid
+		@NotNull
+		@OneToOne(optional=true)
+		public CreditCard getCreditCard() {
+			return creditCard;
+		}
+
+		public void setCreditCard(CreditCard creditCard) {
+			this.creditCard = creditCard;
+		}
+
+		@Valid
+		@NotNull
+		@OneToMany()
+		public Taste getTaste() {
+			return taste;
+		}
+
+		public void setTaste(Taste taste) {
+			this.taste = taste;
+		}
+
+		@Valid
+		@NotNull
+		@OneToOne
+		public Coordinate getCoordinate() {
+			return coordinate;
+		}
+
+		public void setCoordinate(Coordinate coordinate) {
+			this.coordinate = coordinate;
+		}
+
+
+		@Valid
+		@NotNull
+		@OneToOne(optional=false)
+		public Template getTemplate() {
+			return template;
+		}
+
+		public void setTemplate(Template template) {
+			this.template = template;
+		}
+
+		
+	
 
 }
