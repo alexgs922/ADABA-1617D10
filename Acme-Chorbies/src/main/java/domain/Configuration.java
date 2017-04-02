@@ -21,9 +21,9 @@ public class Configuration extends DomainEntity {
 	//Attributes ---------------------------------------------------------------------------
 
 	private String	banner;
-	private Integer	hour;
-	private Integer	minute;
-	private Integer	second;
+	private int		hour;
+	private int		minute;
+	private int		second;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
@@ -37,27 +37,27 @@ public class Configuration extends DomainEntity {
 		this.banner = banner;
 	}
 
-	public Integer getHour() {
+	public int getHour() {
 		return this.hour;
 	}
 
-	public void setHour(final Integer hour) {
+	public void setHour(final int hour) {
 		this.hour = hour;
 	}
 
-	public Integer getMinute() {
+	public int getMinute() {
 		return this.minute;
 	}
 
-	public void setMinute(final Integer minute) {
+	public void setMinute(final int minute) {
 		this.minute = minute;
 	}
 
-	public Integer getSecond() {
+	public int getSecond() {
 		return this.second;
 	}
 
-	public void setSecond(final Integer second) {
+	public void setSecond(final int second) {
 		this.second = second;
 	}
 

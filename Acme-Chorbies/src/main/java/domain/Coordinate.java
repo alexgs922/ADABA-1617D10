@@ -3,17 +3,13 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Embeddable;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
+@Embeddable
 @Access(AccessType.PROPERTY)
-public class Coordinate extends DomainEntity {
+public class Coordinate {
 
 	//Constructors ---------------------------------------------------------------------------
 
@@ -66,33 +62,4 @@ public class Coordinate extends DomainEntity {
 		this.city = city;
 	}
 
-	//Relationships
-	
-	private Chorbi chorbi;
-	private Template template;
-
-		@Valid
-		@NotNull
-		@OneToOne(optional=false)
-		public Chorbi getChorbi() {
-			return chorbi;
-		}
-
-		public void setChorbi(Chorbi chorbi) {
-			this.chorbi = chorbi;
-		}
-		@Valid
-		@NotNull
-		@ManyToOne(optional=false)
-		public Template getTemplate() {
-			return template;
-		}
-
-		public void setTemplate(Template template) {
-			this.template = template;
-		}
-
-
-
-	
 }

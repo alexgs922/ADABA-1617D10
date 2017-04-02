@@ -1,10 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -27,14 +29,24 @@ public class Template extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private Relationship	relationShip;
-	private Integer			approximatedAge;
-	private Genre			genre;
-	private String			keyword;
-	private Date			moment;
+	private Relationship			relationShip;
+	private Integer					approximatedAge;
+	private Genre					genre;
+	private String					keyword;
+	private Date					moment;
+	private Collection<Coordinate>	coordinates;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
+
+	@ElementCollection
+	public Collection<Coordinate> getCoordinates() {
+		return this.coordinates;
+	}
+
+	public void setCoordinates(final Collection<Coordinate> coordinates) {
+		this.coordinates = coordinates;
+	}
 
 	public Relationship getRelationShip() {
 		return this.relationShip;
@@ -78,32 +90,21 @@ public class Template extends DomainEntity {
 		this.moment = moment;
 	}
 
+
 	//Relationships
-	
-	private Coordinate coordinate;
-	private Chorbi chorbi;
 
-	@Valid
-	@OneToMany(mappedBy="template")
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}
+	private Collection<Chorbi>	chorbies;
 
-	public void setCoordinate(Coordinate coordinate) {
-		this.coordinate = coordinate;
-	}
 
 	@Valid
 	@NotNull
 	@OneToMany
-	public Chorbi getChorbi() {
-		return chorbi;
+	public Collection<Chorbi> getChorbies() {
+		return this.chorbies;
 	}
 
-	public void setChorbi(Chorbi chorbi) {
-		this.chorbi = chorbi;
+	public void setChorbies(final Collection<Chorbi> chorbies) {
+		this.chorbies = chorbies;
 	}
-	
-	
-	
+
 }
