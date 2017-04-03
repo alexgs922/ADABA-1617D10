@@ -31,8 +31,6 @@
 		<bean class="converters.ConfigurationToStringConverter" />
 		<bean class="converters.StringToConfigurationConverter" />
 
-		<bean class="converters.CoordinateToStringConverter" />
-		<bean class="converters.StringToCoordinateConverter" />
 
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />

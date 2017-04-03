@@ -70,4 +70,19 @@ public class ChorbiService {
 		return chorbies;
 	}
 
+	public Collection<Chorbi> findAllChorbiesWhoLikedByThisUser(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		Collection<Chorbi> chorbies;
+
+		chorbies = this.chorbiRepository.findAllChorbiesWhoLikedByThisUser(chorbi.getId());
+
+		Assert.notNull(chorbies);
+
+		return chorbies;
+
+	}
+
 }
