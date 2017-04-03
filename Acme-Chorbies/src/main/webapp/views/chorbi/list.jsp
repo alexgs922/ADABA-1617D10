@@ -28,7 +28,9 @@
 	<display:column property="genre" title="${chorbiGenre}" sortable="false" />
 	
 	<spring:message code="chorbi.birthDate" var="chorbiBirthDate" />
-	<display:column property="birthDate" title="${chorbiBirthDate}" sortable="false" />
+	<display:column property="birthDate" title="${chorbiBirthDate}" sortable="false" format="{0,date,dd/MM/YYYY}"/>
+	
+	
 	
 	<spring:message code="chorbi.relationship" var="chorbiRelationship" />
 	<display:column property="relationship" title="${chorbiRelationship}" sortable="false" />
@@ -48,6 +50,16 @@
 			<a
 				href="chorbi/listWhoLikeThem.do?chorbiId=${row.id}">
 				<spring:message code="chorbi.ListWhoLikeThem" />
+			</a>
+
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="isAuthenticated()">
+		<display:column>
+			<a
+				href="chorbi/listWhoLikedThis.do?chorbiId=${row.id}">
+				<spring:message code="chorbi.ListWhoLikedThis" />
 			</a>
 
 		</display:column>

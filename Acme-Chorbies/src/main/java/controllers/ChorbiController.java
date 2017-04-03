@@ -24,15 +24,15 @@ public class ChorbiController extends AbstractController {
 	}
 
 
-	//Services
+	//Services -----------------------------------------------------------
 
 	@Autowired
 	private ChorbiService	chorbiService;
 
 
 	//Browse the chorbies who has registered to the system
-	@RequestMapping(value = "/listChorbies", method = RequestMethod.GET)
-	public ModelAndView listChorbies() {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
 
 		ModelAndView result;
 		Collection<Chorbi> chorbiesToShow;
@@ -64,7 +64,7 @@ public class ChorbiController extends AbstractController {
 
 	//See people who like him/her
 
-	@RequestMapping(value = "/listChorbiesWhoLike", method = RequestMethod.GET)
+	@RequestMapping(value = "/listWhoLikeThem", method = RequestMethod.GET)
 	public ModelAndView listChorbiesWhoLike(@RequestParam final int chorbiId) {
 		ModelAndView result;
 		Collection<Chorbi> chorbies;
@@ -73,8 +73,25 @@ public class ChorbiController extends AbstractController {
 		chorbies = this.chorbiService.findAllChorbiesWhoLikeThem(chorbi);
 
 		result = new ModelAndView("chorbi/list");
-		result.addObject("chorbi", chorbies);
+		result.addObject("chorbies", chorbies);
 		result.addObject("requestURI", "chorbi/listWhoLikeThem.do?chorbiId=" + chorbiId);
+
+		return result;
+	}
+
+	//See people who like to him/her
+
+	@RequestMapping(value = "/listWhoLikedThis", method = RequestMethod.GET)
+	public ModelAndView listWhoLikedThis(@RequestParam final int chorbiId) {
+		ModelAndView result;
+		Collection<Chorbi> chorbies;
+		Chorbi chorbi;
+		chorbi = this.chorbiService.findOne(chorbiId);
+		chorbies = this.chorbiService.findAllChorbiesWhoLikedByThisUser(chorbi);
+
+		result = new ModelAndView("chorbi/list");
+		result.addObject("chorbies", chorbies);
+		result.addObject("requestURI", "chorbi/listWhoLikedThis.do?chorbiId=" + chorbiId);
 
 		return result;
 	}

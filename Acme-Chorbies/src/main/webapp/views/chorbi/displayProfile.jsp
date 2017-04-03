@@ -12,9 +12,8 @@
 
 <spring:message code="chorbi.personalInfo" var="chorbiPersonalInfo" />
 <h2>
-	<jstl:out value="chorbiPersonalInfo" />
+	<jstl:out value="${chorbiPersonalInfo}" />
 </h2>
-<br>
 <display:table pagesize="5" class="displaytag" name="chorbi"
 	requestURI="${requestURI}" id="row">
 
@@ -48,9 +47,8 @@
 
 <spring:message code="chorbi.locationInfo" var="chorbiLocationInfo" />
 <h2>
-	<jstl:out value="chorbiLocationInfo" />
+	<jstl:out value="${chorbiLocationInfo}" />
 </h2>
-<br>
 <display:table pagesize="5" class="displaytag" name="chorbi"
 	requestURI="${requestURI}" id="coordinate">
 	
@@ -71,16 +69,15 @@
 
 <spring:message code="chorbi.contactInfo" var="chorbiContactInfo" />
 <h2>
-	<jstl:out value="chorbiContactInfo" />
+	<jstl:out value="${chorbiContactInfo}" />
 </h2>
-<br>
 <display:table pagesize="5" class="displaytag" name="chorbi"
 	requestURI="${requestURI}" id="row">
 	
 	<spring:message code="chorbi.email" var="chorbiEmail" />
-	<display:column property="email" title="${chorbiEmail}" sortable="false" />
+	<display:column title="${chorbiEmail}" sortable="false" ><jstl:out value="***"></jstl:out></display:column>
 	
 	<spring:message code="chorbi.phone" var="chorbiPhone" />
-	<display:column property="phone" title="${chorbiPhone}" sortable="false" />
+	<display:column  title="${chorbiPhone}" sortable="false" ><jstl:out value="***"></jstl:out></display:column>
 	
 </display:table>
