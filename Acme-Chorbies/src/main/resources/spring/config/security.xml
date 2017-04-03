@@ -52,6 +52,12 @@
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+		
+		<!-- Belen -->
+		
+		<security:intercept-url pattern="/chorbi/**" access="isAuthenticated()" /> 
+		
+		
 
 		<security:form-login 
 			login-page="/security/login.do"
