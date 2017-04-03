@@ -30,6 +30,22 @@ public class ChorbiService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
+	public Chorbi create() {
+		Chorbi result;
+
+		result = new Chorbi();
+
+		return result;
+	}
+
+	public Collection<Chorbi> findAll() {
+		Collection<Chorbi> res;
+		res = this.chorbiRepository.findAll();
+		Assert.notNull(res);
+
+		return res;
+	}
+
 	public Chorbi findOne(final int chorbiId) {
 		Chorbi res;
 		final Actor principal = this.actorService.findByPrincipal();
@@ -39,6 +55,19 @@ public class ChorbiService {
 		Assert.notNull(res);
 
 		return res;
+	}
+
+	public Chorbi save(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+
+		return this.chorbiRepository.save(chorbi);
+	}
+
+	public void delete(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+		Assert.isTrue(chorbi.getId() != 0);
+
+		this.chorbiRepository.delete(chorbi);
 	}
 
 	// Other business methods ----------------------------------------------------
