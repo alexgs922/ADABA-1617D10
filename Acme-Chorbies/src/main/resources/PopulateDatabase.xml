@@ -327,7 +327,7 @@
 		<property name="relationship" value="LOVE" />
 		<property name="birthDate" value="11/07/1992" />
 		<property name="genre" value="FEMALE" />
-		<property name="ban" value="true" />
+		<property name="ban" value="false" />
 
 		<property name="chirpReceives">
 			<list>

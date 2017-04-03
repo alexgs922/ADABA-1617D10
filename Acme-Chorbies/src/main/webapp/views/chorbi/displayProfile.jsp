@@ -44,6 +44,25 @@
 
 </display:table>
 
+<security:authorize access="hasRole('CHORBI')">
+	<div>
+
+		<jstl:choose>
+			<jstl:when test="${toLike==true and principal.id ne row.id}">
+				<a href="chorbi/chorbi/like.do?chorbiId=${row.id}"><img
+					src="images/like.jpg" width="120" height="120" /></a>
+			</jstl:when>
+			<jstl:when test="${toLike==false and principal.id ne row.id}">
+				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}"><img
+					src="images/cancelLike.jpg" width="80" height="80" /></a>
+			</jstl:when>
+
+		</jstl:choose>
+
+
+	</div>
+</security:authorize>
+
 
 <spring:message code="chorbi.locationInfo" var="chorbiLocationInfo" />
 <h2>
@@ -51,20 +70,24 @@
 </h2>
 <display:table pagesize="5" class="displaytag" name="chorbi"
 	requestURI="${requestURI}" id="coordinate">
-	
+
 	<spring:message code="chorbi.country" var="chorbiCountry" />
-	<display:column property="coordinate.country" title="${chorbiCountry}" sortable="false" />
-	
+	<display:column property="coordinate.country" title="${chorbiCountry}"
+		sortable="false" />
+
 	<spring:message code="chorbi.state" var="chorbiState" />
-	<display:column property="coordinate.state" title="${chorbiState}" sortable="false" />
-	
+	<display:column property="coordinate.state" title="${chorbiState}"
+		sortable="false" />
+
 	<spring:message code="chorbi.province" var="chorbiProvince" />
-	<display:column property="coordinate.province" title="${chorbiProvince}" sortable="false" />
-	
+	<display:column property="coordinate.province"
+		title="${chorbiProvince}" sortable="false" />
+
 	<spring:message code="chorbi.city" var="chorbiCity" />
-	<display:column property="coordinate.city" title="${chorbiCity}" sortable="false" />
-	
-	
+	<display:column property="coordinate.city" title="${chorbiCity}"
+		sortable="false" />
+
+
 </display:table>
 
 <spring:message code="chorbi.contactInfo" var="chorbiContactInfo" />
@@ -73,11 +96,15 @@
 </h2>
 <display:table pagesize="5" class="displaytag" name="chorbi"
 	requestURI="${requestURI}" id="row">
-	
+
 	<spring:message code="chorbi.email" var="chorbiEmail" />
-	<display:column title="${chorbiEmail}" sortable="false" ><jstl:out value="***"></jstl:out></display:column>
-	
+	<display:column title="${chorbiEmail}" sortable="false">
+		<jstl:out value="***"></jstl:out>
+	</display:column>
+
 	<spring:message code="chorbi.phone" var="chorbiPhone" />
-	<display:column  title="${chorbiPhone}" sortable="false" ><jstl:out value="***"></jstl:out></display:column>
-	
+	<display:column title="${chorbiPhone}" sortable="false">
+		<jstl:out value="***"></jstl:out>
+	</display:column>
+
 </display:table>

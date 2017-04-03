@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ChorbiRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
 import domain.Chorbi;
 
@@ -83,6 +85,26 @@ public class ChorbiService {
 
 		return chorbies;
 
+	}
+
+	public Chorbi findByPrincipal() {
+		Chorbi result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		result = this.findByUserAccount(userAccount);
+
+		return result;
+	}
+
+	public Chorbi findByUserAccount(final UserAccount userAccount) {
+		Assert.notNull(userAccount);
+
+		Chorbi result;
+
+		result = this.chorbiRepository.findByUserAccountId(userAccount.getId());
+
+		return result;
 	}
 
 }
