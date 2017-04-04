@@ -8,7 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -98,7 +98,7 @@ public class Template extends DomainEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany
+	@ManyToMany
 	public Collection<Chorbi> getChorbies() {
 		return this.chorbies;
 	}

@@ -47,10 +47,46 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="chorbi3" />
 		<property name="password" value="a2da05a88eead7e64593826cafc6a7a7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="chorbi4" />
+		<property name="password" value="a09dd233386632e297a7f4f461989563" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="chorbi5" />
+		<property name="password" value="7e062f6f2a4c0f7ec5abacef2917e033" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="chorbi6" />
+		<property name="password" value="0b41c51bd4b755c5b639498f55058fd3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -105,6 +141,24 @@
 		<property name="cvvCode" value="105" />
 	</bean>
 
+	<bean id="creditCardChorbi4" class="domain.CreditCard">
+		<property name="holderName" value="Chorbi4" />
+		<property name="brandName" value="MASTERCARD" />
+		<property name="number" value="5555555555554444" />
+		<property name="expirationMonth" value="02" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvvCode" value="125" />
+	</bean>
+
+	<bean id="creditCardChorbi5" class="domain.CreditCard">
+		<property name="holderName" value="Chorbi5" />
+		<property name="brandName" value="DISCOVER" />
+		<property name="number" value="6849892547748030" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="2018" />
+		<property name="cvvCode" value="155" />
+	</bean>
+
 	<!-- COORDINATES -->
 
 	<bean id="coordinateChorbi1" class="domain.Coordinate">
@@ -138,7 +192,7 @@
 		<property name="city" value="Cádiz" />
 
 	</bean>
-	
+
 	<bean id="coordinateChorbi2" class="domain.Coordinate">
 		<property name="country" value="España" />
 		<property name="state" value="España" />
@@ -146,7 +200,7 @@
 		<property name="city" value="Aracena" />
 
 	</bean>
-	
+
 	<bean id="coordinateTemplate2.1" class="domain.Coordinate">
 		<property name="country" value="España" />
 		<property name="state" value="España" />
@@ -154,12 +208,37 @@
 		<property name="city" value="Sevilla" />
 
 	</bean>
-	
+
 	<bean id="coordinateChorbi3" class="domain.Coordinate">
 		<property name="country" value="España" />
 		<property name="state" value="España" />
 		<property name="province" value="Cádiz" />
 		<property name="city" value="Valdelagrana" />
+
+	</bean>
+
+	<bean id="coordinateChorbi4" class="domain.Coordinate">
+		<property name="country" value="Colombia" />
+		<property name="state" value="Colombia" />
+		<property name="province" value="Medellín" />
+		<property name="city" value="Medellín" />
+
+	</bean>
+
+	<bean id="coordinateChorbi5" class="domain.Coordinate">
+		<property name="country" value="España" />
+		<property name="city" value="Huelva" />
+
+	</bean>
+
+	<bean id="coordinateTemplate5.1" class="domain.Coordinate">
+		<property name="country" value="Colombia" />
+		<property name="city" value="Medellín" />
+	</bean>
+
+	<bean id="coordinateChorbi6" class="domain.Coordinate">
+		<property name="country" value="España" />
+		<property name="city" value="Cádiz" />
 
 	</bean>
 
@@ -170,7 +249,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="25/04/2017 17:00" />
+		<property name="moment" value="10/03/2017 17:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate1.1" />
@@ -189,18 +268,18 @@
 		</property>
 
 	</bean>
-	
-	
+
+
 	<bean id="templateChorbi2" class="domain.Template">
 		<property name="relationShip" value="FRIENDSHIP" />
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="25/04/2017 16:00" />
+		<property name="moment" value="25/03/2017 16:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate2.1" />
-				
+
 			</list>
 
 		</property>
@@ -213,29 +292,80 @@
 		</property>
 
 	</bean>
-	
+
 	<bean id="templateChorbi3" class="domain.Template">
 		<property name="relationShip" value="LOVE" />
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="25/05/2017 20:00" />
+		<property name="moment" value="25/02/2017 20:00" />
 		<property name="coordinates">
 			<list>
-				
+
 			</list>
 
 		</property>
 
 		<property name="chorbies">
 			<list>
-				
+
 			</list>
 
 		</property>
 
 	</bean>
-	
+
+	<bean id="templateChorbi4" class="domain.Template">
+		<property name="moment" value="25/01/2017 20:00" />
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1" />
+				<ref bean="chorbi2" />
+				<ref bean="chorbi3" />
+				<ref bean="chorbi4" />
+
+			</list>
+
+		</property>
+
+	</bean>
+
+	<bean id="templateChorbi5" class="domain.Template">
+		<property name="relationShip" value="LOVE" />
+		<property name="approximatedAge" value="25" />
+		<property name="genre" value="FEMALE" />
+		<property name="moment" value="12/02/2017 20:00" />
+		<property name="coordinates">
+			<list>
+				<ref bean="coordinateTemplate5.1" />
+			</list>
+
+		</property>
+
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi4" />
+			</list>
+
+		</property>
+
+	</bean>
+
+	<bean id="templateChorbi6" class="domain.Template">
+		<property name="moment" value="03/04/2017 23:00" />
+		<property name="relationShip" value="ACTIVITIES" />
+		<property name="chorbies">
+			<list>
+
+				<ref bean="chorbi5" />
+
+			</list>
+
+		</property>
+
+	</bean>
+
+
 
 	<!-- CHORBIES -->
 
@@ -276,7 +406,7 @@
 
 
 	</bean>
-	
+
 	<bean id="chorbi2" class="domain.Chorbi">
 		<property name="userAccount" ref="userAccount3" />
 		<property name="name" value="Chorbi 2" />
@@ -313,7 +443,7 @@
 
 
 	</bean>
-	
+
 	<bean id="chorbi3" class="domain.Chorbi">
 		<property name="userAccount" ref="userAccount4" />
 		<property name="name" value="Chorbi 3" />
@@ -327,7 +457,7 @@
 		<property name="relationship" value="LOVE" />
 		<property name="birthDate" value="11/07/1992" />
 		<property name="genre" value="FEMALE" />
-		<property name="ban" value="false" />
+		<property name="ban" value="true" />
 
 		<property name="chirpReceives">
 			<list>
@@ -350,31 +480,143 @@
 
 
 	</bean>
-	
+
+	<bean id="chorbi4" class="domain.Chorbi">
+		<property name="userAccount" ref="userAccount5" />
+		<property name="name" value="Chorbi 4" />
+		<property name="surName" value="Chorbi4 surname" />
+		<property name="email" value="chorbi4@acmechorbi.com" />
+		<property name="phone" value="684415212" />
+
+		<property name="picture"
+			value="https://c1.staticflickr.com/4/3634/3485640178_f41555af4f.jpg" />
+		<property name="description" value="Chorbi4 Female Love description" />
+		<property name="relationship" value="LOVE" />
+		<property name="birthDate" value="22/03/1995" />
+		<property name="genre" value="FEMALE" />
+		<property name="ban" value="false" />
+
+		<property name="chirpReceives">
+			<list>
+
+			</list>
+		</property>
+		<property name="chirpWrites">
+			<list>
+
+			</list>
+		</property>
+		<property name="creditCard" ref="creditCardChorbi4" />
+		<property name="givenTastes">
+			<list>
+
+			</list>
+		</property>
+		<property name="coordinate" ref="coordinateChorbi4" />
+		<property name="template" ref="templateChorbi4" />
+
+	</bean>
+
+	<bean id="chorbi5" class="domain.Chorbi">
+		<property name="userAccount" ref="userAccount6" />
+		<property name="name" value="Chorbi 5" />
+		<property name="surName" value="Chorbi5 surname" />
+		<property name="email" value="chorbi5@acmechorbi.com" />
+		<property name="phone" value="+130 687146359" />
+
+		<property name="picture"
+			value="https://c1.staticflickr.com/3/2688/4298216428_83e663eb8d.jpg" />
+		<property name="description" value="Chorbi5 Female Activities description" />
+		<property name="relationship" value="ACTIVITIES" />
+		<property name="birthDate" value="08/09/1985" />
+		<property name="genre" value="FEMALE" />
+		<property name="ban" value="false" />
+
+		<property name="chirpReceives">
+			<list>
+
+			</list>
+		</property>
+		<property name="chirpWrites">
+			<list>
+
+			</list>
+		</property>
+		<property name="creditCard" ref="creditCardChorbi5" />
+		<property name="givenTastes">
+			<list>
+
+			</list>
+		</property>
+		<property name="coordinate" ref="coordinateChorbi5" />
+		<property name="template" ref="templateChorbi5" />
+
+	</bean>
+
+
+	<bean id="chorbi6" class="domain.Chorbi">
+		<property name="userAccount" ref="userAccount7" />
+		<property name="name" value="Chorbi 6" />
+		<property name="surName" value="Chorbi6 surname" />
+		<property name="email" value="chorbi6@acmechorbi.com" />
+		<property name="phone" value="+13 687146351" />
+
+		<property name="picture"
+			value="https://c1.staticflickr.com/6/5186/5638121789_a56748b9d9_m.jpg" />
+		<property name="description" value="Chorbi6 MALE Activities description" />
+		<property name="relationship" value="ACTIVITIES" />
+		<property name="birthDate" value="08/10/1986" />
+		<property name="genre" value="MALE" />
+		<property name="ban" value="false" />
+
+		<property name="chirpReceives">
+			<list>
+
+			</list>
+		</property>
+		<property name="chirpWrites">
+			<list>
+
+			</list>
+		</property>
+		<property name="givenTastes">
+			<list>
+
+			</list>
+		</property>
+		<property name="coordinate" ref="coordinateChorbi6" />
+		<property name="template" ref="templateChorbi6" />
+
+	</bean>
+
 	<!-- CHIRPS -->
-	
+
 	<bean id="chirp1" class="domain.Chirp">
 		<property name="moment" value="02/04/2017 16:30" />
 		<property name="subject" value="Excursión sierra nevada" />
-		<property name="text" value="Hola, estarías interesado en hacer montañismo?" />
-		<property name="attachments" value="http://www.traventia.es/esqui/sierra-nevada/hotel-forfait?gclid=CKefoOKGhtMCFWgW0wod1P8H3w" />
+		<property name="text"
+			value="Hola, estarías interesado en hacer montañismo?" />
+		<property name="attachments"
+			value="http://www.traventia.es/esqui/sierra-nevada/hotel-forfait?gclid=CKefoOKGhtMCFWgW0wod1P8H3w" />
 		<property name="copy" value="false" />
 		<property name="sender" ref="chorbi1" />
 		<property name="recipient" ref="chorbi2" />
 
 	</bean>
-	
+
 	<bean id="chirp1copy" class="domain.Chirp">
 		<property name="moment" value="02/04/2017 16:30" />
 		<property name="subject" value="Excursión sierra nevada" />
-		<property name="text" value="Hola, estarías interesado en hacer montañismo?" />
-		<property name="attachments" value="http://www.traventia.es/esqui/sierra-nevada/hotel-forfait?gclid=CKefoOKGhtMCFWgW0wod1P8H3w" />
+		<property name="text"
+			value="Hola, estarías interesado en hacer montañismo?" />
+		<property name="attachments"
+			value="http://www.traventia.es/esqui/sierra-nevada/hotel-forfait?gclid=CKefoOKGhtMCFWgW0wod1P8H3w" />
 		<property name="copy" value="true" />
 		<property name="sender" ref="chorbi1" />
 		<property name="recipient" ref="chorbi2" />
 
 	</bean>
-	
+
 	<bean id="chirp2" class="domain.Chirp">
 		<property name="moment" value="02/04/2017 18:32" />
 		<property name="subject" value="Excursion a sierra nevada" />
@@ -385,8 +627,8 @@
 		<property name="recipient" ref="chorbi1" />
 
 	</bean>
-	
-		<bean id="chirp2copy" class="domain.Chirp">
+
+	<bean id="chirp2copy" class="domain.Chirp">
 		<property name="moment" value="02/04/2017 18:32" />
 		<property name="subject" value="Excursion a sierra nevada" />
 		<property name="text" value="Sí, me encantaría!" />
@@ -396,30 +638,30 @@
 		<property name="recipient" ref="chorbi1" />
 
 	</bean>
-	
+
 	<!-- TASTES -->
-	
+
 	<bean id="taste1" class="domain.Taste">
 		<property name="moment" value="02/03/2017 15:00" />
 		<property name="comment" value="commenttaste1" />
 		<property name="chorbi" ref="chorbi2" />
 
 	</bean>
-	
+
 	<bean id="taste2" class="domain.Taste">
 		<property name="moment" value="02/01/2017 21:00" />
 		<property name="comment" value="commenttaste2" />
 		<property name="chorbi" ref="chorbi3" />
 
 	</bean>
-	
+
 	<bean id="taste3" class="domain.Taste">
 		<property name="moment" value="22/03/2017 09:00" />
 		<property name="comment" value="commenttaste3" />
 		<property name="chorbi" ref="chorbi1" />
 
 	</bean>
-	
+
 	<bean id="taste4" class="domain.Taste">
 		<property name="moment" value="07/01/2017 22:00" />
 		<property name="comment" value="commenttaste4" />
@@ -428,7 +670,25 @@
 	</bean>
 
 
+	<!-- CONFIGURATION -->
 
+	<bean id="configuration" class="domain.Configuration">
+		<property name="banners">
+			<list>
+				<value>https://c1.staticflickr.com/3/2875/32662160373_4a9e9e2b1f_b.jpg
+				</value>
+				<value>https://c1.staticflickr.com/6/5270/5597003936_8be5517eb0_m.jpg
+				</value>
+				<value>https://c1.staticflickr.com/3/2581/4196739522_508f74d424_m.jpg
+				</value>
+			</list>
+		</property>
+		<property name="hour" value="12" />
+		<property name="minute" value="0" />
+		<property name="second" value="0" />
+
+
+	</bean>
 
 
 

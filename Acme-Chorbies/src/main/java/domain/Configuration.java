@@ -1,11 +1,12 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -20,21 +21,21 @@ public class Configuration extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private String	banner;
-	private int		hour;
-	private int		minute;
-	private int		second;
+	private Collection<String>	banners;
+	private int					hour;
+	private int					minute;
+	private int					second;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
 
-	@URL
-	public String getBanner() {
-		return this.banner;
+	@ElementCollection
+	public Collection<String> getBanners() {
+		return this.banners;
 	}
 
-	public void setBanner(final String banner) {
-		this.banner = banner;
+	public void setBanners(final Collection<String> banners) {
+		this.banners = banners;
 	}
 
 	public int getHour() {
