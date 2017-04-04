@@ -55,6 +55,12 @@
 
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message
 						code="master.page.know.people" /></a></li>
+			
+			<li><a class="fNiv" href="chorbi/chorbi/myLikes.do"><spring:message
+						code="master.page.myLikes" /></a></li>
+			
+			<li><a class="fNiv" href="chorbi/chorbi/likesToMe.do"><spring:message
+						code="master.page.whoILike" /></a></li>
 
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication

@@ -12,34 +12,38 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
-<display:table pagesize="5" class="displaytag" name="chorbies" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="tastes" requestURI="${requestURI}" id="row">
 	
 	<spring:message code="chorbi.picture" var="chorbiPicture" />
 	<display:column title="${chorbiPicture}" sortable="false" >
-		<img src="${row.picture}" width="200" height="100" />
+		<img src="${row.chorbi.picture}" width="200" height="100" />
 	</display:column>
 	
 	<spring:message code="chorbi.name" var="chorbiName" />
-	<display:column property="name" title="${chorbiName}" sortable="false" />
+	<display:column property="chorbi.name" title="${chorbiName}" sortable="false" />
 	
 	<spring:message code="chorbi.surname" var="chorbiSurname" />
-	<display:column property="surName" title="${chorbiSurname}" sortable="false" />
+	<display:column property="chorbi.surName" title="${chorbiSurname}" sortable="false" />
 	
 	<spring:message code="chorbi.genre" var="chorbiGenre" />
-	<display:column property="genre" title="${chorbiGenre}" sortable="false" />
+	<display:column property="chorbi.genre" title="${chorbiGenre}" sortable="false" />
 	
 	<spring:message code="chorbi.birthDate" var="chorbiBirthDate" />
-	<display:column property="birthDate" title="${chorbiBirthDate}" sortable="false" format="{0,date,dd/MM/YYYY}"/>
+	<display:column property="chorbi.birthDate" title="${chorbiBirthDate}" sortable="false" format="{0,date,dd/MM/YYYY}"/>
 	
-	
-	
+
 	<spring:message code="chorbi.relationship" var="chorbiRelationship" />
-	<display:column property="relationship" title="${chorbiRelationship}" sortable="false" />
+	<display:column property="chorbi.relationship" title="${chorbiRelationship}" sortable="false" />
+	
+	
+	<spring:message code="taste.comment" var="tasteComment" />
+	<display:column title="${tasteComment}" sortable="false" ><jstl:out value="${row.comment}"/></display:column>
+	
 	
 	<security:authorize access="isAuthenticated()">
 		<display:column>
 			<a
-				href="chorbi/profile.do?chorbiId=${row.id}">
+				href="chorbi/profile.do?chorbiId=${row.chorbi.id}">
 				<spring:message code="chorbi.profile" />
 			</a>
 
@@ -49,7 +53,7 @@
 	<security:authorize access="isAuthenticated()">
 		<display:column>
 			<a
-				href="chorbi/listWhoLikeThem.do?chorbiId=${row.id}">
+				href="chorbi/listWhoLikeThem.do?chorbiId=${row.chorbi.id}">
 				<spring:message code="chorbi.ListWhoLikeThem" />
 			</a>
 
@@ -59,7 +63,7 @@
 	<security:authorize access="isAuthenticated()">
 		<display:column>
 			<a
-				href="chorbi/listWhoLikedThis.do?chorbiId=${row.id}">
+				href="chorbi/listWhoLikedThis.do?chorbiId=${row.chorbi.id}">
 				<spring:message code="chorbi.ListWhoLikedThis" />
 			</a>
 

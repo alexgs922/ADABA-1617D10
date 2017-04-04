@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Chorbi;
+import domain.Taste;
 
 @Service
 @Transactional
@@ -87,6 +88,21 @@ public class ChorbiService {
 
 	}
 
+	public Collection<Chorbi> findAllChorbiesWhoLikedByThisUserForNotDoubleLike(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		Collection<Chorbi> chorbies;
+
+		chorbies = this.chorbiRepository.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(chorbi.getId());
+
+		Assert.notNull(chorbies);
+
+		return chorbies;
+
+	}
+
 	public Chorbi findByPrincipal() {
 		Chorbi result;
 		UserAccount userAccount;
@@ -105,6 +121,28 @@ public class ChorbiService {
 		result = this.chorbiRepository.findByUserAccountId(userAccount.getId());
 
 		return result;
+	}
+
+	public Collection<Taste> findAllMyTastesWithoutBannedChorbies(final Chorbi c) {
+		Assert.notNull(c);
+		Collection<Taste> t;
+
+		t = this.chorbiRepository.findAllMyTastesWithoutBannedChorbies(c.getId());
+
+		Assert.notNull(t);
+
+		return t;
+	}
+
+	public Collection<Chorbi> findAllTastesToMeWithoutBannedChorbies(final Chorbi c) {
+		Assert.notNull(c);
+		Collection<Chorbi> t;
+
+		t = this.chorbiRepository.findAllTastesToMeWithoutBannedChorbies(c.getId());
+
+		Assert.notNull(t);
+
+		return t;
 	}
 
 }

@@ -15,6 +15,17 @@
 		<put-attribute name="title" value="Editar Me gusta" />
 		<put-attribute name="body" value="/views/taste/edit.jsp" />
 	</definition>
+	
+		<definition name="taste/list" extends="master.page">
+		<put-attribute name="title" value="Lista de Likes" />
+		<put-attribute name="body" value="/views/taste/list.jsp" />
+	</definition>
+	
+	<definition name="taste/list2" extends="master.page">
+		<put-attribute name="title" value="Lista de Likes" />
+		<put-attribute name="body" value="/views/taste/list2.jsp" />
+	</definition>
+	
 
 
 

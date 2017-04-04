@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,6 +35,47 @@ public class TasteController {
 	@Autowired
 	private TasteService	tasteService;
 
+
+	//MyLikes ------------------------------------------------
+
+	@RequestMapping(value = "/myLikes", method = RequestMethod.GET)
+	public ModelAndView myLikes() {
+
+		ModelAndView result;
+		final Collection<Taste> tastes;
+		Chorbi principal;
+
+		principal = this.chorbiService.findByPrincipal();
+		tastes = this.chorbiService.findAllMyTastesWithoutBannedChorbies(principal);
+
+		result = new ModelAndView("taste/list");
+		result.addObject("tastes", tastes);
+		result.addObject("requestURI", "chorbi/chorbi/myLikes.do");
+
+		return result;
+
+	}
+
+	//People who i like  ------------------------------------------------
+
+	@RequestMapping(value = "/likesToMe", method = RequestMethod.GET)
+	public ModelAndView likestoMe() {
+
+		ModelAndView result;
+		final Collection<Chorbi> tastes;
+		Chorbi principal;
+
+		principal = this.chorbiService.findByPrincipal();
+		tastes = this.chorbiService.findAllTastesToMeWithoutBannedChorbies(principal);
+
+		result = new ModelAndView("taste/list2");
+		result.addObject("chorbies", tastes);
+		result.addObject("principal", principal);
+		result.addObject("requestURI", "chorbi/chorbi/likesToMe.do");
+
+		return result;
+
+	}
 
 	// Create ------------------------------------------------
 
