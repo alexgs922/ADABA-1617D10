@@ -148,7 +148,6 @@ public class TasteController {
 
 		chorbi = this.chorbiService.findOne(chorbiId);
 		final Chorbi principal = this.chorbiService.findByPrincipal();
-		boolean exist = false;
 
 		if (chorbi.isBan() == true) {
 			result = new ModelAndView("taste/forboperation");
@@ -164,19 +163,11 @@ public class TasteController {
 			result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
 			return result;
 
-		} else {
-
-			for (final Taste t : principal.getGivenTastes())
-				if (t.getChorbi().getId() == chorbi.getId())
-					exist = true;
-
-			if (exist == false) {
-				result = new ModelAndView("taste/forboperation");
-				result.addObject("forbiddenOperation", "cancel.taste.not.twice");
-				result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
-				return result;
-			}
-
+		} else if (!this.chorbiService.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(principal).contains(chorbi)) {
+			result = new ModelAndView("taste/forboperation");
+			result.addObject("forbiddenOperation", "operacion.prohibida");
+			result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
+			return result;
 		}
 
 		this.tasteService.delete(chorbi);
