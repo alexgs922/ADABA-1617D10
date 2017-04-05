@@ -66,5 +66,25 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<jstl:choose>
+				<jstl:when test = "${row.ban == false }" >
+					<a
+						href="administrator/chorbi/banChorbi.do?chorbiId=${row.id}">
+						<spring:message code="chorbi.banChorbi" />
+					</a>
+				</jstl:when>
+				<jstl:when test = "${row.ban == true }" >
+					<a
+						href="administrator/chorbi/unBanChorbi.do?chorbiId=${row.id}">
+						<spring:message code="chorbi.unBanChorbi" />
+					</a>
+				</jstl:when>
+			</jstl:choose>
+
+		</display:column>
+	</security:authorize>
+	
 
 </display:table>

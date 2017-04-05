@@ -126,79 +126,67 @@ public class ChorbiController extends AbstractController {
 	}
 
 	// Terms of Use -----------------------------------------------------------
-		@RequestMapping("/dataProtection")
-		public ModelAndView dataProtection() {
-			ModelAndView result;
-			result = new ModelAndView("chorbi/dataProtection");
-			return result;
+	@RequestMapping("/dataProtection")
+	public ModelAndView dataProtection() {
+		ModelAndView result;
+		result = new ModelAndView("chorbi/dataProtection");
+		return result;
 
-		}
+	}
 
-		// Creation ---------------------------------------------------------------
-		@RequestMapping(value = "/register", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			RegistrationForm chorbi;
+	// Creation ---------------------------------------------------------------
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		RegistrationForm chorbi;
 
-			chorbi = new RegistrationForm();
-			result = this.createEditModelAndView(chorbi);
-			
-			return result;
+		chorbi = new RegistrationForm();
+		result = this.createEditModelAndView(chorbi);
 
-		}
+		return result;
 
-		@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(
-				@ModelAttribute("chorbi") @Valid final RegistrationForm form,
-				final BindingResult binding) {
+	}
 
-			ModelAndView result;
-			Chorbi chorbi;
-			if (binding.hasErrors()) {
-				if (binding.getGlobalError() != null)
-					result = this.createEditModelAndView(form, binding
-							.getGlobalError().getCode());
-				else
-					result = this.createEditModelAndView(form);
-			} else
-				try {
-					Template t = this.templateService.create();
-					chorbi = this.chorbiService.reconstruct(form);
-					chorbi = this.chorbiService.saveAndFlush(chorbi,t);
-					
-					result = new ModelAndView("redirect:../security/login.do");
-				} catch (final DataIntegrityViolationException exc) {
-					result = this.createEditModelAndView(form,
-							"chorbi.duplicated.user");
-				} catch (final Throwable oops) {
-					result = this.createEditModelAndView(form,
-							"chorbi.commit.error");
-				}
-			return result;
-		}
-	
-	
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@ModelAttribute("chorbi") @Valid final RegistrationForm form, final BindingResult binding) {
 
-		// Other methods
+		ModelAndView result;
+		Chorbi chorbi;
+		if (binding.hasErrors()) {
+			if (binding.getGlobalError() != null)
+				result = this.createEditModelAndView(form, binding.getGlobalError().getCode());
+			else
+				result = this.createEditModelAndView(form);
+		} else
+			try {
+				final Template t = this.templateService.create();
+				chorbi = this.chorbiService.reconstruct(form);
+				chorbi = this.chorbiService.saveAndFlush(chorbi, t);
 
-		protected ModelAndView createEditModelAndView(
-				final RegistrationForm chorbi) {
-			ModelAndView result;
-			result = this.createEditModelAndView(chorbi, null);
-			return result;
-		}
+				result = new ModelAndView("redirect:../security/login.do");
+			} catch (final DataIntegrityViolationException exc) {
+				result = this.createEditModelAndView(form, "chorbi.duplicated.user");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(form, "chorbi.commit.error");
+			}
+		return result;
+	}
 
-		protected ModelAndView createEditModelAndView(
-				final RegistrationForm chorbi, final String message) {
-			ModelAndView result;
-				result = new ModelAndView("chorbi/register");
-			result.addObject("chorbi", chorbi);
-			result.addObject("message", message);
-			return result;
+	// Other methods
 
-		}
+	protected ModelAndView createEditModelAndView(final RegistrationForm chorbi) {
+		ModelAndView result;
+		result = this.createEditModelAndView(chorbi, null);
+		return result;
+	}
 
-		
-		
-	
+	protected ModelAndView createEditModelAndView(final RegistrationForm chorbi, final String message) {
+		ModelAndView result;
+		result = new ModelAndView("chorbi/register");
+		result.addObject("chorbi", chorbi);
+		result.addObject("message", message);
+		return result;
+
+	}
+
 }

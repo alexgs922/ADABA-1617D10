@@ -1,12 +1,10 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -46,15 +44,14 @@ public class ChorbiService {
 
 	@Autowired
 	private Md5PasswordEncoder	encoder;
-		
+
 	@Autowired
 	private Validator			validator;
-	
-	@Autowired
-	private TemplateService	templateService;
-		
 
-	
+	@Autowired
+	private TemplateService		templateService;
+
+
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Chorbi create() {
@@ -63,8 +60,6 @@ public class ChorbiService {
 		return result;
 	}
 
-
-
 	public Chorbi reconstruct(final RegistrationForm customerForm) {
 		Chorbi result;
 		UserAccount userAccount;
@@ -72,48 +67,43 @@ public class ChorbiService {
 		Collection<Authority> authorities;
 		String pwdHash;
 		Coordinate coordinate;
-		
+
 		result = this.create();
 		authorities = new HashSet<Authority>();
 		userAccount = new UserAccount();
 		coordinate = new Coordinate();
-		
-		
-		
+
 		result.setName(customerForm.getName());
 		result.setSurName(customerForm.getSurName());
 		result.setPhone(customerForm.getPhone());
 		result.setEmail(customerForm.getEmail());
 		result.setDescription(customerForm.getDescription());
 		result.setPicture(customerForm.getPicture());
-		
-		if(customerForm.getGenre().equals("MALE")){
+
+		if (customerForm.getGenre().equals("MALE"))
 			result.setGenre(Genre.MALE);
-		}
-		else{
+		else
 			result.setGenre(Genre.FEMALE);
-		}
-		
-		if(customerForm.getRelation().equals("ACTIVITIES"))
+
+		if (customerForm.getRelation().equals("ACTIVITIES"))
 			result.setRelationship(Relationship.ACTIVITIES);
-		
-		else if(customerForm.getRelation().equals("FRIENDSHIP"))
+
+		else if (customerForm.getRelation().equals("FRIENDSHIP"))
 			result.setRelationship(Relationship.FRIENDSHIP);
-			
-		else if(customerForm.getRelation().equals("LOVE"))
+
+		else if (customerForm.getRelation().equals("LOVE"))
 			result.setRelationship(Relationship.LOVE);
-		
-		
+
 		//Validamos la fecha de nacimiento de la persona para saber si tiene 18 años.
-		Assert.isTrue(calcularEdad(customerForm.getBirthDate())>=18);
+		Assert.isTrue(ChorbiService.calcularEdad(customerForm.getBirthDate()) >= 18);
 		result.setBirthDate(customerForm.getBirthDate());
-		
+
 		coordinate.setCity(customerForm.getCity());
 		coordinate.setCountry(customerForm.getCountry());
 		coordinate.setProvince(customerForm.getProvince());
 		coordinate.setState(customerForm.getState());
 		result.setCoordinate(coordinate);
-			
+
 		authority = new Authority();
 		authority.setAuthority(Authority.CHORBI);
 		authorities.add(authority);
@@ -122,11 +112,10 @@ public class ChorbiService {
 		userAccount.setPassword(pwdHash);
 		userAccount.setUsername(customerForm.getUsername());
 		result.setUserAccount(userAccount);
-			
+
 		return result;
 	}
-	
-	
+
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
 		if (chorbi.getId() == 0)
@@ -154,33 +143,31 @@ public class ChorbiService {
 		return res;
 	}
 
-	public Collection<Chorbi> findAll(){
+	public Collection<Chorbi> findAll() {
 		Collection<Chorbi> res;
 		res = this.chorbiRepository.findAll();
 		return res;
 	}
-	
+
 	public Chorbi save(final Chorbi chorbi) {
 		Assert.notNull(chorbi);
 		return this.chorbiRepository.save(chorbi);
 
 	}
-	
-	public Chorbi saveAndFlush(Chorbi chorbi,Template t){
+
+	public Chorbi saveAndFlush(Chorbi chorbi, Template t) {
 		Assert.notNull(chorbi);
 		Assert.notNull(t);
-		
-		if(chorbi.getId()==0){
+
+		if (chorbi.getId() == 0) {
 
 			t = this.templateService.saveAndFlush(t);
 			chorbi.setTemplate(t);
-			save(chorbi);
-		}
-		else{
-			chorbi = save(chorbi);
-		}
+			this.save(chorbi);
+		} else
+			chorbi = this.save(chorbi);
 		return chorbi;
-	
+
 	}
 
 	// Other business methods ----------------------------------------------------
@@ -192,6 +179,19 @@ public class ChorbiService {
 		Collection<Chorbi> chorbiesToShow;
 
 		chorbiesToShow = this.chorbiRepository.findAllNotBannedChorbies();
+
+		Assert.notNull(chorbiesToShow);
+
+		return chorbiesToShow;
+	}
+
+	public Collection<Chorbi> findAllChorbies() {
+		final Actor principal = this.actorService.findByPrincipal();
+		Assert.notNull(principal);
+
+		Collection<Chorbi> chorbiesToShow;
+
+		chorbiesToShow = this.chorbiRepository.findAll();
 
 		Assert.notNull(chorbiesToShow);
 
@@ -284,17 +284,38 @@ public class ChorbiService {
 		return t;
 	}
 
-	private static int calcularEdad(Date fecha) {
-		Calendar fechaNac = Calendar.getInstance();
+	public void banChorbi(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+
+		Assert.isTrue(chorbi.isBan() == false);
+
+		chorbi.setBan(true);
+
+		this.save(chorbi);
+
+	}
+
+	public void unBanChorbi(final Chorbi chorbi) {
+		Assert.notNull(chorbi);
+
+		Assert.isTrue(chorbi.isBan() == true);
+
+		chorbi.setBan(false);
+
+		this.save(chorbi);
+
+	}
+
+	private static int calcularEdad(final Date fecha) {
+		final Calendar fechaNac = Calendar.getInstance();
 		fechaNac.setTime(fecha);
-        Calendar today = Calendar.getInstance();
-        int diffYear = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
-        int diffMonth = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
-        int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
-        // Si está en ese año pero todavía no los ha cumplido
-        if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0)) {
-            diffYear = diffYear - 1; 
-        }
-        return diffYear;
+		final Calendar today = Calendar.getInstance();
+		int diffYear = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
+		final int diffMonth = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
+		final int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
+		// Si está en ese año pero todavía no los ha cumplido
+		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
+			diffYear = diffYear - 1;
+		return diffYear;
 	}
 }

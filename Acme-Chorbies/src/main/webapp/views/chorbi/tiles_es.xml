@@ -16,8 +16,13 @@
       
 <tiles-definitions>
 
-		<definition name="chorbi/list" extends="master.page">	
+	<definition name="chorbi/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de Chorbies" />
+		<put-attribute name="body" value="/views/chorbi/list.jsp" />
+	</definition>
+	
+	<definition name="administrator/chorbi/list" extends="master.page">	
+		<put-attribute name="title" value="Chorbies del Sistema" />
 		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
 	
