@@ -90,4 +90,17 @@ public class TasteService {
 			}
 	}
 
+	public void flush() {
+		this.tasteRepository.flush();
+
+	}
+
+	public Collection<Taste> findAll() {
+
+		final Collection<Taste> t = this.tasteRepository.findAll();
+		Assert.notNull(t);
+		return t;
+
+	}
+
 }
