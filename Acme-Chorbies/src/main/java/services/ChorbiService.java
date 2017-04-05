@@ -4,6 +4,7 @@ package services;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 import javax.transaction.Transactional;
@@ -184,6 +185,7 @@ public class ChorbiService {
 
 		return chorbiesToShow;
 	}
+	
 
 	public Collection<Chorbi> findAllNotBannedChorbies2() {
 		Collection<Chorbi> chorbiesToShow;
@@ -329,5 +331,42 @@ public class ChorbiService {
 		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
 			diffYear = diffYear - 1;
 		return diffYear;
+	}
+
+	public Integer getEdad(final Date fechaNacimiento) {
+		final Calendar today = Calendar.getInstance();
+
+		final Calendar fechaNac = new GregorianCalendar();
+		fechaNac.setTime(fechaNacimiento);
+
+		int diff_year = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
+		final int diff_month = today.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
+		final int diff_day = today.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
+
+		//Si está en ese año pero todavía no los ha cumplido
+		if (diff_month < 0 || (diff_month == 0 && diff_day < 0))
+			diff_year = diff_year - 1; //no aparecían los dos guiones del postincremento :|
+		return diff_year;
+
+	}
+
+	public Collection<Chorbi> findByAllCoordinate(final String country, final String state, final String province, final String city) {
+		final Collection<Chorbi> cs = this.chorbiRepository.findByAllCoordinate(country, state, province, city);
+		return cs;
+	}
+
+	public Collection<Chorbi> findByCountryProvinceCity(final String country, final String province, final String city) {
+		final Collection<Chorbi> cs = this.chorbiRepository.findByCountryProvinceCity(country, province, city);
+		return cs;
+	}
+
+	public Collection<Chorbi> findByCountryStateCity(final String country, final String state, final String city) {
+		final Collection<Chorbi> cs = this.chorbiRepository.findByCountryStateCity(country, state, city);
+		return cs;
+	}
+
+	public Collection<Chorbi> findByCountryCity(final String country, final String city) {
+		final Collection<Chorbi> cs = this.chorbiRepository.findByCountryCity(country, city);
+		return cs;
 	}
 }

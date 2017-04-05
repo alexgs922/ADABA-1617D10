@@ -14,8 +14,8 @@
 		<put-attribute name="title" value="Chorbies List" />
 		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
-	
-	<definition name="administrator/chorbi/list" extends="master.page">	
+
+	<definition name="administrator/chorbi/list" extends="master.page">
 		<put-attribute name="title" value="System Chorbies" />
 		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
@@ -26,13 +26,20 @@
 	</definition>
 
 	<definition name="chorbi/register" extends="master.page">
-		<put-attribute name="title" value="Register a Chorbi"/>
-		<put-attribute name="body" value="/views/chorbi/register.jsp"/>
+		<put-attribute name="title" value="Register a Chorbi" />
+		<put-attribute name="body" value="/views/chorbi/register.jsp" />
+	</definition>
+
+	<definition name="template/result" extends="master.page">
+		<put-attribute name="title" value="Chorbies List" />
+		<put-attribute name="body" value="/views/chorbi/list.jsp" />
 	</definition>
 	
-	<definition name="chorbi/dataProtection" extends="master.page">
+		<definition name="chorbi/dataProtection" extends="master.page">
 <put-attribute name="title" value="Terms of Use"/>
 <put-attribute name="body" value="/views/chorbi/dataProtection.jsp"/>
 </definition>
+
+
 
 </tiles-definitions>
