@@ -41,7 +41,7 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
-		
+		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/chorbi/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chorbi/profile.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chorbi/listWhoLikeThem.do" access="isAuthenticated()" /> 

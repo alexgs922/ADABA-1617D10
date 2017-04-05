@@ -20,6 +20,8 @@ public class TemplateService {
 	@Autowired
 	private TemplateRepository	templateRepository;
 
+	@Autowired
+	private ChorbiService	chorbiService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -32,6 +34,7 @@ public class TemplateService {
 	public Template create() {
 		Template res;
 		res = new Template();
+		res.setChorbies(chorbiService.findAll());
 		return res;
 	}
 
@@ -56,7 +59,13 @@ public class TemplateService {
 		return this.templateRepository.save(t);
 
 	}
-
+	
+	public Template saveAndFlush(Template t){
+		Assert.notNull(t);
+		return this.templateRepository.saveAndFlush(t);
+		
+	}
+	
 	public void delete(final Template t) {
 		Assert.notNull(t);
 		this.templateRepository.delete(t);

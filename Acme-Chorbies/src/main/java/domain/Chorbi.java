@@ -114,7 +114,7 @@ public class Chorbi extends Actor {
 	private Template			template;
 
 
-	@Valid
+	
 	@OneToMany(mappedBy = "recipient")
 	public Collection<Chirp> getChirpReceives() {
 		return this.chirpReceives;
@@ -123,7 +123,7 @@ public class Chorbi extends Actor {
 	public void setChirpReceives(final Collection<Chirp> chirpReceives) {
 		this.chirpReceives = chirpReceives;
 	}
-	@Valid
+	
 	@OneToMany(mappedBy = "sender")
 	public Collection<Chirp> getChirpWrites() {
 		return this.chirpWrites;
@@ -133,7 +133,7 @@ public class Chorbi extends Actor {
 		this.chirpWrites = chirpWrites;
 	}
 
-	@Valid
+	
 	@OneToOne(optional = true)
 	public CreditCard getCreditCard() {
 		return this.creditCard;
@@ -143,7 +143,7 @@ public class Chorbi extends Actor {
 		this.creditCard = creditCard;
 	}
 
-	@Valid
+	
 	@OneToMany
 	public Collection<Taste> getGivenTastes() {
 		return this.givenTastes;
@@ -153,8 +153,7 @@ public class Chorbi extends Actor {
 		this.givenTastes = givenTastes;
 	}
 
-	@Valid
-	@NotNull
+	
 	@OneToOne(optional = false)
 	public Template getTemplate() {
 		return this.template;

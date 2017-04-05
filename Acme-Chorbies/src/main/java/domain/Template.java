@@ -96,7 +96,7 @@ public class Template extends DomainEntity {
 	private Collection<Chorbi>	chorbies;
 
 
-	@Valid
+	
 	@NotNull
 	@ManyToMany
 	public Collection<Chorbi> getChorbies() {

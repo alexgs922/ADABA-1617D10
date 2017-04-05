@@ -40,7 +40,6 @@ public class TasteService {
 		Assert.notNull(principal);
 
 		final Taste t = new Taste();
-
 		t.setChorbi(chorbiToLike);
 
 		return t;
