@@ -86,18 +86,18 @@ public class ChorbiServiceTest extends AbstractTest {
 
 			// Para el caso de uso probaremos que:
 			//(Para chorbies)
-			//1. Se recojan de la base de datos el número correcto total de chorbies que debería
+			//1. Se recojan de la base de datos el número correcto total de chorbies que debería (5)
 			//2. El usuario que accede esté logueado en el sistema
-			//3. No se muestre en el listado ningun chorbi banneado
+			//3. No se muestre en el listado ningun chorbi banneado ( sin chorbi3)
 			//4. Que los chorbies que se deben mostrar sean los correctos (mediante el username)
 
 			// Para el caso de uso probaremos que:
 			//(Para admin)
-			//1. Se recojan de la base de datos el número correcto total de chorbies que debería
+			//1. Se recojan de la base de datos el número correcto total de chorbies que debería (6)
 			//2. El usuario que accede esté logueado en el sistema
-			//3. Se muestren en el listado los chorbies banneados
+			//3. Se muestren en el listado los chorbies banneados (incluido chorbi3)
 			//4. Que los chorbies que se deben mostrar sean los correctos (mediante el username)
-			//5. Que el chorbi baneado sea el correcto
+			//5. Que el chorbi baneado sea el correcto (chorbi3)
 
 			//DETALLES DE CADA PRUEBA:
 			//1. Se deben recoger datos correctos, sin ningun chorbi banneado y con un size de 5
@@ -127,4 +127,101 @@ public class ChorbiServiceTest extends AbstractTest {
 			this.templateListUseCase1((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
 
 	}
+
+	//CASO DE USO 2,3 y 4:   ---------------------------------------------------------------------------------
+	//2 : BROWSE THE LIST OF CHORBIES WHO HAVE REGISTERED TO THE SYSTEM AND NAVIGATE TO THE CHORBIES WHO LIKE THEM
+	//3 : MY LIKES, donde cada usuario autenticado como principal ve un listado de chorbies a los que ha dado su like 
+	//4 : PEOPLE WHO I LIKE, donde cada usuario autenticado como principal ve un listado de chorbies que le han dado like
+	//Se ha decidido probar los tres casos en conjunto, ya que la funcionalidad es practicamente la misma, pues hacen uso del mismo método de servicio, unicamente difieren en el controlador.
+
+	//Estos casos de uso añaden funcionalidad al anterior, hace que en el listado de chorbies se añadan dos enlaces:
+	// El primero, donde podemos ver las personas que han dado like al chorbi de esa fila
+	// El segundo, donde podemos ver las personas a las que el chorbi de esa fila ha dado like
+	//Igual que en el caso anterior, no deben mostrarse los chorbies banneados
+
+	//Option controlará si el listado es del primer tipo o del segundo
+	protected void templateListUseCase2(final String username, final int resultsSize, final int option, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+
+			this.authenticate(username);
+
+			Collection<Chorbi> res = null;
+			final Chorbi principal = this.chorbiService.findByPrincipal();
+
+			if (option == 1)
+				res = this.chorbiService.findAllChorbiesWhoLikeThem(principal);
+			else
+				res = this.chorbiService.findAllChorbiesWhoLikedByThisUser(principal);
+
+			Assert.isTrue(res.size() == resultsSize);
+
+			for (final Chorbi c : res) {
+				Assert.isTrue(c.isBan() == false);
+				Assert.isTrue(c.getId() != principal.getId());
+
+			}
+
+			this.unauthenticate();
+			this.chorbiService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	@Test
+	public void driverListUseCase2() {
+
+		final Object testingData[][] = {
+
+			// Para el caso de uso probaremos que:
+			//1. Se recojan de la base de datos el número correcto total de chorbies que debería para cada uno y en cada opción
+			//2. El usuario que accede esté logueado en el sistema
+			//3. No se muestre en el listado ningun chorbi banneado (sin chorbi3)
+			//4. Que los chorbies que se deben mostrar sean los correctos (mediante el username)
+			//5. Que no se puede acceder a los datos del chorbi3, por estar banneado
+
+			//DETALLES DE CADA PRUEBA:
+			//1 a 10 --> resultados positivos: comprobando que se recoja la cantidad de chorbies correcta para cada caso y que no estén banneados.
+			//11 y 12 --> resultados negativos : no se debe poder acceder a esta información, ya que el chorbi3 no se puede autenticar al estar banneado
+			{
+				"chorbi1", 1, 1, null
+			}, {
+				"chorbi1", 1, 2, null
+			}, {
+				"chorbi2", 1, 1, null
+			}, {
+				"chorbi2", 1, 2, null
+			}, {
+				"chorbi4", 0, 1, null
+			}, {
+				"chorbi4", 0, 2, null
+			}, {
+				"chorbi5", 0, 1, null
+			}, {
+				"chorbi5", 0, 2, null
+			}, {
+				"chorbi6", 0, 1, null
+			}, {
+				"chorbi6", 0, 2, null
+			}, {
+				"chorbi3", 1, 1, IllegalArgumentException.class
+			}, {
+				"chorbi3", 1, 2, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListUseCase2((String) testingData[i][0], (int) testingData[i][1], (int) testingData[i][2], (Class<?>) testingData[i][3]);
+
+	}
+
 }
