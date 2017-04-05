@@ -72,6 +72,26 @@ public class AdministratorChorbiController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/unBanChorbi", method = RequestMethod.GET)
+	public ModelAndView unBanChorbi(@RequestParam final int chorbiId) {
+		ModelAndView result;
+		Chorbi chorbi;
+
+		chorbi = this.chorbiService.findOne(chorbiId);
+
+		try {
+			this.chorbiService.unBanChorbi(chorbi);
+			result = new ModelAndView("redirect:list.do");
+
+		} catch (final Throwable th) {
+			result = new ModelAndView("forbiddenOperation");
+
+		}
+
+		return result;
+
+	}
+
 	//See Chorbi Profile
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView displayProfile(@RequestParam final int chorbiId) {

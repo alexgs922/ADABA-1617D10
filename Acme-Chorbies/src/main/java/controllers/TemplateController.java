@@ -122,6 +122,8 @@ public class TemplateController extends AbstractController {
 		return result;
 	}
 
+	//Edit coordinates
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int templateId) {
 		ModelAndView result;
