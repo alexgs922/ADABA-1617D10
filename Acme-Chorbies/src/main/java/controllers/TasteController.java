@@ -83,7 +83,24 @@ public class TasteController {
 	public ModelAndView like(@RequestParam final int chorbiId) {
 		ModelAndView result;
 		Taste taste;
+		final Chorbi principal = this.chorbiService.findByPrincipal();
 		final Chorbi chorbiToLike = this.chorbiService.findOne(chorbiId);
+
+		if (principal.getId() == chorbiToLike.getId()) {
+
+			result = new ModelAndView("taste/forboperation");
+			result.addObject("forbiddenOperation", "taste.not.like.yourself");
+			result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
+			return result;
+
+		} else
+			for (final Taste t : principal.getGivenTastes())
+				if (t.getChorbi().getId() == chorbiToLike.getId()) {
+					result = new ModelAndView("taste/forboperation");
+					result.addObject("forbiddenOperation", "taste.not.twice");
+					result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
+					return result;
+				}
 
 		taste = this.tasteService.create(chorbiToLike);
 		result = this.createEditModelAndView(taste);
@@ -131,6 +148,29 @@ public class TasteController {
 
 		chorbi = this.chorbiService.findOne(chorbiId);
 		final Chorbi principal = this.chorbiService.findByPrincipal();
+		boolean exist = false;
+
+		if (principal.getId() == chorbi.getId()) {
+
+			result = new ModelAndView("taste/forboperation");
+			result.addObject("forbiddenOperation", "taste.not.cancel.like.yourself");
+			result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
+			return result;
+
+		} else {
+
+			for (final Taste t : principal.getGivenTastes())
+				if (t.getChorbi().getId() == chorbi.getId())
+					exist = true;
+
+			if (exist == false) {
+				result = new ModelAndView("taste/forboperation");
+				result.addObject("forbiddenOperation", "cancel.taste.not.twice");
+				result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + chorbiId);
+				return result;
+			}
+
+		}
 
 		this.tasteService.delete(chorbi);
 
