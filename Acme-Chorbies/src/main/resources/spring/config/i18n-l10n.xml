@@ -28,6 +28,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/chorbi/messages</value>
 		<value>/views/taste/messages</value>
+		<value>/views/template/messages</value>
 	</util:list>
 
 </beans>

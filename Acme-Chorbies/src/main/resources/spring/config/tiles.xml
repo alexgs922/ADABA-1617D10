@@ -28,6 +28,7 @@
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/chorbi/tiles.xml</value>
 		<value>/views/taste/tiles.xml</value>
+		<value>/views/template/tiles.xml</value>
 		
 	</util:list>
 

@@ -249,7 +249,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="10/03/2017 17:00" />
+		<property name="moment" value="02/04/2017 17:00 17:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate1.1" />
