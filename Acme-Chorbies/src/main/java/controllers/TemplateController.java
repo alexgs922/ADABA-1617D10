@@ -19,6 +19,7 @@ import services.ChorbiService;
 import services.ConfigurationService;
 import services.TemplateService;
 import domain.Chorbi;
+import domain.Configuration;
 import domain.Coordinate;
 import domain.CreditCard;
 import domain.Template;
@@ -84,9 +85,8 @@ public class TemplateController extends AbstractController {
 
 		} else {
 
-			//final List<Configuration> configurations = this.configurationService.findAll();
-			//final Configuration confi = configurations.get(0);
-			//final Integer horaTotal = this.configurationService.getHoraConfiguration(confi);
+			final Configuration confi = this.configurationService.findConfiguation();
+			final Integer horaTotal = this.configurationService.getHoraConfiguration(confi);
 
 			final Date momentTemplate = template.getMoment();
 			if (momentTemplate != null) {
@@ -98,7 +98,7 @@ public class TemplateController extends AbstractController {
 				final long minutes = (diff / 1000) / 60;
 
 				//cambiar horaTotal por 720 para comprobar que funciona ya que no existe configuration
-				if (minutes > 720 || template.getChorbies().isEmpty()) {
+				if (minutes > horaTotal || template.getChorbies().isEmpty()) {
 					cs = this.templateService.findChorbiesByMyTemplate(template);
 					template.setMoment(new Date());
 

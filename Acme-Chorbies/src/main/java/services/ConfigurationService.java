@@ -79,4 +79,34 @@ public class ConfigurationService {
 
 		return res;
 	}
+
+	public Integer getHoraConfiguration(final Configuration c) {
+
+		Integer horas = c.getHour();
+		Integer minutos = c.getMinute();
+		Integer segundos = c.getSecond();
+
+		final Integer horaTotal;
+
+		while (minutos > 60) {
+			minutos = minutos - 60;
+			horas = horas + 1;
+
+		}
+
+		while (segundos > 60) {
+			segundos = segundos - 60;
+			minutos = minutos + 1;
+		}
+
+		horaTotal = horas + minutos + segundos;
+
+		return horaTotal;
+
+	}
+
+	public Configuration findConfiguation() {
+		final Configuration c = this.configurationRepository.findConfiguration();
+		return c;
+	}
 }
