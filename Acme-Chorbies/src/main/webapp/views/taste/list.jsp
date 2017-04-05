@@ -39,6 +39,16 @@
 	<spring:message code="taste.comment" var="tasteComment" />
 	<display:column title="${tasteComment}" sortable="false" ><jstl:out value="${row.comment}"/></display:column>
 	
+	<%-- <spring:message code="taste.momment" var="tasteMomment" />
+	<display:column property="moment" title="${tasteMomment}" sortable="false" format="{0,date,dd/MM/yyyy HH:mm}" /> --%>
+	
+	<spring:message code="taste.momment" var="tasteMoment" />
+	<display:column title="${tasteMoment}" sortable="false">
+		<fmt:formatDate type="both" dateStyle="medium" timeStyle="short"
+			value="${row.moment}" />
+		
+	</display:column>
+	
 	
 	<security:authorize access="isAuthenticated()">
 		<display:column>

@@ -10,6 +10,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <div>

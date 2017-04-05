@@ -44,10 +44,12 @@
 
 
 	<jstl:set var="tasteAux" value="${row.givenTastes}" />
-	
+
 	<jstl:forEach var="i" begin="0" end="${fn:length(tasteAux)}">
-	
-		<jstl:if test="${tasteAux[i].chorbi.id eq principal.id}"><jstl:set var="tasteAuxdef" value="${tasteAux[i]}"/> </jstl:if>
+
+		<jstl:if test="${tasteAux[i].chorbi.id eq principal.id}">
+			<jstl:set var="tasteAuxdef" value="${tasteAux[i]}" />
+		</jstl:if>
 
 	</jstl:forEach>
 
@@ -55,6 +57,15 @@
 	<display:column title="${tasteComment}" sortable="false">
 		<jstl:out value="${tasteAuxdef.comment}" />
 	</display:column>
+
+	<spring:message code="taste.momment" var="tasteMoment" />
+	<display:column title="${tasteMoment}" sortable="false">
+		<fmt:formatDate type="both" dateStyle="medium" timeStyle="short"
+			value="${tasteAuxdef.moment}" />
+		<%-- <jstl:out value="${tasteAuxdef.moment}" /> --%>
+	</display:column>
+
+
 
 
 	<security:authorize access="isAuthenticated()">

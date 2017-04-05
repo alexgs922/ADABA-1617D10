@@ -249,7 +249,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="02/04/2017 17:00 17:00" />
+		<property name="moment" value="2017/04/02 17:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate1.1" />
@@ -275,7 +275,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="25/03/2017 16:00" />
+		<property name="moment" value="2017/03/25 16:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate2.1" />
@@ -298,7 +298,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
-		<property name="moment" value="25/02/2017 20:00" />
+		<property name="moment" value="2017/02/25 20:00" />
 		<property name="coordinates">
 			<list>
 
@@ -316,7 +316,7 @@
 	</bean>
 
 	<bean id="templateChorbi4" class="domain.Template">
-		<property name="moment" value="25/01/2017 20:00" />
+		<property name="moment" value="2017/01/25 20:00" />
 		<property name="chorbies">
 			<list>
 				<ref bean="chorbi1" />
@@ -334,7 +334,7 @@
 		<property name="relationShip" value="LOVE" />
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="FEMALE" />
-		<property name="moment" value="12/02/2017 20:00" />
+		<property name="moment" value="2017/02/12 20:00" />
 		<property name="coordinates">
 			<list>
 				<ref bean="coordinateTemplate5.1" />
@@ -352,7 +352,7 @@
 	</bean>
 
 	<bean id="templateChorbi6" class="domain.Template">
-		<property name="moment" value="03/04/2017 23:00" />
+		<property name="moment" value="2017/04/03 23:00" />
 		<property name="relationShip" value="ACTIVITIES" />
 		<property name="chorbies">
 			<list>
@@ -592,7 +592,7 @@
 	<!-- CHIRPS -->
 
 	<bean id="chirp1" class="domain.Chirp">
-		<property name="moment" value="02/04/2017 16:30" />
+		<property name="moment" value="2017/02/04 16:30" />
 		<property name="subject" value="Excursión sierra nevada" />
 		<property name="text"
 			value="Hola, estarías interesado en hacer montañismo?" />
@@ -605,7 +605,7 @@
 	</bean>
 
 	<bean id="chirp1copy" class="domain.Chirp">
-		<property name="moment" value="02/04/2017 16:30" />
+		<property name="moment" value="2017/02/04 16:30" />
 		<property name="subject" value="Excursión sierra nevada" />
 		<property name="text"
 			value="Hola, estarías interesado en hacer montañismo?" />
@@ -618,7 +618,7 @@
 	</bean>
 
 	<bean id="chirp2" class="domain.Chirp">
-		<property name="moment" value="02/04/2017 18:32" />
+		<property name="moment" value="2017/02/04 18:32" />
 		<property name="subject" value="Excursion a sierra nevada" />
 		<property name="text" value="Sí, me encantaría!" />
 		<property name="attachments" value="" />
@@ -629,7 +629,7 @@
 	</bean>
 
 	<bean id="chirp2copy" class="domain.Chirp">
-		<property name="moment" value="02/04/2017 18:32" />
+		<property name="moment" value="2017/02/04 18:32" />
 		<property name="subject" value="Excursion a sierra nevada" />
 		<property name="text" value="Sí, me encantaría!" />
 		<property name="attachments" value="" />
@@ -642,28 +642,28 @@
 	<!-- TASTES -->
 
 	<bean id="taste1" class="domain.Taste">
-		<property name="moment" value="02/03/2017 15:00" />
+		<property name="moment" value="2017/02/03 15:00" />
 		<property name="comment" value="commenttaste1" />
 		<property name="chorbi" ref="chorbi2" />
 
 	</bean>
 
 	<bean id="taste2" class="domain.Taste">
-		<property name="moment" value="02/01/2017 21:00" />
+		<property name="moment" value="2017/02/01 21:00" />
 		<property name="comment" value="commenttaste2" />
 		<property name="chorbi" ref="chorbi3" />
 
 	</bean>
 
 	<bean id="taste3" class="domain.Taste">
-		<property name="moment" value="22/03/2017 09:00" />
+		<property name="moment" value="2017/03/22 09:00" />
 		<property name="comment" value="commenttaste3" />
 		<property name="chorbi" ref="chorbi1" />
 
 	</bean>
 
 	<bean id="taste4" class="domain.Taste">
-		<property name="moment" value="07/01/2017 22:00" />
+		<property name="moment" value="2017/01/07 22:00" />
 		<property name="comment" value="commenttaste4" />
 		<property name="chorbi" ref="chorbi1" />
 
