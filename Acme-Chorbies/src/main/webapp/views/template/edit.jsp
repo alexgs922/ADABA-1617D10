@@ -26,6 +26,7 @@
 		<form:options items="${Genre}" />
 	</form:select>
 	<br>
+	<br>
 
 
 	<form:label path="relationShip">
@@ -35,6 +36,7 @@
 		<form:option value="0" label="----" />
 		<form:options items="${Relationship}" />
 	</form:select>
+	<br>
 	<br>
 
 	<acme:textbox code="template.Age" path="approximatedAge" />
