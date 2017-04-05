@@ -119,11 +119,11 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
-		
-		int principal=this.actorService.findByPrincipal().getId();
-		int principalChorbi= chorbi.getId();
 
-		Assert.isTrue(principal==principalChorbi);
+		final int principal = this.actorService.findByPrincipal().getId();
+		final int principalChorbi = chorbi.getId();
+
+		Assert.isTrue(principal == principalChorbi);
 		if (chorbi.getId() == 0)
 			result = chorbi;
 		else {
@@ -136,7 +136,7 @@ public class ChorbiService {
 		}
 		return result;
 	}
-	
+
 	public Chorbi findOne(final int chorbiId) {
 		Chorbi res;
 		final Actor principal = this.actorService.findByPrincipal();
@@ -172,6 +172,17 @@ public class ChorbiService {
 		} else
 			chorbi = this.save(chorbi);
 		return chorbi;
+
+	}
+
+	public Chorbi findOneToSent(final int chorbiId) {
+
+		Chorbi result;
+
+		result = this.chorbiRepository.findOne(chorbiId);
+		Assert.notNull(result);
+
+		return result;
 
 	}
 

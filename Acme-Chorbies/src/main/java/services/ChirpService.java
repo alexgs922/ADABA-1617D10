@@ -2,14 +2,18 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
 import domain.Chirp;
+import domain.Chorbi;
 
 @Service
 @Transactional
@@ -20,6 +24,14 @@ public class ChirpService {
 	@Autowired
 	private ChirpRepository	chirpRepository;
 
+	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private ChorbiService	chorbiService;
+
+	@Autowired
+	private Validator		validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -27,12 +39,65 @@ public class ChirpService {
 		super();
 	}
 
-	//Simple CRUD -------------------------------------------------------------
+	//Simple CRUD methods ---------------------------------
 
 	public Chirp create() {
 		Chirp res;
+
 		res = new Chirp();
+		res.setCopy(true);
+
 		return res;
+	}
+
+	public Chirp create(final Chorbi c) {
+		Chirp res;
+		final Chorbi c1 = this.chorbiService.findByPrincipal();
+
+		res = new Chirp();
+
+		res.setRecipient(c);
+		res.setCopy(true);
+
+		return res;
+	}
+
+	public Chirp reconstruct(final Chirp chirp, final BindingResult binding) {
+
+		Chirp result;
+		final Chorbi t = this.chorbiService.findByPrincipal();
+
+		result = chirp;
+		result.setRecipient(chirp.getRecipient());
+		result.setSender(t);
+		result.setText(chirp.getText());
+		result.setSubject(chirp.getSubject());
+		result.setAttachments(chirp.getAttachments());
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
+		result.setCopy(chirp.isCopy());
+		this.validator.validate(result, binding);
+
+		return result;
+
+	}
+
+	public Chirp reply(final Chirp chirp, final BindingResult binding) {
+
+		Chirp result;
+		final Chorbi t = this.chorbiService.findByPrincipal();
+
+		result = chirp;
+		result.setRecipient(chirp.getRecipient());
+		result.setSender(t);
+		result.setText(chirp.getText());
+		result.setSubject(chirp.getSubject());
+		result.setAttachments(chirp.getAttachments());
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
+		result.setCopy(chirp.isCopy());
+		this.validator.validate(result, binding);
+
+		return result;
+
 	}
 
 	public Collection<Chirp> findAll() {
@@ -49,16 +114,79 @@ public class ChirpService {
 		return res;
 	}
 
-	public Chirp save(final Chirp c) {
-		Assert.notNull(c);
-		return this.chirpRepository.save(c);
+	public void save(final Chirp m) {
+		Assert.notNull(m);
+
+		final Chorbi c = this.chorbiService.findByPrincipal();
+
+		final Chirp chirp1 = new Chirp();
+		chirp1.setSubject(m.getSubject());
+		chirp1.setText(m.getText());
+		chirp1.setMoment(m.getMoment());
+		chirp1.setAttachments(m.getAttachments());
+		chirp1.setRecipient(m.getRecipient());
+		chirp1.setSender(m.getSender());
+		chirp1.setCopy(false);
+
+		final Chirp chirp2 = new Chirp();
+		chirp2.setSubject(m.getSubject());
+		chirp2.setText(m.getText());
+		chirp2.setMoment(m.getMoment());
+		chirp2.setAttachments(m.getAttachments());
+		chirp2.setRecipient(m.getRecipient());
+		chirp2.setSender(m.getSender());
+		chirp1.setCopy(true);
+
+		final Collection<Chirp> cr = m.getRecipient().getChirpReceives();
+		cr.add(chirp1);
+
+		final Collection<Chirp> cs = m.getSender().getChirpWrites();
+		cs.add(chirp2);
+
+		Assert.isTrue(c.getId() == m.getSender().getId());
+
+		this.chirpRepository.save(chirp2);
+		this.chirpRepository.save(chirp1);
 
 	}
 
-	public void delete(final Chirp c) {
-		Assert.notNull(c);
-		this.chirpRepository.delete(c);
+	public void deleteReceived(final Chirp m) {
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+		Assert.notNull(m);
+
+		Assert.isTrue(principal.getId() == m.getRecipient().getId());
+
+		this.chirpRepository.delete(m.getId());
+
 	}
 
-	//Other business methods --------------------------------------
+	public void deleteSent(final Chirp m) {
+		Assert.notNull(m);
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+		Assert.isTrue(principal.getId() == m.getSender().getId());
+
+		this.chirpRepository.delete(m.getId());
+
+	}
+
+	//Other methods ---------------------------------------------------------
+
+	public Collection<Chirp> mySendedMessages(final int actorId) {
+
+		final Collection<Chirp> sm = this.chirpRepository.mySendedMessages(actorId);
+
+		return sm;
+	}
+
+	public Collection<Chirp> myRecivedMessages(final int actorId) {
+
+		final Collection<Chirp> sm = this.chirpRepository.myRecivedMessages(actorId);
+
+		return sm;
+	}
+
+	public void flush() {
+		this.chirpRepository.flush();
+
+	}
 }

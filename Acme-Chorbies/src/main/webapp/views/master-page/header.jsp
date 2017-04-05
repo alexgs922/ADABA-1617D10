@@ -42,6 +42,18 @@
 					<li><a href="template/result.do"><spring:message
 								code="master.page.chorbi.myTemplate" /></a></li>
 				</ul></li>
+				
+				<li><a class="fNiv"><spring:message
+						code="master.page.chirp" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="chirp/create.do"><spring:message
+								code="master.page.chirp.create" /></a></li>
+					<li><a href="chirp/listSentMessages.do"><spring:message
+								code="master.page.chirp.sent" /></a></li>
+					<li><a href="chirp/listReceivedMessages.do"><spring:message
+								code="master.page.chirp.received" /></a></li>
+				</ul></li>
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
