@@ -119,11 +119,15 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
+
+		final int principal = this.actorService.findByPrincipal().getId();
+		final int principalChorbi = chorbi.getId();
+
+		Assert.isTrue(principal == principalChorbi);
 		if (chorbi.getId() == 0)
 			result = chorbi;
 		else {
 			result = this.chorbiRepository.findOne(chorbi.getId());
-			result = new Chorbi();
 			result.setName(chorbi.getName());
 			result.setSurName(chorbi.getSurName());
 			result.setEmail(chorbi.getEmail());
@@ -185,7 +189,6 @@ public class ChorbiService {
 
 		return chorbiesToShow;
 	}
-	
 
 	public Collection<Chorbi> findAllNotBannedChorbies2() {
 		Collection<Chorbi> chorbiesToShow;
@@ -196,9 +199,8 @@ public class ChorbiService {
 
 		return chorbiesToShow;
 
-		
 	}
-	
+
 	public Collection<Chorbi> findAllChorbies() {
 		final Actor principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
@@ -368,5 +370,10 @@ public class ChorbiService {
 	public Collection<Chorbi> findByCountryCity(final String country, final String city) {
 		final Collection<Chorbi> cs = this.chorbiRepository.findByCountryCity(country, city);
 		return cs;
+	}
+
+	public void flush() {
+		this.chorbiRepository.flush();
+
 	}
 }
