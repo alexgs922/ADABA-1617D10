@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ChorbiService;
 import controllers.AbstractController;
 import domain.Chorbi;
+import domain.Taste;
 
 @Controller
 @RequestMapping("/administrator/chorbi")
@@ -69,6 +70,35 @@ public class AdministratorChorbiController extends AbstractController {
 
 		return result;
 
+	}
+
+	//See Chorbi Profile
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView displayProfile(@RequestParam final int chorbiId) {
+		ModelAndView result;
+		Chorbi chorbi;
+		chorbi = this.chorbiService.findOne(chorbiId);
+		boolean toLike;
+
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+
+		if (principal != null) {
+			toLike = true;
+			for (final Taste t : principal.getGivenTastes())
+				if (t.getChorbi().getId() == chorbiId) {
+					toLike = false;
+					break;
+				}
+		} else
+			toLike = false;
+
+		result = new ModelAndView("administrator/chorbi/displayProfile");
+		result.addObject("chorbi", chorbi);
+		result.addObject("principal", principal);
+		result.addObject("toLike", toLike);
+		result.addObject("requestURI", "administrator/chorbi/profile.do?chorbiId=" + chorbiId);
+
+		return result;
 	}
 
 }

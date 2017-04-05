@@ -35,17 +35,30 @@
 	
 	<spring:message code="chorbi.relationship" var="chorbiRelationship" />
 	<display:column property="relationship" title="${chorbiRelationship}" sortable="false" />
-	
-	<security:authorize access="isAuthenticated()">
+
+
+	<security:authorize access="hasRole('CHORBI')">
 		<display:column>
-			<a
-				href="chorbi/profile.do?chorbiId=${row.id}">
-				<spring:message code="chorbi.profile" />
+			<a href="chorbi/profile.do?chorbiId=${row.id}"> <spring:message
+					code="chorbi.profile" />
 			</a>
 
 		</display:column>
 	</security:authorize>
-	
+
+
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="administrator/chorbi/profile.do?chorbiId=${row.id}"> <spring:message
+					code="chorbi.profile" />
+			</a>
+
+		</display:column>
+	</security:authorize>
+
+
+
 	<security:authorize access="isAuthenticated()">
 		<display:column>
 			<a
