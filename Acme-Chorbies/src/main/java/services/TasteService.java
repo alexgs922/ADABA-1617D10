@@ -104,4 +104,11 @@ public class TasteService {
 
 	}
 
+	public Taste findOne(final int id) {
+		Taste t;
+		t = this.tasteRepository.findOne(id);
+		Assert.notNull(t);
+		return t;
+	}
+
 }

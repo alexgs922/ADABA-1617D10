@@ -173,4 +173,105 @@ public class TasteServiceTest extends AbstractTest {
 
 	}
 
+	//CASO DE USO : CANCEL LIKE ---------------------------------------------------------------------------------
+
+	//Prueba 1: comprobando que el chorbi1 puede cancelar su like al chorbi2
+	//Para este test comprobaremos:
+	//1. Que el like traido de la base de datos pertenezca a chorbi1
+	//2. Que el like traido de la base de datos tenga como destino el chorbi2
+	//3. Que el like cancelado se elimine del sistema
+	//4. Que el like cancelado ya no aparezca para ninguno de los dos implicados
+
+	@Test
+	public void testCancelLike() {
+
+		this.authenticate("chorbi1");
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+		final Chorbi chorbiToCancelLike = this.chorbiService.findOne(55);
+
+		final int beforeCancel = this.tasteService.findAll().size();
+
+		final Taste likeToCancel = this.tasteService.findOne(64);
+		Assert.isTrue(likeToCancel.getChorbi().getId() == chorbiToCancelLike.getId());
+		Assert.isTrue(principal.getGivenTastes().contains(likeToCancel));
+
+		this.tasteService.delete(chorbiToCancelLike);
+
+		this.tasteService.flush();
+
+		Assert.isTrue(this.tasteService.findAll().size() == beforeCancel - 1);
+		Assert.isTrue(!this.chorbiService.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(principal).contains(chorbiToCancelLike));
+		Assert.isTrue(!this.chorbiService.findAllChorbiesWhoLikeThem(chorbiToCancelLike).contains(principal));
+
+	}
+
+	//Prueba 2: comprobando que un chorbi no puede cancelar un like que no es suyo (pertenece a chorbi2)
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCancelLikeNotMine() {
+
+		this.authenticate("chorbi1");
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+
+		final Taste likeToCancel = this.tasteService.findOne(66);
+		Assert.isTrue(!principal.getGivenTastes().contains(likeToCancel));
+
+		this.tasteService.delete(likeToCancel.getChorbi());
+
+		this.tasteService.flush();
+
+	}
+
+	//Prueba 3: comprobando que no se puede cancelar un like que ya se había cancelado y que por tanto, no existe
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCancelLikeNotExists() {
+
+		this.authenticate("chorbi1");
+
+		//Cancela la primera vez
+		final Taste likeToCancel = this.tasteService.findOne(64);
+		this.tasteService.delete(likeToCancel.getChorbi());
+		this.tasteService.flush();
+
+		//Cancela la segunda vez
+		final Taste likeToCancel2 = this.tasteService.findOne(64);
+		this.tasteService.delete(likeToCancel2.getChorbi());
+		this.tasteService.flush();
+
+	}
+
+	//Prueba 4: comprobando que no se puede cancelar un like que  no existe
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCancelLikeNotExists2() {
+
+		this.authenticate("chorbi1");
+
+		//4585965 será el id utilizado para simular un like que no existe
+		final Taste likeToCancel = this.tasteService.findOne(4585965);
+		this.tasteService.delete(likeToCancel.getChorbi());
+		this.tasteService.flush();
+
+	}
+
+	//Prueba 5 : comprobando que no se puede cancelar un like a un chorbi baneado
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCancelLikeToBannedChorbi() {
+
+		this.authenticate("chorbi1");
+		final Chorbi principal = this.chorbiService.findByPrincipal();
+		final Chorbi chorbiToCancelLike = this.chorbiService.findOne(56);
+
+		final Taste likeToCancel = this.tasteService.findOne(65);
+		Assert.isTrue(likeToCancel.getChorbi().getId() == chorbiToCancelLike.getId());
+		Assert.isTrue(principal.getGivenTastes().contains(likeToCancel));
+
+		this.tasteService.delete(chorbiToCancelLike);
+
+		this.tasteService.flush();
+
+	}
+
 }
