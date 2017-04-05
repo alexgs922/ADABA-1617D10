@@ -166,9 +166,21 @@ public class ChorbiService {
 
 	}
 	
-	public Chorbi saveAndFlush(Chorbi chorbi){
+	public Chorbi saveAndFlush(Chorbi chorbi,Template t){
 		Assert.notNull(chorbi);
-		return this.chorbiRepository.saveAndFlush(chorbi);
+		Assert.notNull(t);
+		
+		if(chorbi.getId()==0){
+
+			t = this.templateService.saveAndFlush(t);
+			chorbi.setTemplate(t);
+			save(chorbi);
+		}
+		else{
+			chorbi = save(chorbi);
+		}
+		return chorbi;
+	
 	}
 
 	// Other business methods ----------------------------------------------------

@@ -3,6 +3,8 @@ package services;
 
 import java.util.Collection;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +60,10 @@ public class TemplateService {
 		Assert.notNull(t);
 		return this.templateRepository.save(t);
 
+	}
+
+	public void flush(){
+		this.templateRepository.flush();
 	}
 	
 	public Template saveAndFlush(Template t){
