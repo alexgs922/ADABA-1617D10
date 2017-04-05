@@ -53,6 +53,7 @@ public class TasteService {
 		Assert.isTrue(t.getChorbi().getId() != principal.getId());
 		final Collection<Chorbi> chorbiesWithMyLike = this.chorbiService.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(principal);
 		Assert.isTrue(!chorbiesWithMyLike.contains(t.getChorbi()));
+		Assert.isTrue(t.getChorbi().isBan() == false);
 
 		result = this.tasteRepository.saveAndFlush(t);
 
@@ -82,6 +83,7 @@ public class TasteService {
 
 		for (final Taste t : principal.getGivenTastes())
 			if (t.getChorbi().getId() == chorbi.getId()) {
+				Assert.isTrue(t.getChorbi().isBan() == false);
 				principal.getGivenTastes().remove(t);
 				this.tasteRepository.delete(t);
 				break;

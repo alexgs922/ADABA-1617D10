@@ -150,6 +150,13 @@ public class TasteController {
 		final Chorbi principal = this.chorbiService.findByPrincipal();
 		boolean exist = false;
 
+		if (chorbi.isBan() == true) {
+			result = new ModelAndView("taste/forboperation");
+			result.addObject("forbiddenOperation", "not.cancel.like.to.banned");
+			result.addObject("cancelURL", "chorbi/profile.do?chorbiId=" + principal.getId());
+			return result;
+		}
+
 		if (principal.getId() == chorbi.getId()) {
 
 			result = new ModelAndView("taste/forboperation");
