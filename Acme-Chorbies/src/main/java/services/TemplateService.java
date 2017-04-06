@@ -3,14 +3,13 @@ package services;
 
 import java.util.Collection;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.TemplateRepository;
+import domain.Chorbi;
 import domain.Template;
 
 @Service
@@ -36,7 +35,9 @@ public class TemplateService {
 	public Template create() {
 		Template res;
 		res = new Template();
-		res.setChorbies(chorbiService.findAll());
+		Collection<Chorbi> coll = chorbiService.findAllNotBannedChorbies2();
+		res.setChorbies(coll);
+	
 		return res;
 	}
 

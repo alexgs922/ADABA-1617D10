@@ -185,6 +185,18 @@ public class ChorbiService {
 		return chorbiesToShow;
 	}
 
+	public Collection<Chorbi> findAllNotBannedChorbies2() {
+		Collection<Chorbi> chorbiesToShow;
+
+		chorbiesToShow = this.chorbiRepository.findAllNotBannedChorbies();
+
+		Assert.notNull(chorbiesToShow);
+
+		return chorbiesToShow;
+
+		
+	}
+	
 	public Collection<Chorbi> findAllChorbies() {
 		final Actor principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);

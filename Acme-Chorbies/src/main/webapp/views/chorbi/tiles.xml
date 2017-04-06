@@ -30,5 +30,9 @@
 		<put-attribute name="body" value="/views/chorbi/register.jsp"/>
 	</definition>
 	
+	<definition name="chorbi/dataProtection" extends="master.page">
+<put-attribute name="title" value="Terms of Use"/>
+<put-attribute name="body" value="/views/chorbi/dataProtection.jsp"/>
+</definition>
 
 </tiles-definitions>
