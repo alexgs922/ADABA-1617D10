@@ -41,6 +41,9 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		<security:intercept-url pattern="/chorbi/dataProtection.do" access="isAnonymous()"/>
+	 <security:intercept-url pattern="/welcome/cookiesPolicy.do" access="permitAll" /> 
+  		<security:intercept-url pattern="/welcome/about.do" access="permitAll" /> 
+
 		
 		
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" /> 
