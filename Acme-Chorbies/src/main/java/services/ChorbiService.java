@@ -119,6 +119,11 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
+		
+		int principal=this.actorService.findByPrincipal().getId();
+		int principalChorbi= chorbi.getId();
+
+		Assert.isTrue(principal==principalChorbi);
 		if (chorbi.getId() == 0)
 			result = chorbi;
 		else {

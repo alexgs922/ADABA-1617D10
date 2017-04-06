@@ -44,6 +44,8 @@
 
 </display:table>
 
+
+
 <security:authorize access="hasRole('CHORBI')">
 	<div>
 
@@ -56,6 +58,15 @@
 				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}"><img
 					src="images/cancelLike.jpg" width="80" height="80" /></a>
 			</jstl:when>
+
+			<jstl:when test="${principal.id == row.id}">
+				<a href="profile/editProfile.do?chorbiId=${row.id}">
+				<spring:message code="chorbi.editProfile"/>				
+				</a>
+
+				
+			</jstl:when>
+
 
 		</jstl:choose>
 

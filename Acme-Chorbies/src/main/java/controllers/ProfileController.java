@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ChorbiService;
 import services.TasteService;
 import services.TemplateService;
@@ -40,18 +41,22 @@ public class ProfileController extends AbstractController {
 	@Autowired
 	private TemplateService templateService;
 
-	
+	@Autowired
+	private ActorService actorService;
+
 	//Edit profile
 	
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int chorbiId) {
 		ModelAndView res;
 		Chorbi chorbi;
-		Chorbi principal;
-		principal = chorbiService.findByPrincipal();
+		int  principal;
 		chorbi = chorbiService.findOne(chorbiId);
+		principal = this.actorService.findByPrincipal().getId();
+		Assert.isTrue(principal==chorbiId);
+
 		try {
-			Assert.isTrue(principal.getId() == chorbiId);
+			Assert.isTrue(principal == chorbiId);
 		} catch (Throwable th) {
 			res = createEditModelAndViewError(chorbi);
 			return res;
