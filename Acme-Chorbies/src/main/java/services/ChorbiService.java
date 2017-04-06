@@ -123,7 +123,6 @@ public class ChorbiService {
 			result = chorbi;
 		else {
 			result = this.chorbiRepository.findOne(chorbi.getId());
-			result = new Chorbi();
 			result.setName(chorbi.getName());
 			result.setSurName(chorbi.getSurName());
 			result.setEmail(chorbi.getEmail());

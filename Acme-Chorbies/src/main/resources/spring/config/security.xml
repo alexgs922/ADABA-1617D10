@@ -54,6 +54,7 @@
 		<security:intercept-url pattern="/template/result.do" access="hasRole('CHORBI')" /> 
 	    <security:intercept-url pattern="/template/list.do" access="hasRole('CHORBI')" /> 
         <security:intercept-url pattern="/template/edit.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/profile/editProfile.do" access="hasRole('CHORBI')" /> 
 		
 		
 		<security:intercept-url pattern="/administrator/chorbi/banChorbi.do" access="hasRole('ADMIN')" />
