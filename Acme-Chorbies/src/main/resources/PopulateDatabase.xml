@@ -675,11 +675,32 @@
 	<bean id="configuration" class="domain.Configuration">
 		<property name="banners">
 			<list>
-				<value>https://c1.staticflickr.com/3/2875/32662160373_4a9e9e2b1f_b.jpg
+				<value>
+				"https://c1.staticflickr.com/3/2875/32662160373_4a9e9e2b1f_b.jpg"
 				</value>
-				<value>https://c1.staticflickr.com/6/5270/5597003936_8be5517eb0_m.jpg
+				<value>
+				"https://c1.staticflickr.com/3/2835/33836359206_666352964c_b.jpg"
 				</value>
-				<value>https://c1.staticflickr.com/3/2581/4196739522_508f74d424_m.jpg
+				<value>
+				"https://c1.staticflickr.com/4/3841/33063993293_cc0957ce3f_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/3/2891/33836360576_90ae654320_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/4/3871/33063992743_d71862cda2_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/4/3856/33836359616_62d6c795f0_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/3/2823/33080045763_b0e55e61bc_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/3/2829/33049748344_e3ed738946_b.jpg"
+				</value>
+				<value>
+				"https://c1.staticflickr.com/3/2884/33080045703_17bf18ba03_b.jpg"
 				</value>
 			</list>
 		</property>
