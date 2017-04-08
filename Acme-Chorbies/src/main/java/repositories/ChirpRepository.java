@@ -18,4 +18,12 @@ public interface ChirpRepository extends JpaRepository<Chirp, Integer> {
 	@Query("select m from Chorbi c join c.chirpWrites m where m.copy=true and c.id=?1")
 	Collection<Chirp> mySendedMessages(int actorId);
 
+	//Dashboard
+
+	@Query("select min(c.chirpReceives.size),avg(c.chirpReceives.size),max(c.chirpReceives.size) from Chorbi c")
+	Collection<Object[]> minAvgMaxChirpsReceived();
+
+	@Query("select min(c.chirpWrites.size),avg(c.chirpWrites.size),max(c.chirpWrites.size) from Chorbi c")
+	Collection<Object[]> minAvgMaxChripsSent();
+
 }

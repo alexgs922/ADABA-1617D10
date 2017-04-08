@@ -69,7 +69,7 @@ public class Chorbi extends Actor {
 		this.relationship = relationship;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getBirthDate() {
 		return this.birthDate;
@@ -114,7 +114,6 @@ public class Chorbi extends Actor {
 	private Template			template;
 
 
-	
 	@OneToMany(mappedBy = "recipient")
 	public Collection<Chirp> getChirpReceives() {
 		return this.chirpReceives;
@@ -123,7 +122,7 @@ public class Chorbi extends Actor {
 	public void setChirpReceives(final Collection<Chirp> chirpReceives) {
 		this.chirpReceives = chirpReceives;
 	}
-	
+
 	@OneToMany(mappedBy = "sender")
 	public Collection<Chirp> getChirpWrites() {
 		return this.chirpWrites;
@@ -133,7 +132,6 @@ public class Chorbi extends Actor {
 		this.chirpWrites = chirpWrites;
 	}
 
-	
 	@OneToOne(optional = true)
 	public CreditCard getCreditCard() {
 		return this.creditCard;
@@ -143,7 +141,6 @@ public class Chorbi extends Actor {
 		this.creditCard = creditCard;
 	}
 
-	
 	@OneToMany
 	public Collection<Taste> getGivenTastes() {
 		return this.givenTastes;
@@ -153,7 +150,6 @@ public class Chorbi extends Actor {
 		this.givenTastes = givenTastes;
 	}
 
-	
 	@OneToOne(optional = false)
 	public Template getTemplate() {
 		return this.template;
