@@ -11,10 +11,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="template/editCoordinate.do" modelAttribute="template">
+<form:form action="template/editCoordinate.do" modelAttribute="coordinate">
 
 
-<form:hidden path="chorbies"/>
+
 
 
 	<acme:textbox code="coordinate.country" path="country" />

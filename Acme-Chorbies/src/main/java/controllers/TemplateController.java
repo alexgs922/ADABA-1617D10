@@ -54,7 +54,7 @@ public class TemplateController extends AbstractController {
 
 		final Chorbi c = this.chorbiService.findByPrincipal();
 		final Template template = c.getTemplate();
-		final Collection<Coordinate> coordinates = template.getCoordinates();
+		final Coordinate coordinates = template.getCoordinate();
 
 		result = new ModelAndView("template/list");
 		result.addObject("template", template);
@@ -167,6 +167,66 @@ public class TemplateController extends AbstractController {
 		return result;
 	}
 
+	// Create and edit Coordinate -----------------------------------------------------------
+
+	@RequestMapping(value = "/createCoordinate", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Coordinate coordinate;
+
+		coordinate = new Coordinate();
+		result = this.createEditModelAndViewCoordinate(coordinate);
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/editCoordinate", method = RequestMethod.GET)
+	public ModelAndView editCoordinate(@RequestParam final int templateId) {
+		ModelAndView result;
+		Template template;
+		Coordinate coordinate;
+		try {
+			template = this.templateService.findOneToEdit(templateId);
+			coordinate = template.getCoordinate();
+			result = this.createEditModelAndViewCoordinate(coordinate);
+
+		} catch (final Throwable oops) {
+			final Coordinate coordinate2 = new Coordinate();
+			result = this.createEditModelAndViewCoordinate(coordinate2, "template.commit.error");
+		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/editCoordinate", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveCoordinate(@Valid final Coordinate coordinate, final BindingResult binding) {
+		ModelAndView result;
+		Template template;
+
+		if (binding.hasErrors()) {
+
+			if (binding.getGlobalError() != null)
+				result = this.createEditModelAndViewCoordinate(coordinate, binding.getGlobalError().getCode());
+			else
+				result = this.createEditModelAndViewCoordinate(coordinate);
+
+		} else
+			try {
+				final Chorbi principal = this.chorbiService.findByPrincipal();
+				template = principal.getTemplate();
+				template.setCoordinate(coordinate);
+				this.templateService.saveEdit(template);
+				result = new ModelAndView("redirect:/template/list.do");
+
+			} catch (final Throwable oops) {
+
+				result = this.createEditModelAndViewCoordinate(coordinate, "template.commit.error");
+			}
+
+		return result;
+	}
+
 	// Ancillary methods ---------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final Template template) {
 		ModelAndView result;
@@ -180,6 +240,23 @@ public class TemplateController extends AbstractController {
 
 		result = new ModelAndView("template/edit");
 		result.addObject("template", template);
+		result.addObject("message", message);
+		return result;
+
+	}
+
+	protected ModelAndView createEditModelAndViewCoordinate(final Coordinate coordinate) {
+		ModelAndView result;
+		result = this.createEditModelAndViewCoordinate(coordinate, null);
+		return result;
+
+	}
+
+	protected ModelAndView createEditModelAndViewCoordinate(final Coordinate coordinate, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("coordinate/edit");
+		result.addObject("coordinate", coordinate);
 		result.addObject("message", message);
 		return result;
 

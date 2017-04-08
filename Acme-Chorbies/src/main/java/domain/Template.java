@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
@@ -28,27 +27,26 @@ public class Template extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private Relationship			relationShip;
-	private Integer					approximatedAge;
-	private Genre					genre;
-	private String					keyword;
-	private Date					moment;
-	private Collection<Coordinate>	coordinates;
+	private Relationship	relationShip;
+	private Integer			approximatedAge;
+	private Genre			genre;
+	private String			keyword;
+	private Date			moment;
+	private Coordinate		coordinate;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
 
-	@ElementCollection
-	public Collection<Coordinate> getCoordinates() {
-		return this.coordinates;
-	}
-
-	public void setCoordinates(final Collection<Coordinate> coordinates) {
-		this.coordinates = coordinates;
-	}
-
 	public Relationship getRelationShip() {
 		return this.relationShip;
+	}
+
+	public Coordinate getCoordinate() {
+		return this.coordinate;
+	}
+
+	public void setCoordinate(final Coordinate coordinate) {
+		this.coordinate = coordinate;
 	}
 
 	public void setRelationShip(final Relationship relationShip) {

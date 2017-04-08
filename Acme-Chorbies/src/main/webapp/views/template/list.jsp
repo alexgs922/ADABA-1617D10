@@ -50,7 +50,22 @@
 	<spring:message code="coordinate.city" var="coordinateCity" />
 	<display:column property="city" title="${coordinateCity}" sortable="false" />
 	
+	<security:authorize access="hasRole('CHORBI')">
+		<display:column>
+			<a href="template/editCoordinate.do?templateId=${template.id}"> <spring:message
+					code="template.editCoordinate" />
+			</a>
 
+		</display:column>
+	</security:authorize>
 	
 	
 </display:table>
+
+<security:authorize access="hasRole('CHORBI')">
+	<jstl:if test="${template.coordinate == null }">
+		<a href="template/createCoordinate.do"> <spring:message
+				code="template.createCoordinate" />
+		</a>
+	</jstl:if>
+</security:authorize>

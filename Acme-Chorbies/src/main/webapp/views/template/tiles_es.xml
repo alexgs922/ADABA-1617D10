@@ -20,6 +20,11 @@
 		<put-attribute name="body" value="/views/template/edit.jsp" />
 	</definition>
 	
+	<definition name="coordinate/edit" extends="master.page">
+		<put-attribute name="title" value="Editar mi Coordenada" />
+		<put-attribute name="body" value="/views/template/editCoordinates.jsp" />
+	</definition>
+	
 
 
 </tiles-definitions>

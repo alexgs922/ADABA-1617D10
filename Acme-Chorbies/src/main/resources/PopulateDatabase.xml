@@ -193,7 +193,7 @@
 
 	</bean>
 
-	<bean id="coordinateChorbi2" class="domain.Coordinate">
+  	<bean id="coordinateChorbi2" class="domain.Coordinate">
 		<property name="country" value="España" />
 		<property name="state" value="España" />
 		<property name="province" value="Huelva" />
@@ -201,13 +201,14 @@
 
 	</bean>
 
-	<bean id="coordinateTemplate2.1" class="domain.Coordinate">
+<!--  	<bean id="coordinateTemplate2.1" class="domain.Coordinate">
 		<property name="country" value="España" />
 		<property name="state" value="España" />
 		<property name="province" value="Sevilla" />
 		<property name="city" value="Sevilla" />
 
 	</bean>
+-->	
 
 	<bean id="coordinateChorbi3" class="domain.Coordinate">
 		<property name="country" value="España" />
@@ -230,11 +231,12 @@
 		<property name="city" value="Huelva" />
 
 	</bean>
-
+<!--
 	<bean id="coordinateTemplate5.1" class="domain.Coordinate">
 		<property name="country" value="Colombia" />
 		<property name="city" value="Medellín" />
 	</bean>
+-->	
 
 	<bean id="coordinateChorbi6" class="domain.Coordinate">
 		<property name="country" value="España" />
@@ -250,14 +252,8 @@
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
 		<property name="moment" value="2017/04/02 17:00" />
-		<property name="coordinates">
-			<list>
-				<ref bean="coordinateTemplate1.1" />
-				<ref bean="coordinateTemplate1.2" />
-				<ref bean="coordinateTemplate1.3" />
-			</list>
-
-		</property>
+		<property name="coordinate" ref="coordinateTemplate1.1"/>
+			
 
 		<property name="chorbies">
 			<list>
@@ -276,13 +272,7 @@
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
 		<property name="moment" value="2017/03/25 16:00" />
-		<property name="coordinates">
-			<list>
-				<ref bean="coordinateTemplate2.1" />
-
-			</list>
-
-		</property>
+		<property name="coordinate" ref="coordinateTemplate1.2"/>
 
 		<property name="chorbies">
 			<list>
@@ -299,12 +289,7 @@
 		<property name="genre" value="MALE" />
 		<property name="keyword" value="male" />
 		<property name="moment" value="2017/02/25 20:00" />
-		<property name="coordinates">
-			<list>
-
-			</list>
-
-		</property>
+		
 
 		<property name="chorbies">
 			<list>
@@ -335,12 +320,7 @@
 		<property name="approximatedAge" value="25" />
 		<property name="genre" value="FEMALE" />
 		<property name="moment" value="2017/02/12 20:00" />
-		<property name="coordinates">
-			<list>
-				<ref bean="coordinateTemplate5.1" />
-			</list>
-
-		</property>
+		<property name="coordinate" ref="coordinateTemplate1.3"/>
 
 		<property name="chorbies">
 			<list>
