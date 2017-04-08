@@ -50,6 +50,7 @@ public class TasteService {
 		Assert.notNull(t);
 
 		final Chorbi principal = this.chorbiService.findByPrincipal();
+		Assert.notNull(principal);
 		Assert.isTrue(t.getChorbi().getId() != principal.getId());
 		final Collection<Chorbi> chorbiesWithMyLike = this.chorbiService.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(principal);
 		Assert.isTrue(!chorbiesWithMyLike.contains(t.getChorbi()));
