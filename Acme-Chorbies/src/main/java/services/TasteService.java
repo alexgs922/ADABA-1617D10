@@ -55,7 +55,8 @@ public class TasteService {
 		final Collection<Chorbi> chorbiesWithMyLike = this.chorbiService.findAllChorbiesWhoLikedByThisUserForNotDoubleLike(principal);
 		Assert.isTrue(!chorbiesWithMyLike.contains(t.getChorbi()));
 		Assert.isTrue(t.getChorbi().isBan() == false);
-
+		if (!(t.getComment() == null))
+			t.setComment(this.checkContactInfo(t.getComment()));
 		result = this.tasteRepository.saveAndFlush(t);
 
 		principal.getGivenTastes().add(result);
@@ -110,6 +111,44 @@ public class TasteService {
 		t = this.tasteRepository.findOne(id);
 		Assert.notNull(t);
 		return t;
+	}
+
+	public String checkContactInfo(final String cadena) {
+
+		String res = "";
+
+		if (cadena.contains("@")) {
+			final String[] trozos = cadena.split(" ");
+			for (String t : trozos)
+				if (t.contains("@")) {
+					t = "***@***";
+					res = res + " " + t;
+				} else
+					res = res + " " + t;
+		} else
+			res = cadena;
+
+		final char[] res2 = cadena.toCharArray();
+		int contador = 0;
+		for (int i = 0; i < res.length(); i++)
+			if (Character.isDigit(res2[i]))
+				contador = contador + 1;
+
+		if (contador >= 6) {
+			String copia = "";
+			final char c_aux = '*';
+			for (int i = 0; i < res.length(); i++)
+				if (Character.isDigit(res.charAt(i)))
+					copia = copia + c_aux;
+				else
+					copia = copia + res.charAt(i);
+
+			res = copia;
+
+		}
+
+		return res;
+
 	}
 
 }
