@@ -46,4 +46,42 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select c from Chorbi c where c.coordinate.country like %?1% and c.coordinate.city like %?2%")
 	Collection<Chorbi> findByCountryCity(String country, String city);
 
+	//Dashboard
+
+	@Query("select c.coordinate.country,c.coordinate.city, count(c) from Chorbi c group by c.coordinate.city,c.coordinate.country")
+	Collection<Object[]> listingWithTheNumberOfChorbiesPerCountryAndCity();
+
+	@Query("select min(YEAR(CURRENT_DATE)-YEAR(c.birthDate)),avg(YEAR(CURRENT_DATE)-YEAR(c.birthDate)),max(YEAR(CURRENT_DATE)-YEAR(c.birthDate)) from Chorbi c")
+	Collection<Object[]> minimumMaximumAverageAgesOfTheChorbies();
+
+	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c) from Chorbi c where c.id in (select c.id from Chorbi c where c.creditCard is null) or c.id in (select c.id from Chorbi c where c.creditCard.expirationYear < YEAR(CURRENT_DATE))")
+	Double RatioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard();
+
+	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c)from Chorbi c where c.relationship='ACTIVITIES'")
+	Double ratiosOfChorbiesWhoSearchActivities();
+
+	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c)from Chorbi c where c.relationship='LOVE'")
+	Double ratiosOfChorbiesWhoSearchLove();
+
+	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c)from Chorbi c where c.relationship='FRIENDSHIP'")
+	Double ratiosOfChorbiesWhoSearchFriendship();
+
+	@Query("select c,(select count(t) from Taste t where t.chorbi.id=c.id) as cuenta from Chorbi c order by cuenta DESC")
+	Collection<Object[]> listOfChorbiesCortedByTheNumberOfLikesTheyHaveGot();
+
+	@Query("select count(t) from Taste t group by t.chorbi.id having count(t)<= ALL (select count(t1) from Taste t1 group by t1.chorbi.id)")
+	Collection<Double> minOfLikesPerChorbie();
+
+	@Query("select count(t) from Taste t group by t.chorbi.id having count(t)>= ALL (select count(t1) from Taste t1 group by t1.chorbi.id)")
+	Collection<Double> maxOfLikesPerChorbie();
+
+	@Query("select count(t)*1.0/(select count(c)*1.0 from Chorbi c) from Taste t")
+	Double averageLikesPerChorbi();
+
+	@Query("select c from Chorbi c where c.chirpReceives.size=(select max(c1.chirpReceives.size) from Chorbi c1)")
+	Collection<Chorbi> theChorbiesWhoHaveGotMoreChirps();
+
+	@Query("select c from Chorbi c where c.chirpWrites.size=(select max(c1.chirpWrites.size) from Chorbi c1)")
+	Collection<Chorbi> theChorbiesWhoHaveSentMoreChirps();
+
 }

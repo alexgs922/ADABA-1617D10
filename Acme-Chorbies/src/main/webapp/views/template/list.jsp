@@ -50,18 +50,7 @@
 	<spring:message code="coordinate.city" var="coordinateCity" />
 	<display:column property="city" title="${coordinateCity}" sortable="false" />
 	
-	<display:column>
-		<a href="template/deleteCoordinate.do?coordinateId=${row.id}"> <spring:message
-				code="template.delete" />
-		</a>
 
-	</display:column>
 	
 	
 </display:table>
-
-<security:authorize access="hasRole('CHORBI')">
-	<a href="template/createCoordinate.do?templateId=${row.id}"> <spring:message
-			code="template.edit" />
-	</a>
-</security:authorize>

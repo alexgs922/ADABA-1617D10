@@ -155,7 +155,7 @@
 		<property name="brandName" value="DISCOVER" />
 		<property name="number" value="6849892547748030" />
 		<property name="expirationMonth" value="10" />
-		<property name="expirationYear" value="2018" />
+		<property name="expirationYear" value="2015" />
 		<property name="cvvCode" value="155" />
 	</bean>
 

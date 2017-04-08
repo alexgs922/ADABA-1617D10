@@ -53,10 +53,23 @@
 			<jstl:when test="${toLike==true and principal.id ne row.id}">
 				<a href="chorbi/chorbi/like.do?chorbiId=${row.id}"><img
 					src="images/like.jpg" width="120" height="120" /></a>
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp; <a href="chorbi/chorbi/like.do?chorbiId=${row.id}">
+				<spring:message code="chorbi.giveLike"/>	
+				</a>
+				
 			</jstl:when>
 			<jstl:when test="${toLike==false and principal.id ne row.id}">
 				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}"><img
 					src="images/cancelLike.jpg" width="80" height="80" /></a>
+				<br>
+				
+				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}">
+				<spring:message code="chorbi.cancelLike"/>	
+				</a>	
+				
+				
 			</jstl:when>
 
 			<jstl:when test="${principal.id == row.id}">
