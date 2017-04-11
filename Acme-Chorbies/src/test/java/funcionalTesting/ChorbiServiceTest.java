@@ -224,4 +224,115 @@ public class ChorbiServiceTest extends AbstractTest {
 
 	}
 
+	// CASO DE USO 5: El administrador puede bannear o volver a permitir a un chorbi -----------------------------------------------------------------
+
+	//Baneamos a un chorbi, y posteriomente comprobamos que el chorbi ha sido banneado correctamente, es decir cuando
+	//su atributo booleano ban es true
+	protected void templateBanChorbiUseCase5(final String username, final Chorbi chorbi, final boolean result, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+
+			this.authenticate(username);
+
+			final Chorbi res = chorbi;
+			this.chorbiService.banChorbi(res);
+
+			Assert.isTrue(res.isBan() == result);
+
+			this.unauthenticate();
+			this.chorbiService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	@Test
+	public void driverBanChorbiUseCase5() {
+
+		final Chorbi chorbi1 = this.chorbiService.findOneToSent(54); // Obtenemos de la base de datos el chorbi con id = 54 inicialmente no banneado
+		final Chorbi chorbi2 = this.chorbiService.findOneToSent(56); // Obtenemos de la base de datos el chorbi con id = 56 inicialmente banneado
+
+		final Object testingData[][] = {
+			//TEST POSITIVO: Bannear un chorbi que aun no esta baneado, y comprobar que el resultado es correcto.
+			{
+				"admin", chorbi1, true, null
+			},
+			//TEST NEGATIVO: Bannear un un chorbi que ya ha sido banneado y comprobar que salta correctamente la excepción.
+			{
+				"admin", chorbi2, true, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateBanChorbiUseCase5((String) testingData[i][0], (Chorbi) testingData[i][1], (boolean) testingData[i][2], (Class<?>) testingData[i][3]);
+
+	}
+
+	//Permitimos a un chorbi, y posteriomente comprobamos que el chorbi ha sido permitido correctamente, es decir cuando
+	//su atributo booleano ban es false
+	protected void templateUnbanChorbiUseCase5(final String username, final Chorbi chorbi, final boolean result, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+
+			this.authenticate(username);
+
+			final Chorbi res = chorbi;
+			this.chorbiService.unBanChorbi(res);
+
+			Assert.isTrue(res.isBan() == result);
+
+			this.unauthenticate();
+			this.chorbiService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	@Test
+	public void driverUnbanChorbiUseCase5() {
+
+		final Chorbi chorbi1 = this.chorbiService.findOneToSent(56); // Obtenemos de la base de datos el chorbi con id = 56 inicialmente banneado
+		final Chorbi chorbi2 = this.chorbiService.findOneToSent(54); // Obtenemos de la base de datos el chorbi con id = 54 inicialmente no banneado
+
+		final Object testingData[][] = {
+			//TEST POSITIVO: Permitir un chorbi que esta baneado, y comprobar que el resultado es correcto.
+			{
+				"admin", chorbi1, false, null
+			},
+			//TEST NEGATIVO: Permitir un chorbi que ya se le permite entrar en el sistema y comprobar que salta correctamente la excepción.
+			{
+				"admin", chorbi2, false, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateUnbanChorbiUseCase5((String) testingData[i][0], (Chorbi) testingData[i][1], (boolean) testingData[i][2], (Class<?>) testingData[i][3]);
+
+	}
+
+	// Con este test comprobamos que al intentar logearnos con un chorbi que se encuentra banneado no es posible realizar dicha operación y test
+	// devuelve IllegalArgumentException 
+	@Test(expected = IllegalArgumentException.class)
+	public void testLoginBannedChorbi() {
+
+		this.authenticate("chorbi3");
+
+	}
+
 }

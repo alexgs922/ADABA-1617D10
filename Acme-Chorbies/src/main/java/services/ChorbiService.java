@@ -23,6 +23,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Chorbi;
 import domain.Coordinate;
+import domain.CreditCard;
 import domain.Genre;
 import domain.Relationship;
 import domain.Taste;
@@ -52,6 +53,10 @@ public class ChorbiService {
 	@Autowired
 	private TemplateService		templateService;
 
+	@Autowired
+	private CreditCardService		creditCardService;
+
+	
 
 	// Simple CRUD methods ----------------------------------------------------
 
@@ -119,7 +124,6 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
-
 		final int principal = this.actorService.findByPrincipal().getId();
 		final int principalChorbi = chorbi.getId();
 
@@ -154,7 +158,7 @@ public class ChorbiService {
 		return res;
 	}
 
-	public Chorbi save(final Chorbi chorbi) {
+	public Chorbi save(Chorbi chorbi) {
 		Assert.notNull(chorbi);
 		return this.chorbiRepository.save(chorbi);
 
@@ -174,7 +178,24 @@ public class ChorbiService {
 		return chorbi;
 
 	}
+	public Chorbi saveAndFlush2(Chorbi chorbi, CreditCard c) {
+		Assert.notNull(chorbi);
+		Assert.notNull(c);
 
+		if (chorbi.getId() != 0) {
+
+			c = this.creditCardService.saveAndFlush(c);
+			chorbi.setCreditCard(c);
+			this.save(chorbi);
+		} else
+			chorbi = this.save(chorbi);
+		return chorbi;
+
+	}
+
+	
+	
+	
 	public Chorbi findOneToSent(final int chorbiId) {
 
 		Chorbi result;
