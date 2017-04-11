@@ -115,41 +115,41 @@ public class TemplateService {
 				if ((t.getApproximatedAge() < this.chorbiService.getEdad(c.getBirthDate()) - 5))
 					todosLosChorbies2.remove(c);
 			}
-	/*	if (!t.getCoordinates().isEmpty())
-			for (final Coordinate c : t.getCoordinates()) {
+		if (t.getCoordinate() != null) {
+			final Coordinate c = t.getCoordinate();
 
-				if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getProvince().equals("")) && (!c.getState().equals(""))) {
-					final Collection<Chorbi> c1 = this.chorbiService.findByAllCoordinate(c.getCountry(), c.getState(), c.getProvince(), c.getCity());
-					c1.remove(b);
-					for (final Chorbi chorbi : c1)
-						if (!todosLosChorbies2.contains(chorbi))
-							todosLosChorbies2.remove(chorbi);
-				}
-
-				if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getProvince().equals(""))) {
-					final Collection<Chorbi> c2 = this.chorbiService.findByCountryProvinceCity(c.getCountry(), c.getProvince(), c.getCity());
-					c2.remove(b);
-					for (final Chorbi chorbi : c2)
-						if (!todosLosChorbies2.contains(chorbi))
-							todosLosChorbies2.remove(chorbi);
-
-				}
-				if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getState().equals(""))) {
-					final Collection<Chorbi> c3 = this.chorbiService.findByCountryStateCity(c.getCountry(), c.getState(), c.getCity());
-					c3.remove(b);
-					for (final Chorbi chorbi : c3)
-						if (!todosLosChorbies2.contains(chorbi))
-							todosLosChorbies2.remove(chorbi);
-				}
-				if ((!c.getCity().equals("")) && (!c.getCountry().equals(""))) {
-					final Collection<Chorbi> c4 = this.chorbiService.findByCountryCity(c.getCountry(), c.getCity());
-					c4.remove(b);
-					for (final Chorbi chorbi : c4)
-						if (!todosLosChorbies2.contains(chorbi))
-							todosLosChorbies2.remove(chorbi);
-				}
+			if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getProvince().equals("")) && (!c.getState().equals(""))) {
+				final Collection<Chorbi> c1 = this.chorbiService.findByAllCoordinate(c.getCountry(), c.getState(), c.getProvince(), c.getCity());
+				c1.remove(b);
+				for (final Chorbi chorbi : c1)
+					if (!todosLosChorbies2.contains(chorbi))
+						todosLosChorbies2.remove(chorbi);
 			}
-*/
+
+			if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getProvince().equals(""))) {
+				final Collection<Chorbi> c2 = this.chorbiService.findByCountryProvinceCity(c.getCountry(), c.getProvince(), c.getCity());
+				c2.remove(b);
+				for (final Chorbi chorbi : c2)
+					if (!todosLosChorbies2.contains(chorbi))
+						todosLosChorbies2.remove(chorbi);
+
+			}
+			if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getState().equals(""))) {
+				final Collection<Chorbi> c3 = this.chorbiService.findByCountryStateCity(c.getCountry(), c.getState(), c.getCity());
+				c3.remove(b);
+				for (final Chorbi chorbi : c3)
+					if (!todosLosChorbies2.contains(chorbi))
+						todosLosChorbies2.remove(chorbi);
+			}
+			if ((!c.getCity().equals("")) && (!c.getCountry().equals(""))) {
+				final Collection<Chorbi> c4 = this.chorbiService.findByCountryCity(c.getCountry(), c.getCity());
+				c4.remove(b);
+				for (final Chorbi chorbi : c4)
+					if (!todosLosChorbies2.contains(chorbi))
+						todosLosChorbies2.remove(chorbi);
+			}
+		}
+
 		return todosLosChorbies2;
 	}
 
