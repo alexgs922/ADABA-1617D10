@@ -30,6 +30,9 @@ public class ChirpService {
 	private ChorbiService	chorbiService;
 
 	@Autowired
+	private TasteService	tasteService;
+
+	@Autowired
 	private Validator		validator;
 
 
@@ -68,10 +71,13 @@ public class ChirpService {
 		final Chorbi t = this.chorbiService.findByPrincipal();
 
 		result = chirp;
+		final String text = this.tasteService.checkContactInfo(chirp.getText());
+		final String subject = this.tasteService.checkContactInfo(chirp.getSubject());
+
 		result.setRecipient(chirp.getRecipient());
 		result.setSender(t);
-		result.setText(chirp.getText());
-		result.setSubject(chirp.getSubject());
+		result.setText(text);
+		result.setSubject(subject);
 		result.setAttachments(chirp.getAttachments());
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));
 		result.setCopy(chirp.isCopy());
@@ -80,17 +86,19 @@ public class ChirpService {
 		return result;
 
 	}
-
 	public Chirp reply(final Chirp chirp, final BindingResult binding) {
 
 		Chirp result;
 		final Chorbi t = this.chorbiService.findByPrincipal();
 
 		result = chirp;
+		final String text = this.tasteService.checkContactInfo(chirp.getText());
+		final String subject = this.tasteService.checkContactInfo(chirp.getSubject());
+
 		result.setRecipient(chirp.getRecipient());
 		result.setSender(t);
-		result.setText(chirp.getText());
-		result.setSubject(chirp.getSubject());
+		result.setText(text);
+		result.setSubject(subject);
 		result.setAttachments(chirp.getAttachments());
 		result.setMoment(new Date(System.currentTimeMillis() - 1000));
 		result.setCopy(chirp.isCopy());

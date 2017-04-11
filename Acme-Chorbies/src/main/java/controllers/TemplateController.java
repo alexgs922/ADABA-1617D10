@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
 import services.ConfigurationService;
+import services.CreditCardService;
 import services.TemplateService;
 import domain.Chorbi;
 import domain.Configuration;
@@ -45,6 +47,9 @@ public class TemplateController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private CreditCardService		creditCardService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -75,6 +80,7 @@ public class TemplateController extends AbstractController {
 
 		//Credit card para comprobar la validez cada vez que se busque
 		final CreditCard c = t1.getCreditCard();
+		Assert.isTrue(this.creditCardService.validateDate(c.getExpirationMonth(), c.getExpirationYear()), "Invalid CreditCard");
 
 		if (template == null) {
 			final Collection<Chorbi> cs2 = this.chorbiService.findAll();

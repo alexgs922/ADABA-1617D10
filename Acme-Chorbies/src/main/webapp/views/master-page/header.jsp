@@ -42,9 +42,8 @@
 					<li><a href="template/result.do"><spring:message
 								code="master.page.chorbi.myTemplate" /></a></li>
 				</ul></li>
-				
-				<li><a class="fNiv"><spring:message
-						code="master.page.chirp" /></a>
+
+			<li><a class="fNiv"><spring:message code="master.page.chirp" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="chirp/create.do"><spring:message
@@ -54,13 +53,15 @@
 					<li><a href="chirp/listReceivedMessages.do"><spring:message
 								code="master.page.chirp.received" /></a></li>
 				</ul></li>
-				
-					<li><a class="fNiv" href="chorbi/chorbi/myLikes.do"><spring:message
+
+			<li><a class="fNiv" href="chorbi/chorbi/myLikes.do"><spring:message
 						code="master.page.myLikes" /></a></li>
-			
+
 			<li><a class="fNiv" href="chorbi/chorbi/likesToMe.do"><spring:message
 						code="master.page.whoILike" /></a></li>
-				
+
+
+
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
@@ -68,15 +69,18 @@
 						code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="chorbi/register.do"><spring:message
 						code="master.page.register" /></a></li>
-		
-		
+
+
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
 
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message
 						code="master.page.know.people" /></a></li>
-			
+
+			<li><a class="fNiv" href="chorbi/viewProfile.do"><spring:message
+						code="master.page.viewMyProfile" /></a></li>
+
 
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication
@@ -86,9 +90,7 @@
 					<li class="arrow"></li>
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
-					<li><a href="chorbi/viewProfile.do"><spring:message
-								code="master.page.viewMyProfile" /> </a></li>
-		
+
 				</ul></li>
 
 
