@@ -12,18 +12,16 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<form:form action="profile/editProfile.do" modelAttribute="chorbi">
-<form:hidden path="id"/>
-<form:hidden path="version"/>
+<form:form action="profile/editLocationInformation.do" modelAttribute="coordinate">
 
 <fieldset>
-		<legend><spring:message code="chorbi.contactInfo"/></legend>
-		<acme:textbox code="chorbi.name" path="name"/>
-		<acme:textbox code="chorbi.surname" path="surName"/>
-		<acme:textbox code="chorbi.email" path="email"/>
-		<acme:textbox code="chorbi.phone" path="phone"/>
+	<legend><spring:message code="chorbi.locationInfo"/></legend>
+		<acme:textbox code="chorbi.country" path="country"/>
+		<acme:textbox code="chorbi.state" path="state"/>
+		<acme:textbox code="chorbi.province" path="province"/>
+		<acme:textbox code="chorbi.city" path="city"/>
+</fieldset>
 
-	</fieldset>
-	<acme:submit name="save" code="chorbi.accept"/>			
+<acme:submit name="save" code="chorbi.accept"/>			
 	
 </form:form>

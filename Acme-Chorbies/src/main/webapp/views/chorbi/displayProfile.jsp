@@ -55,38 +55,65 @@
 					src="images/like.jpg" width="120" height="120" /></a>
 				<br>
 				
-				&nbsp;&nbsp;&nbsp;&nbsp; <a href="chorbi/chorbi/like.do?chorbiId=${row.id}">
-				<spring:message code="chorbi.giveLike"/>	
+				&nbsp;&nbsp;&nbsp;&nbsp; <a
+					href="chorbi/chorbi/like.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.giveLike" />
 				</a>
-				
+
 			</jstl:when>
 			<jstl:when test="${toLike==false and principal.id ne row.id}">
 				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}"><img
 					src="images/cancelLike.jpg" width="80" height="80" /></a>
 				<br>
-				
-				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}">
-				<spring:message code="chorbi.cancelLike"/>	
-				</a>	
-				
-				
-			</jstl:when>
 
-			<jstl:when test="${principal.id == row.id}">
-				<a href="profile/editProfile.do?chorbiId=${row.id}">
-				<spring:message code="chorbi.editProfile"/>				
+				<a href="chorbi/chorbi/cancelLike.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.cancelLike" />
 				</a>
 
-				
+
 			</jstl:when>
 
+			<jstl:when test="${principal.id == row.id }">
+				<a href="profile/editProfile.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.editProfile" />
+				</a>
+				<br/>
+				<a href="profile/editLocationInformation.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.editLocationInformation" />
+				</a>
 
+					<display:table pagesize="5" class="displaytag" name="creditCard" id="creditCard">
+
+					<spring:message code="creditCard.holderName" var="holderName" />
+					<display:column property="holderName" title="${holderName}"
+						sortable="false" />
+
+					<spring:message code="creditCard.number" var="number" />
+					<display:column property="number" title="${number}"
+						sortable="false" />
+
+					<spring:message code="creditCard.brandName" var="brandName" />
+					<display:column property="brandName" title="${brandName}"
+						sortable="false" />
+				</display:table>
+					<jstl:choose>
+					<jstl:when test="${toCreditCard == true}">
+						<a href="profile/editCreditCard.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.editCreditCard" />
+						</a>			
+						</jstl:when>
+					
+					<jstl:when test="${toCreditCard == false}">
+						<a href="profile/createCreditCard.do"> <spring:message
+						code="chorbi.createCreditCard" />
+						</a>			
+						</jstl:when>
+					
+					</jstl:choose>
+			</jstl:when>
 		</jstl:choose>
-
-
 	</div>
 </security:authorize>
-
 
 <spring:message code="chorbi.locationInfo" var="chorbiLocationInfo" />
 <h2>

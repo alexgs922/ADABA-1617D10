@@ -17,6 +17,12 @@
 <tiles-definitions>
 
 
+<definition name="profile/editLocationInformation" extends="master.page">
+		<put-attribute name="title" value="Edit Location"/>
+		<put-attribute name="body" value="/views/profile/editLocationInformation.jsp"/>
+	</definition>
+	
+
 	
 	<definition name="profile/editProfile" extends="master.page">
 		<put-attribute name="title" value="Edit Chorbi Profile"/>
@@ -32,5 +38,17 @@
 		<put-attribute name="title" value="Profile: Action 2" />
 		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
+	
+	<definition name="profile/editCreditCard" extends="master.page">
+		<put-attribute name="title" value="Edit CreditCard"/>
+		<put-attribute name="body" value="/views/profile/creditCard.jsp"/>
+	</definition>
+	
+	
+	<definition name="profile/createCreditCard" extends="master.page">
+		<put-attribute name="title" value="Crear CreditCard"/>
+		<put-attribute name="body" value="/views/profile/createCreditCard.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

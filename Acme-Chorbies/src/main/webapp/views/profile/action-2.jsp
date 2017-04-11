@@ -16,4 +16,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="profile.action.2" /></p>
+
+<p><a href="chorbi/profile.do?chorbiId=${chorbi}"> 
+	<spring:message code="profile.action.1" var="chorbiprofile" />Perfil</a></p>
+
