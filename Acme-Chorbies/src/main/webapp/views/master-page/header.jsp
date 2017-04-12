@@ -29,6 +29,10 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/chorbi/list.do"><spring:message
 								code="master.page.administrator.listAllChorbies" /></a></li>
+					<li><a href="banner/administrator/list.do"><spring:message
+								code="master.page.administrator.banner" /></a></li>
+					<li><a href="configuration/administrator/list.do"><spring:message
+								code="master.page.administrator.configuration" /></a></li>
 				</ul></li>
 		</security:authorize>
 
