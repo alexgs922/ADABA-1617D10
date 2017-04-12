@@ -16,7 +16,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme-Chorbies Co., Inc." />
+	<a href="welcome/index.do"><img src="images/logo.png" alt="Acme-Chorbies Co., Inc." /></a>
 </div>
 
 <div>

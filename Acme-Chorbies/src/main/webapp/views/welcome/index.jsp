@@ -20,4 +20,6 @@
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
 
-
+<jstl:if test="${banner ne '' }">
+<img src="${banner}" width="450" height="200" />
+</jstl:if>

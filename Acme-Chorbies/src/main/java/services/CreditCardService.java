@@ -1,8 +1,8 @@
+
 package services;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CreditCardRepository;
-import domain.BrandName;
-import domain.Chorbi;
 import domain.CreditCard;
 
 @Service
@@ -23,10 +21,11 @@ public class CreditCardService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private CreditCardRepository creditCardRepository;
+	private CreditCardRepository	creditCardRepository;
 
 	@Autowired
-	private Validator			validator;
+	private Validator				validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -51,18 +50,17 @@ public class CreditCardService {
 			result = this.creditCardRepository.findOne(creditCard.getId());
 			result.setBrandName(creditCard.getBrandName());
 			result.setNumber(creditCard.getNumber());
-	
-			if(validateCreditCardNumber(result.getNumber())==false){
+
+			if (this.validateCreditCardNumber(result.getNumber()) == false)
 				result.setNumber(null);
-			}
-			
+
 			result.setCvvCode(creditCard.getCvvCode());
 			result.setExpirationMonth(creditCard.getExpirationMonth());
 			result.setExpirationYear(creditCard.getExpirationYear());
-			if(validateDate(result.getExpirationMonth(), result.getExpirationYear())){
+			if (this.validateDate(result.getExpirationMonth(), result.getExpirationYear())) {
 				result.setNumber(null);
 				result.setBrandName(null);
-				
+
 			}
 			result.setHolderName(creditCard.getHolderName());
 			this.validator.validate(result, binding);
@@ -70,9 +68,6 @@ public class CreditCardService {
 		return result;
 	}
 
-
-	
-	
 	public Collection<CreditCard> findAll() {
 		Collection<CreditCard> res;
 		res = this.creditCardRepository.findAll();
@@ -98,7 +93,7 @@ public class CreditCardService {
 		return this.creditCardRepository.saveAndFlush(c);
 
 	}
-	
+
 	public void delete(final CreditCard c) {
 		Assert.notNull(c);
 		this.creditCardRepository.delete(c);
@@ -106,7 +101,7 @@ public class CreditCardService {
 
 	// Other business methods --------------------------------------
 
-	public boolean validateCreditCardNumber(String number) {
+	public boolean validateCreditCardNumber(final String number) {
 
 		int sum = 0;
 		boolean alternate = false;
@@ -114,9 +109,8 @@ public class CreditCardService {
 			int n = Integer.parseInt(number.substring(i, i + 1));
 			if (alternate) {
 				n *= 2;
-				if (n > 9) {
+				if (n > 9)
 					n = (n % 10) + 1;
-				}
 			}
 			sum += n;
 			alternate = !alternate;
@@ -126,17 +120,16 @@ public class CreditCardService {
 
 	}
 
-	public boolean validateDate(int month, int year){
+	public boolean validateDate(final int month, final int year) {
 		boolean res = false;
-		
-		Calendar cal = Calendar.getInstance();
+
+		final Calendar cal = Calendar.getInstance();
 		//Primero comprobamos el año que nos pase sea mayor que el año actual
-		if(year >= cal.YEAR){
-		//Comprobamos ahora que el mes que nos pase sea mayor que el mes actual
-			if(month > cal.MONTH)
+		if (year >= Calendar.YEAR)
+			//Comprobamos ahora que el mes que nos pase sea mayor que el mes actual
+			if (month > Calendar.MONTH)
 				res = true;
-		}
-		return res;	
+		return res;
 	}
-	
+
 }

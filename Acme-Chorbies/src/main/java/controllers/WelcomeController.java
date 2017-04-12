@@ -12,6 +12,8 @@ package controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ChorbiService;
-import domain.Chorbi;
+import services.BannerService;
+import domain.Banner;
 
 @Controller
 @RequestMapping("/welcome")
@@ -32,6 +34,11 @@ public class WelcomeController extends AbstractController {
 		super();
 	}
 
+
+	@Autowired
+	private BannerService	bannerService;
+
+
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
@@ -39,33 +46,39 @@ public class WelcomeController extends AbstractController {
 		ModelAndView result;
 		SimpleDateFormat formatter;
 		String moment;
-		
+		String banner;
+
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
+
+		final List<Banner> banners = (List<Banner>) this.bannerService.findAll();
+
+		if (banners.size() != 0) {
+			final Random rand = new Random();
+			final int aux = rand.nextInt(banners.size());
+			banner = banners.get(aux).getUrl();
+
+		} else
+			banner = "";
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
-		
+		result.addObject("banner", banner);
+
 		return result;
 	}
-	
-	@RequestMapping(value = "/cookiesPolicy")
 
+	@RequestMapping(value = "/cookiesPolicy")
 	public ModelAndView cookiesPolicy() {
 
 		ModelAndView result;
 
-
-
 		result = new ModelAndView("welcome/cookiesPolicy");
-
-
 
 		return result;
 
 	}
-
 
 	@RequestMapping(value = "/about")
 	public ModelAndView about() {
@@ -74,5 +87,5 @@ public class WelcomeController extends AbstractController {
 		return result;
 
 	}
-	
+
 }

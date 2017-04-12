@@ -19,7 +19,7 @@ import domain.Configuration;
 
 @Controller
 @RequestMapping("/configuration/administrator")
-public class AdministratorConfigurationController extends AbstractController {
+public class ConfigurationAdministratorController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -29,7 +29,7 @@ public class AdministratorConfigurationController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public AdministratorConfigurationController() {
+	public ConfigurationAdministratorController() {
 		super();
 	}
 
@@ -52,11 +52,11 @@ public class AdministratorConfigurationController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int configuratioId) {
+	public ModelAndView edit(@RequestParam final int configurationId) {
 		ModelAndView result;
 		Configuration config;
 
-		config = this.configurationService.findOne(configuratioId);
+		config = this.configurationService.findOne(configurationId);
 		result = this.createEditModelAndView(config);
 
 		return result;

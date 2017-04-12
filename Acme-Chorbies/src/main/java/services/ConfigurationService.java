@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,12 +110,14 @@ public class ConfigurationService {
 		return c;
 	}
 
-	/*public Collection<String> findAllBanners() {
-		final Collection<String> res = new ArrayList<String>();
-		final Configuration c = this.findConfiguation();
-		Assert.notNull(c);
-		res.addAll(c.getBanners());
-		return res;
-
-	}*/
+	/*
+	 * public Collection<String> findAllBanners() {
+	 * final Collection<String> res = new ArrayList<String>();
+	 * final Configuration c = this.findConfiguation();
+	 * Assert.notNull(c);
+	 * res.addAll(c.getBanners());
+	 * return res;
+	 * 
+	 * }
+	 */
 }

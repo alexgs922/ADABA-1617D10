@@ -1,11 +1,8 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 @Entity
@@ -21,9 +18,9 @@ public class Configuration extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private int					hour;
-	private int					minute;
-	private int					second;
+	private int	hour;
+	private int	minute;
+	private int	second;
 
 
 	//Getters & Setters ----------------------------------------------------------------------

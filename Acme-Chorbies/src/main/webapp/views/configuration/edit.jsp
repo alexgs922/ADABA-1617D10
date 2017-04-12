@@ -20,29 +20,11 @@
 		<legend>
 			<spring:message code="configuration.info" />
 		</legend>
-		<div>
-			<form:label path="hour">
-				<spring:message code="configuration.hour" />
-			</form:label>
-			<form:input path="hour" />
-			<form:errors path="hour" cssClass="error" />
-		</div>
+		<acme:number min="0" step="1" code="configuration.hour" path="hour"/>
 		<br>
-		<div>
-			<form:label path="minute">
-				<spring:message code="configuration.minute" />
-			</form:label>
-			<form:input path="minute" />
-			<form:errors path="minute" cssClass="error" />
-		</div>
+		<acme:number min="0" max="60" step="1" code="configuration.minute" path="minute"/>
 		<br>
-		<div>
-			<form:label path="second">
-				<spring:message code="configuration.second" />
-			</form:label>
-			<form:input path="second" />
-			<form:errors path="second" cssClass="error" />
-		</div>
+		<acme:number min="0" max="60" step="1" code="configuration.second" path="second"/>
 		<br>
 	</fieldset>
 
