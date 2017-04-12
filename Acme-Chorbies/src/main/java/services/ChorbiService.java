@@ -124,7 +124,6 @@ public class ChorbiService {
 
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
-		Coordinate c = new Coordinate();
 		final int principal = this.actorService.findByPrincipal().getId();
 		final int principalChorbi = chorbi.getId();
 
@@ -137,11 +136,6 @@ public class ChorbiService {
 			result.setSurName(chorbi.getSurName());
 			result.setEmail(chorbi.getEmail());
 			result.setPhone(chorbi.getPhone());
-			c.setCity(chorbi.getCoordinate().getCity());
-			c.setCountry(chorbi.getCoordinate().getCountry());
-			c.setProvince(chorbi.getCoordinate().getProvince());
-			c.setState(chorbi.getCoordinate().getState());	
-			result.setCoordinate(c);
 			this.validator.validate(result, binding);
 		}
 		return result;
