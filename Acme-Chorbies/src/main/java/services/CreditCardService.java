@@ -51,11 +51,7 @@ public class CreditCardService {
 			result = this.creditCardRepository.findOne(creditCard.getId());
 			result.setBrandName(creditCard.getBrandName());
 			result.setNumber(creditCard.getNumber());
-/*			if(validateBrandName(result.getNumber(), result.getBrandName())==false){
-				result.setNumber(null);
-				result.setBrandName(null);
-			}
-	*/
+	
 			if(validateCreditCardNumber(result.getNumber())==false){
 				result.setNumber(null);
 			}
@@ -109,60 +105,7 @@ public class CreditCardService {
 	}
 
 	// Other business methods --------------------------------------
-/*
-	public boolean validateBrandName(String number, BrandName brandName) {
-		boolean res = true;
 
-		switch (brandName) {
-		case VISA:
-			if (number.startsWith("4"))
-				res = true;
-			else
-				res = false;
-			break;
-
-		case MASTERCARD:
-			if (number.startsWith("51") || number.startsWith("52")
-					|| number.startsWith("53") || number.startsWith("54")
-					|| number.startsWith("55"))
-				res = true;
-			else
-				res = false;
-
-			break;
-		case DISCOVER:
-			if (number.startsWith("6011") || number.startsWith("644")
-					|| number.startsWith("645") || number.startsWith("646")
-					|| number.startsWith("647") || number.startsWith("648")
-					|| number.startsWith("649") || number.startsWith("65"))
-				res = true;
-			else
-				res = false;
-
-			break;
-
-		case DINNERS:
-			if (number.startsWith("300") || number.startsWith("301")
-					|| number.startsWith("302") || number.startsWith("303")
-					|| number.startsWith("304") || number.startsWith("305")
-					|| number.startsWith("36") || number.startsWith("54"))
-				res = true;
-			else
-				res = false;
-
-			break;
-
-		case AMEX:
-			if (number.startsWith("34") || number.startsWith("37"))
-				res = true;
-			else
-				res = false;
-
-			break;
-		}
-		return res;
-	}
-*/
 	public boolean validateCreditCardNumber(String number) {
 
 		int sum = 0;
