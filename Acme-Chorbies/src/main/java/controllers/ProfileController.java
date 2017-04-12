@@ -26,7 +26,7 @@ import services.ChorbiService;
 import services.CreditCardService;
 import services.TasteService;
 import services.TemplateService;
-import domain.Chirp;
+import domain.Actor;
 import domain.Chorbi;
 import domain.CreditCard;
 
@@ -173,6 +173,18 @@ public class ProfileController extends AbstractController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/action-2",method = RequestMethod.GET)
+	public ModelAndView action2(){
+		ModelAndView result;
+		Actor a = this.actorService.findByPrincipal();
+		result = new ModelAndView("profile/action-2");
+		result.addObject("chorbi", a.getId());
+		return result;
+
+
+	}
+
 	
 	
 	//Other methods 
