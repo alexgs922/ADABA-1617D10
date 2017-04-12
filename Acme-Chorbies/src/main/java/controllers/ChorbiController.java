@@ -102,6 +102,14 @@ public class ChorbiController extends AbstractController {
 
 		return result;
 	}
+
+	//See Chorbi Profile
+	@RequestMapping(value = "/viewProfile", method = RequestMethod.GET)
+	public ModelAndView viewProfile() {
+		return display(this.chorbiService.findByPrincipal().getId());
+		
+	}
+	
 	//See people who like him/her
 
 	@RequestMapping(value = "/listWhoLikeThem", method = RequestMethod.GET)

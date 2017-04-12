@@ -86,7 +86,7 @@
 					<li class="arrow"></li>
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
-					<li><a href="profile/action-2.do"><spring:message
+					<li><a href="chorbi/viewProfile.do"><spring:message
 								code="master.page.viewMyProfile" /> </a></li>
 		
 				</ul></li>

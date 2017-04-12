@@ -77,6 +77,11 @@
 				<a href="profile/editProfile.do?chorbiId=${row.id}"> <spring:message
 						code="chorbi.editProfile" />
 				</a>
+				<br/>
+				<a href="profile/editLocationInformation.do?chorbiId=${row.id}"> <spring:message
+						code="chorbi.editLocationInformation" />
+				</a>
+
 					<display:table pagesize="5" class="displaytag" name="creditCard" id="creditCard">
 
 					<spring:message code="creditCard.holderName" var="holderName" />

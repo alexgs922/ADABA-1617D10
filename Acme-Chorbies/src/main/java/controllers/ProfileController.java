@@ -26,8 +26,8 @@ import services.ChorbiService;
 import services.CreditCardService;
 import services.TasteService;
 import services.TemplateService;
-import domain.Actor;
 import domain.Chorbi;
+import domain.Coordinate;
 import domain.CreditCard;
 
 @Controller
@@ -48,7 +48,7 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private CreditCardService creditCardService;
-
+	
 	
 	//Edit profile
 	
@@ -173,22 +173,99 @@ public class ProfileController extends AbstractController {
 		return result;
 
 	}
+	
 
-	@RequestMapping(value = "/action-2",method = RequestMethod.GET)
-	public ModelAndView action2(){
+	
+	
+	// Edit LocationInformation ----------------------------------
+
+	@RequestMapping(value = "/editLocationInformation", method = RequestMethod.GET)
+	public ModelAndView editLocationInformation(@RequestParam int chorbiId) {
+		ModelAndView res;
+		Chorbi principal;
+		principal = chorbiService.findByPrincipal();
+		Coordinate c = principal.getCoordinate();
+		try {
+			Assert.isTrue(principal.getId() == chorbiId);
+		} catch (Throwable th) {
+			res = createEditModelAndView(c);
+			return res;
+		}
+		Assert.notNull(c);
+		res = createEditModelAndView(c);
+		return res;
+	}
+
+	@RequestMapping(value = "/editLocationInformation", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveCreditCard(@Valid Coordinate coordinate,
+			BindingResult binding) {
 		ModelAndView result;
-		Actor a = this.actorService.findByPrincipal();
-		result = new ModelAndView("profile/action-2");
-		result.addObject("chorbi", a.getId());
+		if (binding.hasErrors()) {
+			result = new ModelAndView("profile/editLocationInformation");
+			result.addObject("coordinate", coordinate);
+			result.addObject("forbiddenOperation", false);
+		} else {
+			try {
+				Chorbi t = this.chorbiService.findByPrincipal();
+				t.setCoordinate(coordinate);
+				this.chorbiService.save(t);
+				result = new ModelAndView("redirect:../chorbi/profile.do?chorbiId="+t.getId());
+			} catch (Throwable oops) {
+				result = new ModelAndView("profile/editLocationInformation");
+				result.addObject("coordinate", coordinate);
+				result.addObject("message", "chorbi.commit.error");
+			}
+		}
 		return result;
-
 
 	}
 
 	
 	
+	
+	
+	
+	
 	//Other methods 
+	protected ModelAndView createEditModelAndView(Coordinate c) {
+		ModelAndView result;
+		result = createEditModelAndView(c, null);
+		return result;
+	}
 
+	protected ModelAndView createEditModelAndViewError(Coordinate c) {
+		ModelAndView res;
+		res = createEditModelAndViewError(c, null);
+		return res;
+
+	}
+
+	protected ModelAndView createEditModelAndView(Coordinate c, String message) {
+		ModelAndView result;
+		result = new ModelAndView("profile/editLocationInformation");
+		result.addObject("coordinate", c);
+		result.addObject("message", message);
+		result.addObject("forbiddenOperation", false);
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewError(Coordinate c,
+			String message) {
+		ModelAndView res;
+		res = new ModelAndView("profile/editProfile");
+		res.addObject("coordinate", c);
+		res.addObject("message", message);
+		res.addObject("forbiddenOperation", true);
+		return res;
+
+	}
+
+
+	
+	
+	
+	
+	
 	protected ModelAndView createEditModelAndView(Chorbi chorbi) {
 		ModelAndView result;
 		result = createEditModelAndView(chorbi, null);

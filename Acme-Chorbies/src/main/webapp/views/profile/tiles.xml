@@ -17,6 +17,12 @@
 <tiles-definitions>
 
 
+<definition name="profile/editLocationInformation" extends="master.page">
+		<put-attribute name="title" value="Edit Location"/>
+		<put-attribute name="body" value="/views/profile/editLocationInformation.jsp"/>
+	</definition>
+	
+
 	
 	<definition name="profile/editProfile" extends="master.page">
 		<put-attribute name="title" value="Edit Chorbi Profile"/>
