@@ -21,22 +21,12 @@ public class Configuration extends DomainEntity {
 
 	//Attributes ---------------------------------------------------------------------------
 
-	private Collection<String>	banners;
 	private int					hour;
 	private int					minute;
 	private int					second;
 
 
 	//Getters & Setters ----------------------------------------------------------------------
-
-	@ElementCollection
-	public Collection<String> getBanners() {
-		return this.banners;
-	}
-
-	public void setBanners(final Collection<String> banners) {
-		this.banners = banners;
-	}
 
 	public int getHour() {
 		return this.hour;
