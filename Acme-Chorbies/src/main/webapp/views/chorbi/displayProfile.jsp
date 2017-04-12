@@ -75,7 +75,7 @@
 
 			<jstl:when test="${principal.id == row.id }">
 				<a href="profile/editProfile.do?chorbiId=${row.id}"> <spring:message
-						code="chorbi.editProfile" />
+						code="chorbi.editprofile" />
 				</a>
 				<br/>
 				<a href="profile/editLocationInformation.do?chorbiId=${row.id}"> <spring:message
