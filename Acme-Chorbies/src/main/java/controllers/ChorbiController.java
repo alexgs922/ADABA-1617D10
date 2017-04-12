@@ -20,6 +20,7 @@ import services.ChorbiService;
 import services.TasteService;
 import services.TemplateService;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Taste;
 import domain.Template;
 import form.RegistrationForm;
@@ -71,7 +72,7 @@ public class ChorbiController extends AbstractController {
 		Chorbi chorbi;
 		chorbi = this.chorbiService.findOne(chorbiId);
 		boolean toLike;
-
+		boolean toCreditCard = false;
 		final Chorbi principal = this.chorbiService.findByPrincipal();
 
 		Assert.isTrue(chorbi.isBan() == false);
@@ -85,11 +86,18 @@ public class ChorbiController extends AbstractController {
 				}
 		} else
 			toLike = false;
-
+			
+		CreditCard creditCard = principal.getCreditCard();
+		if(creditCard != null){
+			toCreditCard = true;
+		}
+		
 		result = new ModelAndView("chorbi/displayProfile");
 		result.addObject("chorbi", chorbi);
 		result.addObject("principal", principal);
 		result.addObject("toLike", toLike);
+		result.addObject("creditCard",creditCard);
+		result.addObject("toCreditCard",toCreditCard);		
 		result.addObject("requestURI", "chorbi/profile.do?chorbiId=" + chorbiId);
 
 		return result;

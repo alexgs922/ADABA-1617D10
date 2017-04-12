@@ -59,6 +59,9 @@
         <security:intercept-url pattern="/template/createCoordinate.do" access="hasRole('CHORBI')" />
         <security:intercept-url pattern="/template/editCoordinate.do" access="hasRole('CHORBI')" />  
 		<security:intercept-url pattern="/profile/editProfile.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/profile/createCreditCard.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/profile/editCreditCard.do" access="hasRole('CHORBI')" /> 
+		
 		
 	
 		

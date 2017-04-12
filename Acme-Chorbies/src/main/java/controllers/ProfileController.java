@@ -23,8 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ChorbiService;
+import services.CreditCardService;
 import services.TasteService;
 import services.TemplateService;
+import domain.Chirp;
 import domain.Chorbi;
 import domain.CreditCard;
 
@@ -44,6 +46,10 @@ public class ProfileController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 
+	@Autowired
+	private CreditCardService creditCardService;
+
+	
 	//Edit profile
 	
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
@@ -86,7 +92,43 @@ public class ProfileController extends AbstractController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/createCreditCard", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		CreditCard creditCard;
 
+		creditCard = this.creditCardService.create();
+
+		result = this.editCreditCardModelAndView(creditCard);
+
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/createCreditCard", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(CreditCard creditCard, final BindingResult binding) {
+
+		ModelAndView result;
+		CreditCard res;
+		Chorbi chorbi = this.chorbiService.findByPrincipal();
+		res = this.creditCardService.reconstruct(creditCard, binding);
+		if (binding.hasErrors())
+			result = this.editCreditCardModelAndView(res);
+		else
+			try {
+				this.chorbiService.saveAndFlush2(chorbi, creditCard);
+				result = new ModelAndView("redirect:../chorbi/profile.do?chorbiId="+chorbi.getId());
+
+			} catch (final Throwable th) {
+				result = this.editCreditCardModelAndView(res, "creditCard.commit.error");
+
+			}
+
+		return result;
+	}
+
+	
 	// Edit CreditCard ----------------------------------
 
 	@RequestMapping(value = "/editCreditCard", method = RequestMethod.GET)
@@ -120,7 +162,8 @@ public class ProfileController extends AbstractController {
 				Chorbi t = this.chorbiService.findByPrincipal();
 				t.setCreditCard(creditCard);
 				this.chorbiService.save(t);
-				result = new ModelAndView("redirect:../chorbi/list.do");
+				this.creditCardService.save(creditCard);
+				result = new ModelAndView("redirect:../chorbi/profile.do?chorbiId="+t.getId());
 			} catch (Throwable oops) {
 				result = new ModelAndView("profile/editCreditCard");
 				result.addObject("creditCard", creditCard);
@@ -204,4 +247,29 @@ public class ProfileController extends AbstractController {
 		return res;
 
 	}
+	
+	
+	//----------------------
+	
+	protected ModelAndView editCreditCardModelAndView(
+			CreditCard creditCard) {
+		ModelAndView res;
+		res = editCreditCardModelAndView(creditCard, null);
+		return res;
+	}
+
+	protected ModelAndView editCreditCardModelAndView(
+			CreditCard creditCard, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("profile/createCreditCard");
+		result.addObject("creditCard", creditCard);
+		result.addObject("message", message);
+		result.addObject("forbiddenOperation", false);
+
+		return result;
+	}
+
+	
+	
 }

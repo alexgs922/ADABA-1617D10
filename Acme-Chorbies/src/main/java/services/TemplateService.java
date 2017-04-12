@@ -115,7 +115,7 @@ public class TemplateService {
 				if ((t.getApproximatedAge() < this.chorbiService.getEdad(c.getBirthDate()) - 5))
 					todosLosChorbies2.remove(c);
 			}
-		if (!t.getCoordinates().isEmpty())
+	/*	if (!t.getCoordinates().isEmpty())
 			for (final Coordinate c : t.getCoordinates()) {
 
 				if ((!c.getCity().equals("")) && (!c.getCountry().equals("")) && (!c.getProvince().equals("")) && (!c.getState().equals(""))) {
@@ -149,7 +149,7 @@ public class TemplateService {
 							todosLosChorbies2.remove(chorbi);
 				}
 			}
-
+*/
 		return todosLosChorbies2;
 	}
 
