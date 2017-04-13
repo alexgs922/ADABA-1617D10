@@ -192,14 +192,18 @@ public class TemplateController extends AbstractController {
 		ModelAndView result;
 		Template template;
 		Coordinate coordinate;
+		Chorbi principal;
 		try {
+			principal = this.chorbiService.findByPrincipal();
 			template = this.templateService.findOneToEdit(templateId);
+			Assert.isTrue(principal.getTemplate().getId() == templateId);
 			coordinate = template.getCoordinate();
 			result = this.createEditModelAndViewCoordinate(coordinate);
 
 		} catch (final Throwable oops) {
-			final Coordinate coordinate2 = new Coordinate();
-			result = this.createEditModelAndViewCoordinate(coordinate2, "template.commit.error");
+			//			final Coordinate coordinate2 = new Coordinate();
+			//			result = this.createEditModelAndViewCoordinate(coordinate2, "template.commit.error");
+			result = new ModelAndView("forbiddenOperation");
 		}
 		return result;
 
