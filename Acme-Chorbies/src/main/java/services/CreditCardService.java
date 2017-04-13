@@ -3,6 +3,7 @@ package services;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,13 +124,15 @@ public class CreditCardService {
 	public boolean validateDate(final int month, final int year) {
 		boolean res = false;
 
-		final Calendar cal = Calendar.getInstance();
+		final Calendar cal = new GregorianCalendar();
+		final Integer yearActual = cal.get(Calendar.YEAR);
+		final Integer monthActual = cal.get(Calendar.MONTH) + 1;
+
 		//Primero comprobamos el año que nos pase sea mayor que el año actual
-		if (year >= Calendar.YEAR)
+		if (year >= yearActual)
 			//Comprobamos ahora que el mes que nos pase sea mayor que el mes actual
-			if (month > Calendar.MONTH)
+			if (month > monthActual)
 				res = true;
 		return res;
 	}
-
 }

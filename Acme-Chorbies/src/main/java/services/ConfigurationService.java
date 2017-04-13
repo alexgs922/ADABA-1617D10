@@ -85,6 +85,7 @@ public class ConfigurationService {
 		Integer horas = c.getHour();
 		Integer minutos = c.getMinute();
 		Integer segundos = c.getSecond();
+		Integer minutosNuevos = 0;
 
 		final Integer horaTotal;
 
@@ -99,7 +100,12 @@ public class ConfigurationService {
 			minutos = minutos + 1;
 		}
 
-		horaTotal = horas + minutos + segundos;
+		while (horas > 0) {
+			horas = horas - 1;
+			minutosNuevos = minutosNuevos + 60;
+		}
+
+		horaTotal = minutosNuevos;
 
 		return horaTotal;
 

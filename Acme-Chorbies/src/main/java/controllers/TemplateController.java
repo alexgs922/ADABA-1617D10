@@ -83,7 +83,7 @@ public class TemplateController extends AbstractController {
 		Assert.isTrue(this.creditCardService.validateDate(c.getExpirationMonth(), c.getExpirationYear()), "Invalid CreditCard");
 
 		if (template == null) {
-			final Collection<Chorbi> cs2 = this.chorbiService.findAll();
+			final Collection<Chorbi> cs2 = this.chorbiService.findAllNotBannedChorbies();
 			result = new ModelAndView("template/result");
 			result.addObject("chorbies", cs2);
 			result.addObject("requestURI", "template/result.do");
@@ -98,7 +98,6 @@ public class TemplateController extends AbstractController {
 			if (momentTemplate != null) {
 
 				final Date currentDate = new Date();
-				final long mm = momentTemplate.getTime();
 
 				final long diff = (currentDate.getTime() - 10000) - momentTemplate.getTime();
 				final long minutes = (diff / 1000) / 60;

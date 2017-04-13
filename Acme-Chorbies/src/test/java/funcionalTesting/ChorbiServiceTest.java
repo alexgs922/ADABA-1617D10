@@ -253,11 +253,12 @@ public class ChorbiServiceTest extends AbstractTest {
 
 	}
 
+	//Chorbi = 63,64,65,66,67,68
 	@Test
 	public void driverBanChorbiUseCase5() {
 
-		final Chorbi chorbi1 = this.chorbiService.findOneToSent(54); // Obtenemos de la base de datos el chorbi con id = 54 inicialmente no banneado
-		final Chorbi chorbi2 = this.chorbiService.findOneToSent(56); // Obtenemos de la base de datos el chorbi con id = 56 inicialmente banneado
+		final Chorbi chorbi1 = this.chorbiService.findOneToSent(63); // Obtenemos de la base de datos el chorbi con id = 63 inicialmente no banneado
+		final Chorbi chorbi2 = this.chorbiService.findOneToSent(65); // Obtenemos de la base de datos el chorbi con id = 65 inicialmente banneado
 
 		final Object testingData[][] = {
 			//TEST POSITIVO: Bannear un chorbi que aun no esta baneado, y comprobar que el resultado es correcto.
@@ -306,8 +307,8 @@ public class ChorbiServiceTest extends AbstractTest {
 	@Test
 	public void driverUnbanChorbiUseCase5() {
 
-		final Chorbi chorbi1 = this.chorbiService.findOneToSent(56); // Obtenemos de la base de datos el chorbi con id = 56 inicialmente banneado
-		final Chorbi chorbi2 = this.chorbiService.findOneToSent(54); // Obtenemos de la base de datos el chorbi con id = 54 inicialmente no banneado
+		final Chorbi chorbi1 = this.chorbiService.findOneToSent(65); // Obtenemos de la base de datos el chorbi con id = 65 inicialmente banneado
+		final Chorbi chorbi2 = this.chorbiService.findOneToSent(63); // Obtenemos de la base de datos el chorbi con id = 63 inicialmente no banneado
 
 		final Object testingData[][] = {
 			//TEST POSITIVO: Permitir un chorbi que esta baneado, y comprobar que el resultado es correcto.

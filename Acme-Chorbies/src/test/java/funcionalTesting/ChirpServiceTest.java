@@ -35,7 +35,7 @@ public class ChirpServiceTest extends AbstractTest {
 	private ChorbiService	chorbiService;
 
 
-	//Chorbi = 54,55,56,57,58,59
+	//Chorbi = 63,64,65,66,67,68
 
 	//Crear chirp sin errores de validacion y otros casos comunes
 	protected void template(final String username, final int enviarId, final int recibirId, final Class<?> expected) {
@@ -81,28 +81,28 @@ public class ChirpServiceTest extends AbstractTest {
 
 	}
 
-	//Chorbi = 54,55,56,57,58,59
+	//Chorbi = 63,64,65,66,67,68
 	@Test
 	public void driver() {
 
 		final Object testingData[][] = {
 			{   //chorbi 1 envia chirp correcto a chorbi 2
-				"chorbi1", 54, 55, null
+				"chorbi1", 63, 64, null
 			}, {
 				//chorbi 2 enviar chirp correcto a chorbi 1
-				"chorbi2", 55, 54, null
+				"chorbi2", 64, 63, null
 			}, {
 				//chorbi 1 envia chirp correcto a chorbi 3
-				"chorbi1", 54, 57, null
+				"chorbi1", 63, 65, null
 			}, {
 				//Simular post hacking. Logeado como chorbi 3, pero en realidad soy chorbi 2 intentando enviar chirp a chorbi 1
-				"chorbi3", 55, 54, IllegalArgumentException.class
+				"chorbi3", 64, 63, IllegalArgumentException.class
 			}, {
 				//Usuario no autenticado intenta enviar chirp a otro actor.
-				null, 54, 55, IllegalArgumentException.class
+				null, 63, 64, IllegalArgumentException.class
 			}, {
 				//Chorbi 1 intenta enviar a un chorbi que no existe un chirp
-				"chorbi1", 54, 5000, IllegalArgumentException.class
+				"chorbi1", 63, 5000, IllegalArgumentException.class
 			}
 		};
 
@@ -180,26 +180,26 @@ public class ChirpServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 
 	}
-	//Chorbi = 54,55,56,57,58,59
+	//Chorbi = 63,64,65,66,67,68
 	@Test
 	public void driver2() {
 
 		final Object testingData[][] = {
 			{
 				//chorbi 2 intenta enviar chirp sin texto a chirp 1
-				"chorbi2", 55, 54, 1, ConstraintViolationException.class
+				"chorbi2", 64, 63, 1, ConstraintViolationException.class
 			}, {
 				//chorbi 2 intenta enviar chirp sin titulo a chorbi 3
-				"chorbi2", 55, 56, 2, ConstraintViolationException.class
+				"chorbi2", 64, 65, 2, ConstraintViolationException.class
 			}, {
 				//chorbi 1 intenta enviar chirp sin recipient
-				"chorbi1", 54, 55, 3, NullPointerException.class
+				"chorbi1", 63, 64, 3, NullPointerException.class
 			}, {
 				//No existe sender
-				"chorbi1", 54, 55, 4, NullPointerException.class
+				"chorbi1", 63, 64, 4, NullPointerException.class
 			}, {
 				//Mensaje vacio
-				"chorbi1", 54, 55, 5, NullPointerException.class
+				"chorbi1", 63, 63, 5, NullPointerException.class
 			}
 
 		};
