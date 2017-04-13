@@ -201,8 +201,7 @@ public class TemplateController extends AbstractController {
 			result = this.createEditModelAndViewCoordinate(coordinate);
 
 		} catch (final Throwable oops) {
-			//			final Coordinate coordinate2 = new Coordinate();
-			//			result = this.createEditModelAndViewCoordinate(coordinate2, "template.commit.error");
+
 			result = new ModelAndView("forbiddenOperation");
 		}
 		return result;

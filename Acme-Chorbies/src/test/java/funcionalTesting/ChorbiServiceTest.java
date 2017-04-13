@@ -326,7 +326,7 @@ public class ChorbiServiceTest extends AbstractTest {
 
 	}
 
-	// Con este test comprobamos que al intentar logearnos con un chorbi que se encuentra banneado no es posible realizar dicha operación y test
+	// Con este test comprobamos que al intentar logearnos con un chorbi que se encuentra banneado no es posible realizar dicha operación y el test
 	// devuelve IllegalArgumentException 
 	@Test(expected = IllegalArgumentException.class)
 	public void testLoginBannedChorbi() {
