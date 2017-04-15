@@ -126,8 +126,7 @@ public class TasteServiceTest extends AbstractTest {
 	public void testCreateLikeTwice() {
 
 		this.authenticate("chorbi1");
-		//55
-		final Chorbi chorbiToLike = this.chorbiService.findOne(65);
+		final Chorbi chorbiToLike = this.chorbiService.findOne(64);
 
 		final Taste new_like = this.tasteService.create(chorbiToLike);
 		new_like.setComment("comentario de prueba");
@@ -144,7 +143,6 @@ public class TasteServiceTest extends AbstractTest {
 	public void testCreateLikeToYourself() {
 
 		this.authenticate("chorbi1");
-		//54
 		final Chorbi chorbiToLike = this.chorbiService.findOne(63);
 
 		final Taste new_like = this.tasteService.create(chorbiToLike);
@@ -162,7 +160,6 @@ public class TasteServiceTest extends AbstractTest {
 	public void testCreateLikeToBannedChorbi() {
 
 		this.authenticate("chorbi1");
-		//56
 		final Chorbi chorbiToLike = this.chorbiService.findOne(65);
 
 		final Taste new_like = this.tasteService.create(chorbiToLike);
@@ -184,7 +181,7 @@ public class TasteServiceTest extends AbstractTest {
 	//4. Que el like cancelado ya no aparezca para ninguno de los dos implicados
 
 	//Chorbi = 63,64,65,66,67,68
-	//taste = 73,74,75,76 antes eran 64,65,66,67
+	//taste = 73,74,75,76 
 	@Test
 	public void testCancelLike() {
 
@@ -210,7 +207,7 @@ public class TasteServiceTest extends AbstractTest {
 
 	//Prueba 2: comprobando que un chorbi no puede cancelar un like que no es suyo (pertenece a chorbi2)
 
-	//taste = 73,74,75,76 antes eran 64,65,66,67
+	//taste = 73,74,75,76 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCancelLikeNotMine() {
 
@@ -228,7 +225,7 @@ public class TasteServiceTest extends AbstractTest {
 
 	//Prueba 3: comprobando que no se puede cancelar un like que ya se había cancelado y que por tanto, no existe
 
-	//taste = 73,74,75,76 antes eran 64,65,66,67
+	//taste = 73,74,75,76 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCancelLikeNotExists() {
 
@@ -262,13 +259,13 @@ public class TasteServiceTest extends AbstractTest {
 
 	//Prueba 5 : comprobando que no se puede cancelar un like a un chorbi baneado
 
-	//taste = 73,74,75,76 antes eran 64,65,66,67
+	//taste = 73,74,75,76 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCancelLikeToBannedChorbi() {
 
 		this.authenticate("chorbi1");
 		final Chorbi principal = this.chorbiService.findByPrincipal();
-		final Chorbi chorbiToCancelLike = this.chorbiService.findOne(74);
+		final Chorbi chorbiToCancelLike = this.chorbiService.findOne(65);
 
 		final Taste likeToCancel = this.tasteService.findOne(74);
 		Assert.isTrue(likeToCancel.getChorbi().getId() == chorbiToCancelLike.getId());

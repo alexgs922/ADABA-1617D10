@@ -32,13 +32,13 @@ public class ChorbiServiceTest extends AbstractTest {
 
 		this.authenticate("chorbi1");
 
-		final Chorbi c = this.chorbiService.findOne(55);
+		final Chorbi c = this.chorbiService.findOne(64);
 
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE CHORBI------------------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
 
-		System.out.println("Se espera obtener el Chorbi 2 con id 55: ");
+		System.out.println("Se espera obtener el Chorbi 2 con id 64: ");
 		System.out.println("Nombre: " + c.getName());
 		System.out.println("Id: " + c.getId());
 
@@ -52,7 +52,7 @@ public class ChorbiServiceTest extends AbstractTest {
 
 		this.unauthenticate();
 
-		final Chorbi c = this.chorbiService.findOne(55);
+		final Chorbi c = this.chorbiService.findOne(64);
 
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE CHORBI------------------------------------");
