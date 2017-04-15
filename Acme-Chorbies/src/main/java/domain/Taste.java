@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -16,6 +18,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "chorbi_id")
+})
 public class Taste extends DomainEntity {
 
 	//Constructors ---------------------------------------------------------------------------
@@ -50,23 +55,22 @@ public class Taste extends DomainEntity {
 	public void setComment(final String comment) {
 		this.comment = comment;
 	}
-	
+
+
 	//Relationship
-	
-	private Chorbi chorbi;
+
+	private Chorbi	chorbi;
+
 
 	@NotNull
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Chorbi getChorbi() {
-		return chorbi;
+		return this.chorbi;
 	}
 
-	public void setChorbi(Chorbi chorbi) {
+	public void setChorbi(final Chorbi chorbi) {
 		this.chorbi = chorbi;
 	}
-	
-	
-		
 
 }

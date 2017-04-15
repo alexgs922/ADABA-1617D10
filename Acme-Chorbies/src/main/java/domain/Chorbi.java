@@ -7,8 +7,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -20,6 +22,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "ban"), @Index(columnList = "country,state,province,city"), @Index(columnList = "country,province,city"), @Index(columnList = "country,state,city"), @Index(columnList = "country,city"), @Index(columnList = "creditCard_id"),
+	@Index(columnList = "relationship")
+})
 public class Chorbi extends Actor {
 
 	//Constructors ---------------------------------------------------------------------------
