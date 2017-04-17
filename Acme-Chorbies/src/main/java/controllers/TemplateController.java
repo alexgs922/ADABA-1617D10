@@ -80,7 +80,11 @@ public class TemplateController extends AbstractController {
 
 		//Credit card para comprobar la validez cada vez que se busque
 		final CreditCard c = t1.getCreditCard();
-		Assert.isTrue(this.creditCardService.validateDate(c.getExpirationMonth(), c.getExpirationYear()), "Invalid CreditCard");
+		if (this.creditCardService.validateDate(c.getExpirationMonth(), c.getExpirationYear()) == false) {
+			result = new ModelAndView("template/error");
+			result.addObject("invalidCreditCard", "template.invalidCreditCard");
+			return result;
+		}
 
 		if (template == null) {
 			final Collection<Chorbi> cs2 = this.chorbiService.findAllNotBannedChorbies();

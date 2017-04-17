@@ -24,6 +24,11 @@
 		<put-attribute name="title" value="Edit my Coordinate" />
 		<put-attribute name="body" value="/views/template/editCoordinates.jsp" />
 	</definition>
+	
+	<definition name="template/error" extends="master.page">
+		<put-attribute name="title" value="Invalid Credit Card" />
+		<put-attribute name="body" value="/views/template/error.jsp" />
+	</definition>
 
 
 
