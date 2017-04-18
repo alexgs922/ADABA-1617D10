@@ -44,20 +44,6 @@ public class TemplateService {
 
 	//Simple CRUD -------------------------------------------------------------
 
-	public Collection<Template> findAll() {
-		Collection<Template> res;
-		res = this.templateRepository.findAll();
-		Assert.notNull(res);
-		return res;
-	}
-
-	public Template findOne(final int templateId) {
-		Template res;
-		res = this.templateRepository.findOne(templateId);
-		Assert.notNull(res);
-		return res;
-	}
-
 	public Template save(final Template t) {
 		Assert.notNull(t);
 		return this.templateRepository.save(t);
@@ -79,11 +65,6 @@ public class TemplateService {
 		Assert.notNull(t);
 		return this.templateRepository.saveAndFlush(t);
 
-	}
-
-	public void delete(final Template t) {
-		Assert.notNull(t);
-		this.templateRepository.delete(t);
 	}
 
 	// Other business methods ----------------------------------------------------
