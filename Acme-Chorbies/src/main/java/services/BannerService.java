@@ -73,7 +73,7 @@ public class BannerService {
 
 	// Other business methods ----------------------------------------------
 
-	private boolean checkAdminPrincipal() {
+	public boolean checkAdminPrincipal() {
 		final boolean res;
 		Administrator principal;
 

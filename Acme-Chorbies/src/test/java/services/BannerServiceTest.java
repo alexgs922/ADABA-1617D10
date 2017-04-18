@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Banner;
@@ -38,6 +39,7 @@ public class BannerServiceTest extends AbstractTest {
 
 		final Collection<Banner> b = this.bannerService.findAll();
 
+		Assert.isTrue(this.bannerService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ALL BANNERS------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
@@ -56,6 +58,7 @@ public class BannerServiceTest extends AbstractTest {
 
 		final Collection<Banner> b = this.bannerService.findAll();
 
+		Assert.isTrue(this.bannerService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ALL BANNERS NEGATIVE------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
@@ -72,6 +75,7 @@ public class BannerServiceTest extends AbstractTest {
 		this.authenticate("admin");
 
 		final Banner b = this.bannerService.findOne(79);
+		Assert.isTrue(this.bannerService.checkAdminPrincipal());
 
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE BANNER------------------------------------");
@@ -90,6 +94,7 @@ public class BannerServiceTest extends AbstractTest {
 		this.unauthenticate();
 
 		final Banner b = this.bannerService.findOne(79);
+		Assert.isTrue(this.bannerService.checkAdminPrincipal());
 
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE BANNER------------------------------------");

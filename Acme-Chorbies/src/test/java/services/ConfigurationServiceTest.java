@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Configuration;
@@ -36,6 +37,7 @@ public class ConfigurationServiceTest extends AbstractTest {
 
 		final Collection<Configuration> c = this.configService.findAll();
 
+		Assert.isTrue(this.configService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ALL CONFIG------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
@@ -54,6 +56,7 @@ public class ConfigurationServiceTest extends AbstractTest {
 
 		final Collection<Configuration> c = this.configService.findAll();
 
+		Assert.isTrue(this.configService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ALL CONFIG------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
@@ -71,6 +74,7 @@ public class ConfigurationServiceTest extends AbstractTest {
 
 		final Configuration c = this.configService.findOne(77);
 
+		Assert.isTrue(this.configService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE CONFIG------------------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");
@@ -89,6 +93,7 @@ public class ConfigurationServiceTest extends AbstractTest {
 
 		final Configuration c = this.configService.findOne(77);
 
+		Assert.isTrue(this.configService.checkAdminPrincipal());
 		System.out.println("-----------------------------------------------------------------------------------");
 		System.out.println("--------------------------------FIND ONE CONFIG------------------------------------");
 		System.out.println("-----------------------------------------------------------------------------------");

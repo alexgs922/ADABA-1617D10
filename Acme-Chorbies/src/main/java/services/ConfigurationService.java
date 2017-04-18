@@ -71,7 +71,7 @@ public class ConfigurationService {
 
 	//Other business methods --------------------------------------
 
-	private boolean checkAdminPrincipal() {
+	public boolean checkAdminPrincipal() {
 		final boolean res;
 		Administrator principal;
 
