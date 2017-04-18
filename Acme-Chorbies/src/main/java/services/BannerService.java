@@ -46,7 +46,6 @@ public class BannerService {
 
 	public Collection<Banner> findAll() {
 		Collection<Banner> result;
-		Assert.isTrue(this.checkAdminPrincipal());
 		result = this.bannerRepository.findAll();
 		Assert.notNull(result);
 		return result;
@@ -54,7 +53,6 @@ public class BannerService {
 
 	public Banner findOne(final int bannerId) {
 		Banner result;
-		Assert.isTrue(this.checkAdminPrincipal());
 		result = this.bannerRepository.findOne(bannerId);
 		Assert.notNull(result);
 		return result;

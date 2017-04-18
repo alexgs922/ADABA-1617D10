@@ -56,6 +56,9 @@ public class ChorbiService {
 	@Autowired
 	private CreditCardService	creditCardService;
 
+	@Autowired
+	private TasteService		tasteService;
+
 
 	// Simple CRUD methods ----------------------------------------------------
 
@@ -82,7 +85,10 @@ public class ChorbiService {
 		result.setSurName(customerForm.getSurName());
 		result.setPhone(customerForm.getPhone());
 		result.setEmail(customerForm.getEmail());
-		result.setDescription(customerForm.getDescription());
+
+		final String description = this.tasteService.checkContactInfo(customerForm.getDescription());
+
+		result.setDescription(description);
 		result.setPicture(customerForm.getPicture());
 
 		if (customerForm.getGenre().equals("MALE"))
@@ -120,7 +126,6 @@ public class ChorbiService {
 
 		return result;
 	}
-
 	public Chorbi reconstruct(final Chorbi chorbi, final BindingResult binding) {
 		Chorbi result;
 		final int principal = this.actorService.findByPrincipal().getId();

@@ -209,4 +209,110 @@ public class ChirpServiceTest extends AbstractTest {
 
 	}
 
+	//Delete a received chirp
+	protected void template3(final String username, final int chirpId, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+
+			this.authenticate(username);
+
+			final Chirp c = this.chirpService.findOne(chirpId);
+
+			this.chirpService.deleteReceived(c);
+
+			final Collection<Chirp> cc = this.chirpService.findAll();
+
+			Assert.isTrue(!cc.contains(c));
+
+			this.unauthenticate();
+			this.chirpService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+	//Chorbi = 63,64,65,66,67,68
+	@Test
+	public void driver3() {
+
+		final Object testingData[][] = {
+			{
+				//chorbi 2 elimina un chirp suyo
+				"chorbi2", 70, null
+			}, {
+				//chorbi 1 intenta eliminar un chirp que no es suyo
+				"chorbi1", 70, IllegalArgumentException.class
+			}
+
+			, {
+				//chorbi 2 intenta eliminar un chirp que no existe
+				"chorbi2", 1000, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template3((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+
+	//Delete a received chirp
+	protected void template4(final String username, final int chirpId, final Class<?> expected) {
+
+		Class<?> caught;
+
+		caught = null;
+		try {
+
+			this.authenticate(username);
+
+			final Chirp c = this.chirpService.findOne(chirpId);
+
+			this.chirpService.deleteSent(c);
+
+			final Collection<Chirp> cc = this.chirpService.findAll();
+
+			Assert.isTrue(!cc.contains(c));
+
+			this.unauthenticate();
+			this.chirpService.flush();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+	//Chorbi = 63,64,65,66,67,68
+	@Test
+	public void driver4() {
+
+		final Object testingData[][] = {
+			{
+				//chorbi 1 elimina un chirp suyo
+				"chorbi1", 69, null
+			}, {
+				//chorbi 2 intenta eliminar un chirp que no es suyo
+				"chorbi2", 69, IllegalArgumentException.class
+			}
+
+			, {
+				//chorbi 1 intenta eliminar un chirp que no existe
+				"chorbi1", 1000, IllegalArgumentException.class
+			}
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.template4((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+
+	}
+
 }
