@@ -95,6 +95,18 @@
 					<spring:message code="creditCard.brandName" var="brandName" />
 					<display:column property="brandName" title="${brandName}"
 						sortable="false" />
+						
+					<spring:message code="creditCard.expirationMonth" var="expirationMonth" />
+					<display:column property="expirationMonth" title="${expirationMonth}"
+						sortable="false" />
+						
+					<spring:message code="creditCard.expirationYear" var="expirationYear" />
+					<display:column property="expirationYear" title="${expirationYear}"
+						sortable="false" />
+						
+					<spring:message code="creditCard.cvvCode" var="cvvCode" />
+					<display:column property="cvvCode" title="${cvvCode}"
+						sortable="false" />
 				</display:table>
 					<jstl:choose>
 					<jstl:when test="${toCreditCard == true}">
