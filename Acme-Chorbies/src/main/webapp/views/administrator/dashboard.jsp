@@ -69,7 +69,7 @@
 </h3>
 
 <display:table class="displaytag" keepStatus="true"
-	name="totaAmountDueInTheInvoices" id="row">
+	name="ratioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard" id="row">
 
 	<spring:message
 		code="administrator.ratioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard"

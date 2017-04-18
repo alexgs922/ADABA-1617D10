@@ -33,6 +33,10 @@
 	<display:column property="genre" title="${chorbiGenre}"
 		sortable="false" />
 
+	<spring:message code="chorbi.desc" var="chorbiDesc" />
+	<display:column property="description" title="${chorbiDesc}"
+		sortable="false" />
+
 	<spring:message code="chorbi.birthDate" var="chorbiBirthDate" />
 	<display:column property="birthDate" title="${chorbiBirthDate}"
 		sortable="false" />
@@ -77,12 +81,18 @@
 				<a href="profile/editProfile.do?chorbiId=${row.id}"> <spring:message
 						code="chorbi.editprofile" />
 				</a>
-				<br/>
-				<a href="profile/editLocationInformation.do?chorbiId=${row.id}"> <spring:message
-						code="chorbi.editLocationInformation" />
+				<br />
+				<a href="profile/editLocationInformation.do?chorbiId=${row.id}">
+					<spring:message code="chorbi.editLocationInformation" />
 				</a>
 
-					<display:table pagesize="5" class="displaytag" name="creditCard" id="creditCard">
+				<br>
+				<spring:message code="chorbi.CreditCard" var="chorbiCC" />
+				<h2>
+					<jstl:out value="${chorbiCC}" />
+				</h2>
+				<display:table pagesize="5" class="displaytag" name="creditCard"
+					id="creditCard">
 
 					<spring:message code="creditCard.holderName" var="holderName" />
 					<display:column property="holderName" title="${holderName}"
@@ -95,33 +105,36 @@
 					<spring:message code="creditCard.brandName" var="brandName" />
 					<display:column property="brandName" title="${brandName}"
 						sortable="false" />
-						
-					<spring:message code="creditCard.expirationMonth" var="expirationMonth" />
-					<display:column property="expirationMonth" title="${expirationMonth}"
-						sortable="false" />
-						
-					<spring:message code="creditCard.expirationYear" var="expirationYear" />
+
+					<spring:message code="creditCard.expirationMonth"
+						var="expirationMonth" />
+					<display:column property="expirationMonth"
+						title="${expirationMonth}" sortable="false" />
+
+					<spring:message code="creditCard.expirationYear"
+						var="expirationYear" />
 					<display:column property="expirationYear" title="${expirationYear}"
 						sortable="false" />
-						
+
 					<spring:message code="creditCard.cvvCode" var="cvvCode" />
 					<display:column property="cvvCode" title="${cvvCode}"
 						sortable="false" />
 				</display:table>
-					<jstl:choose>
+				<br>
+				<jstl:choose>
 					<jstl:when test="${toCreditCard == true}">
 						<a href="profile/editCreditCard.do?chorbiId=${row.id}"> <spring:message
-						code="chorbi.editCreditCard" />
-						</a>			
-						</jstl:when>
-					
+								code="chorbi.editCreditCard" />
+						</a>
+					</jstl:when>
+
 					<jstl:when test="${toCreditCard == false}">
 						<a href="profile/createCreditCard.do"> <spring:message
-						code="chorbi.createCreditCard" />
-						</a>			
-						</jstl:when>
-					
-					</jstl:choose>
+								code="chorbi.createCreditCard" />
+						</a>
+					</jstl:when>
+
+				</jstl:choose>
 			</jstl:when>
 		</jstl:choose>
 	</div>

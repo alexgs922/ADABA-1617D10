@@ -16,7 +16,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="welcome/index.do"><img src="images/logo.png" alt="Acme-Chorbies Co., Inc." /></a>
+	<a href="welcome/index.do"><img src="images/logo.png"
+		alt="Acme-Chorbies Co., Inc." /></a>
 </div>
 
 <div>
@@ -49,6 +50,7 @@
 								code="master.page.chorbi.myTemplate" /></a></li>
 				</ul></li>
 
+
 			<li><a class="fNiv"><spring:message code="master.page.chirp" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -65,6 +67,8 @@
 
 			<li><a class="fNiv" href="chorbi/chorbi/likesToMe.do"><spring:message
 						code="master.page.whoILike" /></a></li>
+			<li><a class="fNiv" href="chorbi/viewProfile.do"><spring:message
+						code="master.page.viewMyProfile" /></a></li>
 
 
 
@@ -84,8 +88,7 @@
 			<li><a class="fNiv" href="chorbi/list.do"><spring:message
 						code="master.page.know.people" /></a></li>
 
-			<li><a class="fNiv" href="chorbi/viewProfile.do"><spring:message
-						code="master.page.viewMyProfile" /></a></li>
+
 
 
 			<li><a class="fNiv"> <spring:message
