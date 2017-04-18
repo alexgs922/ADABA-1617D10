@@ -1,9 +1,11 @@
+
 package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -23,6 +25,7 @@ public class Banner extends DomainEntity {
 
 
 	@URL
+	@NotBlank
 	public String getUrl() {
 		return this.url;
 	}

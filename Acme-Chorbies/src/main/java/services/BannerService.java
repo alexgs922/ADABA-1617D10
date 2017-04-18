@@ -84,4 +84,8 @@ public class BannerService {
 		return res;
 	}
 
+	public void flush() {
+		this.bannerRepository.flush();
+	}
+
 }

@@ -238,7 +238,7 @@ public class TemplateServiceTest extends AbstractTest {
 
 				final Collection<Chorbi> chorbiesIniciales = template.getChorbies();
 
-				final Configuration confi = this.configurationService.findConfiguation();
+				final Configuration confi = this.configurationService.findConfiguration();
 				final Integer horaTotal = this.configurationService.getHoraConfiguration(confi);
 
 				final Date momentTemplate = new Date();
@@ -267,7 +267,7 @@ public class TemplateServiceTest extends AbstractTest {
 
 				final Collection<Chorbi> chorbiesIniciales = template.getChorbies();
 
-				final Configuration confi = this.configurationService.findConfiguation();
+				final Configuration confi = this.configurationService.findConfiguration();
 				final Integer horaTotal = this.configurationService.getHoraConfiguration(confi);
 
 				final Date momentTemplate = template.getMoment();

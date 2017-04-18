@@ -95,7 +95,7 @@ public class TemplateController extends AbstractController {
 
 		} else {
 
-			final Configuration confi = this.configurationService.findConfiguation();
+			final Configuration confi = this.configurationService.findConfiguration();
 			final Integer horaTotal = this.configurationService.getHoraConfiguration(confi);
 
 			final Date momentTemplate = template.getMoment();

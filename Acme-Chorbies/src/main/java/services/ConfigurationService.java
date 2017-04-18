@@ -113,19 +113,12 @@ public class ConfigurationService {
 
 	}
 
-	public Configuration findConfiguation() {
+	public Configuration findConfiguration() {
 		final Configuration c = this.configurationRepository.findConfiguration();
 		return c;
 	}
 
-	/*
-	 * public Collection<String> findAllBanners() {
-	 * final Collection<String> res = new ArrayList<String>();
-	 * final Configuration c = this.findConfiguation();
-	 * Assert.notNull(c);
-	 * res.addAll(c.getBanners());
-	 * return res;
-	 * 
-	 * }
-	 */
+	public void flush() {
+		this.configurationRepository.flush();
+	}
 }
