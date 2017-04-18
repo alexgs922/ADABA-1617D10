@@ -42,6 +42,7 @@ public class ConfigurationService {
 	}
 
 	public Collection<Configuration> findAll() {
+		Assert.isTrue(this.checkAdminPrincipal());
 		Collection<Configuration> res;
 		res = this.configurationRepository.findAll();
 		Assert.notNull(res);
@@ -49,6 +50,7 @@ public class ConfigurationService {
 	}
 
 	public Configuration findOne(final int configurationId) {
+		Assert.isTrue(this.checkAdminPrincipal());
 		Configuration res;
 		res = this.configurationRepository.findOne(configurationId);
 		Assert.notNull(res);
