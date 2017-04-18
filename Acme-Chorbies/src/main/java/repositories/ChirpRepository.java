@@ -24,6 +24,6 @@ public interface ChirpRepository extends JpaRepository<Chirp, Integer> {
 	Collection<Object[]> minAvgMaxChirpsReceived();
 
 	@Query("select min(c.chirpWrites.size),avg(c.chirpWrites.size),max(c.chirpWrites.size) from Chorbi c")
-	Collection<Object[]> minAvgMaxChripsSent();
+	Collection<Object[]> minAvgMaxChirpsSent();
 
 }

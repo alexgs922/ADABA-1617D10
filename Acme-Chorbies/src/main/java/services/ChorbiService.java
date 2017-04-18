@@ -54,9 +54,8 @@ public class ChorbiService {
 	private TemplateService		templateService;
 
 	@Autowired
-	private CreditCardService		creditCardService;
+	private CreditCardService	creditCardService;
 
-	
 
 	// Simple CRUD methods ----------------------------------------------------
 
@@ -158,7 +157,7 @@ public class ChorbiService {
 		return res;
 	}
 
-	public Chorbi save(Chorbi chorbi) {
+	public Chorbi save(final Chorbi chorbi) {
 		Assert.notNull(chorbi);
 		return this.chorbiRepository.save(chorbi);
 
@@ -193,9 +192,6 @@ public class ChorbiService {
 
 	}
 
-	
-	
-	
 	public Chorbi findOneToSent(final int chorbiId) {
 
 		Chorbi result;
@@ -407,5 +403,67 @@ public class ChorbiService {
 	public void flush() {
 		this.chorbiRepository.flush();
 
+	}
+
+	// Dashboard
+
+	public Collection<Object[]> listingWithTheNumberOfChorbiesPerCountryAndCity() {
+		final Collection<Object[]> res = this.chorbiRepository.listingWithTheNumberOfChorbiesPerCountryAndCity();
+		return res;
+	}
+
+	public Collection<Object[]> minimumMaximumAverageAgesOfTheChorbies() {
+		final Collection<Object[]> res = this.chorbiRepository.minimumMaximumAverageAgesOfTheChorbies();
+		return res;
+	}
+
+	public Double ratioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard() {
+		final Double res = this.chorbiRepository.ratioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard();
+		return res;
+	}
+
+	public Double ratiosOfChorbiesWhoSearchActivities() {
+		final Double res = this.chorbiRepository.ratiosOfChorbiesWhoSearchActivities();
+		return res;
+	}
+
+	public Double ratiosOfChorbiesWhoSearchFriendship() {
+		final Double res = this.chorbiRepository.ratiosOfChorbiesWhoSearchFriendship();
+		return res;
+	}
+
+	public Double ratiosOfChorbiesWhoSearchLove() {
+		final Double res = this.chorbiRepository.ratiosOfChorbiesWhoSearchLove();
+		return res;
+	}
+
+	public Collection<Object[]> listOfChorbiesCortedByTheNumberOfLikesTheyHaveGot() {
+		final Collection<Object[]> res = this.chorbiRepository.listOfChorbiesCortedByTheNumberOfLikesTheyHaveGot();
+		return res;
+	}
+
+	public Collection<Double> minOfLikesPerChorbie() {
+		final Collection<Double> res = this.chorbiRepository.minOfLikesPerChorbie();
+		return res;
+	}
+
+	public Collection<Double> maxOfLikesPerChorbie() {
+		final Collection<Double> res = this.chorbiRepository.maxOfLikesPerChorbie();
+		return res;
+	}
+
+	public Double averageLikesPerChorbi() {
+		final Double res = this.chorbiRepository.averageLikesPerChorbi();
+		return res;
+	}
+
+	public Collection<Chorbi> theChorbiesWhoHaveGotMoreChirps() {
+		final Collection<Chorbi> res = this.chorbiRepository.theChorbiesWhoHaveGotMoreChirps();
+		return res;
+	}
+
+	public Collection<Chorbi> theChorbiesWhoHaveSentMoreChirps() {
+		final Collection<Chorbi> res = this.chorbiRepository.theChorbiesWhoHaveSentMoreChirps();
+		return res;
 	}
 }

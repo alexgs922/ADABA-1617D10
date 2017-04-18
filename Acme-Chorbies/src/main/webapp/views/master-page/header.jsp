@@ -33,6 +33,8 @@
 								code="master.page.administrator.banner" /></a></li>
 					<li><a href="configuration/administrator/list.do"><spring:message
 								code="master.page.administrator.configuration" /></a></li>
+					<li><a href="administrator/dashboard.do"><spring:message
+								code="master.page.administrator.dashboard" /></a></li>
 				</ul></li>
 		</security:authorize>
 

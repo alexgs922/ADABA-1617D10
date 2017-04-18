@@ -197,4 +197,16 @@ public class ChirpService {
 		this.chirpRepository.flush();
 
 	}
+
+	// Dashboard
+
+	public Collection<Object[]> minAvgMaxChirpsReceived() {
+		final Collection<Object[]> res = this.chirpRepository.minAvgMaxChirpsReceived();
+		return res;
+	}
+
+	public Collection<Object[]> minAvgMaxChirpsSent() {
+		final Collection<Object[]> res = this.chirpRepository.minAvgMaxChirpsSent();
+		return res;
+	}
 }

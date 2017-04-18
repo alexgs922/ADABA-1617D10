@@ -678,7 +678,7 @@
 	
 	<bean id="banner4" class="domain.Banner">
 		<property name="url"
-			value="https://c1.staticflickr.com/3/2891/33836360576_90ae654320_b.jpg" />
+			value="https://c1.staticflickr.com/4/3944/34058733666_d972d5f2cb.jpg" />
 	</bean>	
 	
 	<bean id="banner5" class="domain.Banner">

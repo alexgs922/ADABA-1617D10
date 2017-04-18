@@ -55,7 +55,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Collection<Object[]> minimumMaximumAverageAgesOfTheChorbies();
 
 	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c) from Chorbi c where c.id in (select c.id from Chorbi c where c.creditCard is null) or c.id in (select c.id from Chorbi c where c.creditCard.expirationYear < YEAR(CURRENT_DATE))")
-	Double RatioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard();
+	Double ratioChorbiesWhoHaveNoRegisteredACreditCardOrHaveRegisteredAnInvalidCreditCard();
 
 	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c)from Chorbi c where c.relationship='ACTIVITIES'")
 	Double ratiosOfChorbiesWhoSearchActivities();
@@ -66,7 +66,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select count(c)*1.0/(select count(c)*1.0 from Chorbi c)from Chorbi c where c.relationship='FRIENDSHIP'")
 	Double ratiosOfChorbiesWhoSearchFriendship();
 
-	@Query("select c,(select count(t) from Taste t where t.chorbi.id=c.id) as cuenta from Chorbi c order by cuenta DESC")
+	@Query("select c.name, c.surName,(select count(t) from Taste t where t.chorbi.id=c.id) as cuenta from Chorbi c order by cuenta DESC")
 	Collection<Object[]> listOfChorbiesCortedByTheNumberOfLikesTheyHaveGot();
 
 	@Query("select count(t) from Taste t group by t.chorbi.id having count(t)<= ALL (select count(t1) from Taste t1 group by t1.chorbi.id)")
