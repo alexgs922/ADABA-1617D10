@@ -336,4 +336,114 @@ public class ChorbiServiceTest extends AbstractTest {
 
 	}
 
+	//banChorbi: test positivo 
+
+	@Test
+	public void banChorbi() {
+		this.authenticate("admin");
+
+		final Chorbi chorbi = this.chorbiService.findOneToSent(63);
+
+		boolean haSidoBanneado = false;
+
+		this.chorbiService.banChorbi(chorbi);
+
+		this.unauthenticate();
+
+		final Chorbi bannedChorbi = this.chorbiService.findOneToSent(63);
+
+		if (bannedChorbi.isBan() == true)
+			haSidoBanneado = true;
+
+		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("----------------------------------banChorbi----------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------------");
+
+		System.out.println("Se espera obtener un true ");
+		System.out.println("¿El chorbi ha sido banneado? : " + haSidoBanneado);
+
+	}
+
+	//banChorbi: test negativo
+
+	@Test(expected = IllegalArgumentException.class)
+	public void banChorbiNegative() {
+		this.authenticate("admin");
+
+		final Chorbi chorbi = this.chorbiService.findOneToSent(65);
+
+		boolean haSidoBanneado = false;
+
+		this.chorbiService.banChorbi(chorbi);
+
+		this.unauthenticate();
+
+		final Chorbi bannedChorbi = this.chorbiService.findOneToSent(65);
+
+		if (bannedChorbi.isBan() == true)
+			haSidoBanneado = true;
+
+		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("----------------------------------banChorbiNevative----------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------------");
+
+		System.out.println("Se espera obtener un true ");
+		System.out.println("¿El chorbi ha sido banneado? : " + haSidoBanneado);
+
+	}
+
+	@Test
+	public void unBanChorbi() {
+		this.authenticate("admin");
+
+		final Chorbi chorbi = this.chorbiService.findOneToSent(65);
+
+		boolean haSidoPermitido = false;
+
+		this.chorbiService.unBanChorbi(chorbi);
+
+		this.unauthenticate();
+
+		final Chorbi bannedChorbi = this.chorbiService.findOneToSent(65);
+
+		if (bannedChorbi.isBan() == false)
+			haSidoPermitido = true;
+
+		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("----------------------------------UnbanChorbi----------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------------");
+
+		System.out.println("Se espera obtener un true ");
+		System.out.println("¿El chorbi ha sido banneado? : " + haSidoPermitido);
+
+	}
+
+	//banChorbi: test negativo
+
+	@Test(expected = IllegalArgumentException.class)
+	public void unBanChorbiNegative() {
+		this.authenticate("admin");
+
+		final Chorbi chorbi = this.chorbiService.findOneToSent(63);
+
+		boolean haSidoPermitido = false;
+
+		this.chorbiService.unBanChorbi(chorbi);
+
+		this.unauthenticate();
+
+		final Chorbi bannedChorbi = this.chorbiService.findOneToSent(63);
+
+		if (bannedChorbi.isBan() == true)
+			haSidoPermitido = true;
+
+		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("----------------------------------banChorbiNevative----------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------------");
+
+		System.out.println("Se espera obtener un true ");
+		System.out.println("¿El chorbi ha sido banneado? : " + haSidoPermitido);
+
+	}
+
 }
