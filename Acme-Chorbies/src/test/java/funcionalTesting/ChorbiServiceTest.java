@@ -481,7 +481,7 @@ public class ChorbiServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void driver() {
+	public void RegisterAChorbie() {
 
 		final Object testingData[][] = {
 				// Crear un usuario valido
